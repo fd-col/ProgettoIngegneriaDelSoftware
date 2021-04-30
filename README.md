@@ -1,3 +1,2 @@
 # ProgettoIngegneriaDelSoftware
 
-jingolbel
