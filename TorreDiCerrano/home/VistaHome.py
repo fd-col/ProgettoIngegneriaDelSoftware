@@ -9,6 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from TorreDiCerrano.Registrazione.VistaRegistrazione import VistaRegistrazione
+from TorreDiCerrano.Login.VistaLogin import VistaLogin
 
 
 
@@ -26,12 +28,14 @@ class Ui_HOME(object):
 "color: rgb(255, 255, 255);\n"
 "")
         self.login.setObjectName("login")
+        self.login.clicked.connect(self.go_vista_login)
         self.registrati = QtWidgets.QPushButton(self.centralwidget)
         self.registrati.setGeometry(QtCore.QRect(1080, 20, 171, 45))
         self.registrati.setStyleSheet("font: 75 16pt \"Arial\";\n"
 "color: rgb(0, 0, 0);\n"
 "background-color: rgb(255, 170, 0);")
         self.registrati.setObjectName("registrati")
+        self.registrati.clicked.connect(self.go_vista_registrazione)
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(40, 90, 991, 841))
         self.label.setAutoFillBackground(False)
@@ -129,3 +133,11 @@ class Ui_HOME(object):
         item = self.listWidget.item(8)
         item.setText(_translate("HOME", "noleggio mezzi elettrici"))
         self.listWidget.setSortingEnabled(__sortingEnabled)
+
+    def go_vista_registrazione(self):
+        self.vista_registrazione = VistaRegistrazione()
+        self.vista_registrazione.show()
+
+    def go_vista_login(self):
+        self.vista_login = VistaLogin()
+        self.vista_login.show()
