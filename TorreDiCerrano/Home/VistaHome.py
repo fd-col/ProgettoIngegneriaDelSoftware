@@ -9,8 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from TorreDiCerrano.Registrazione.VistaRegistrazione import VistaRegistrazione
-from TorreDiCerrano.Login.VistaLogin import VistaLogin
+from Registrazione.VistaRegistrazione import VistaRegistrazione
+from Login.VistaLogin import VistaLogin
 
 
 
@@ -41,19 +41,19 @@ class Ui_HOME(object):
         self.label.setAutoFillBackground(False)
         self.label.setStyleSheet("background-color: rgba(255, 168, 29, 30);")
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("C:\\Users\\fedju\\Downloads\\torre_di_cerrano[325].jpg"))
+        self.label.setPixmap(QtGui.QPixmap("images\\torre_di_cerrano[325].jpg"))
         self.label.setScaledContents(False)
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(1050, 350, 181, 161))
         self.label_2.setText("")
-        self.label_2.setPixmap(QtGui.QPixmap("C:\\Users\\fedju\\Downloads\\travel-1677347_1920.jpg"))
+        self.label_2.setPixmap(QtGui.QPixmap("images\\travel-1677347_1920.jpg"))
         self.label_2.setScaledContents(True)
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(1050, 580, 191, 121))
         self.label_3.setText("")
-        self.label_3.setPixmap(QtGui.QPixmap("C:\\Users\\fedju\\Downloads\\sea-3704014_1920.jpg"))
+        self.label_3.setPixmap(QtGui.QPixmap("images\\sea-3704014_1920.jpg"))
         self.label_3.setScaledContents(True)
         self.label_3.setWordWrap(False)
         self.label_3.setObjectName("label_3")
