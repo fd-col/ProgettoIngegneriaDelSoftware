@@ -9,8 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from Registrazione.VistaRegistrazione import VistaRegistrazione
-from Login.VistaLogin import VistaLogin
+from TorreDiCerrano.Registrazione.VistaRegistrazione import VistaRegistrazione
+from TorreDiCerrano.Login.VistaLogin import VistaLogin
+from PyQt5.QtGui import QFont
 
 
 
@@ -18,7 +19,7 @@ class Ui_HOME(object):
     def setupUi(self, HOME):
         HOME.setObjectName("HOME")
         HOME.resize(1267, 913)
-        HOME.setStyleSheet("background-color: rgba(255, 168, 29, 50);")
+        HOME.setStyleSheet("background-color: rgba(255, 255, 120, 50);")
         self.centralwidget = QtWidgets.QWidget(HOME)
         self.centralwidget.setObjectName("centralwidget")
         self.login = QtWidgets.QPushButton(self.centralwidget)
@@ -37,39 +38,39 @@ class Ui_HOME(object):
         self.registrati.setObjectName("registrati")
         self.registrati.clicked.connect(self.go_vista_registrazione)
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(40, 90, 991, 841))
+        self.label.setGeometry(QtCore.QRect(40, 50, 991, 841))
         self.label.setAutoFillBackground(False)
-        self.label.setStyleSheet("background-color: rgba(255, 168, 29, 30);")
+        self.label.setStyleSheet("background-color: rgba(255, 168, 29, 0);")
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("images\\torre_di_cerrano[325].jpg"))
+        self.label.setPixmap(QtGui.QPixmap("images/torre_di_cerrano[325].jpg"))
         self.label.setScaledContents(False)
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(1050, 350, 181, 161))
         self.label_2.setText("")
-        self.label_2.setPixmap(QtGui.QPixmap("images\\travel-1677347_1920.jpg"))
+        self.label_2.setPixmap(QtGui.QPixmap("images/travel-1677347_1920.jpg"))
         self.label_2.setScaledContents(True)
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(1050, 580, 191, 121))
         self.label_3.setText("")
-        self.label_3.setPixmap(QtGui.QPixmap("images\\sea-3704014_1920.jpg"))
+        self.label_3.setPixmap(QtGui.QPixmap("images/sea-3704014_1920.jpg"))
         self.label_3.setScaledContents(True)
         self.label_3.setWordWrap(False)
         self.label_3.setObjectName("label_3")
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
-        self.label_5.setGeometry(QtCore.QRect(70, 270, 350, 111))
-        self.label_5.setStyleSheet("color: rgb(255, 251, 139);\n"
+        self.label_5.setGeometry(QtCore.QRect(70, 270, 450, 111))
+        self.label_5.setStyleSheet("color: rgb(255, 255, 255);\n"
 "background-color: rgba(255, 255, 255, 0);\n"
-"font: 16pt \"Papyrus\";")
+"font: 40pt \"Papyrus\";")
         self.label_5.setObjectName("label_5")
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(390, 90, 431, 91))
-        self.label_4.setStyleSheet("color: rgb(167, 255, 151);\n"
-"font: 36pt \"Arial Rounded MT Bold\";")
+        self.label_4.setGeometry(QtCore.QRect(360, 90, 500, 91))
+        self.label_4.setStyleSheet("color: rgb(51, 102, 255);\n"
+"font: 100 90pt \"Papyrus\";\n background-color: rgba(255, 168, 29, 0);")
         self.label_4.setObjectName("label_4")
         self.listWidget = QtWidgets.QListWidget(self.centralwidget)
-        self.listWidget.setGeometry(QtCore.QRect(40, 80, 270, 145))
+        self.listWidget.setGeometry(QtCore.QRect(40, 30, 270, 145))
         self.listWidget.setMinimumSize(QtCore.QSize(261, 0))
         self.listWidget.setStyleSheet("font: 12pt \"Papyrus\";\n"
 "color: rgb(0, 0, 0);\n"
