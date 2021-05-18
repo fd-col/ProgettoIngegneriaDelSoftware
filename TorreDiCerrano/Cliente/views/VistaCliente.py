@@ -14,7 +14,7 @@ class VistaCliente(QWidget):
         self.label_nome.setFont(self.font_nome)
         self.v_layout.addWidget(self.label_nome)
 
-        self.label_nascita = QLabel(controllore_cliente.get_data_nascita_cliente())
+        self.label_nascita = QLabel(controllore_cliente.get_data_nascita_cliente().strftime('%m/%d/%Y'))
         self.font_nascita = QFont("Arial", 16)
         self.label_nascita.setFont(self.font_nascita)
         self.v_layout.addWidget(self.label_nascita)
@@ -48,5 +48,5 @@ class VistaCliente(QWidget):
         self.v_layout.addLayout(self.h_layout)
 
         self.setLayout(self.v_layout)
-        self.setWindowTitle(controllore_cliente.get_nome_cliente() + " " +controllore_cliente.get_cognome_cliente())
-        self.resize(400, 600)
+        self.setWindowTitle(controllore_cliente.get_nome_cliente() + " " + controllore_cliente.get_cognome_cliente())
+        self.resize(300, 300)
