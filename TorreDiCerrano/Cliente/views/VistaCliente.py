@@ -14,22 +14,22 @@ class VistaCliente(QWidget):
         self.label_nome.setFont(self.font_nome)
         self.v_layout.addWidget(self.label_nome)
 
-        self.label_nascita = QLabel(controllore_cliente.get_data_nascita_cliente().strftime('%m/%d/%Y'))
+        self.label_nascita = QLabel("Data di nascita: " + controllore_cliente.get_data_nascita_cliente().strftime('%m/%d/%Y'))
         self.font_nascita = QFont("Arial", 16)
         self.label_nascita.setFont(self.font_nascita)
         self.v_layout.addWidget(self.label_nascita)
 
-        self.label_indirizzo = QLabel(controllore_cliente.get_indirizzo_cliente())
+        self.label_indirizzo = QLabel("Indirizzo: " + controllore_cliente.get_indirizzo_cliente())
         self.font_indirizzo = QFont("Arial", 16)
         self.label_indirizzo.setFont(self.font_indirizzo)
         self.v_layout.addWidget(self.label_indirizzo)
 
-        self.label_telefono = QLabel(controllore_cliente.get_telefono_cliente())
+        self.label_telefono = QLabel("Telefono: " + controllore_cliente.get_telefono_cliente())
         self.font_telefono = QFont("Arial", 16)
         self.label_telefono.setFont(self.font_telefono)
         self.v_layout.addWidget(self.label_telefono)
 
-        self.label_email = QLabel(controllore_cliente.get_email_cliente())
+        self.label_email = QLabel("Email: " + controllore_cliente.get_email_cliente())
         self.font_email = QFont("Arial", 16)
         self.label_email.setFont(self.font_email)
         self.v_layout.addWidget(self.label_email)

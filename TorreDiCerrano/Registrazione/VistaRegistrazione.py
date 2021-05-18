@@ -113,6 +113,7 @@ class VistaRegistrazione(QWidget):
             try:
                 data_nascita = datetime.strptime(dt_nascita, "%d/%m/%Y")
                 da_aggiungere = Cliente(nome, cognome, data_nascita, indirizzo, telefono, email, password)
+                QMessageBox.about(self, "Completata", "La registrazione è stata completata")
                 self.controller.aggiungi_cliente(da_aggiungere)
                 self.close()
             except:

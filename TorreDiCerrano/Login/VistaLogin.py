@@ -1,6 +1,10 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QFont
+import os
+import json
+import time
 
+from TorreDiCerrano.Amministratore.view.VistaAmministratore import VistaAmministratore
 from TorreDiCerrano.Cliente.controller.ControlloreCliente import ControlloreCliente
 from TorreDiCerrano.Cliente.views.VistaCliente import VistaCliente
 from TorreDiCerrano.ListaClienti.controller.ControlloreListaClienti import ControlloreListaClienti
@@ -54,6 +58,9 @@ class VistaLogin(QWidget):
         email = self.campo_email.text()
         password = self.campo_password.text()
 
+        if self.controlla_admin(email, password):
+            return
+
         if self.controllore.get_cliente_by_email(email) is not None:
             da_mostrare = self.controllore.get_cliente_by_email(email)
             if da_mostrare.password == password:
@@ -67,5 +74,15 @@ class VistaLogin(QWidget):
             QMessageBox.critical(self, "Errore", "L'email inserita non è associata ad alcun cliente", QMessageBox.Ok,
                                  QMessageBox.Ok)
 
+    def controlla_admin(self, email, password):
 
-
+        if os.path.isfile("Amministratore/data/lista_amministratori.json"):
+            with open("Amministratore/data/lista_amministratori.json") as file:
+                self.lista_admin = json.load(file)
+                for admin in self.lista_admin:
+                    if email == admin["email"] and password == admin["password"]:
+                        self.vista_admin = VistaAmministratore(admin["nome"])
+                        self.vista_admin.show()
+                        self.close()
+                        return True
+        return False
