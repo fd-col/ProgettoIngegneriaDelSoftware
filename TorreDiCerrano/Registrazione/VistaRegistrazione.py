@@ -1,12 +1,17 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QFont
+from datetime import datetime
+
+from TorreDiCerrano.Cliente.model.Cliente import Cliente
+from TorreDiCerrano.ListaClienti.controller.ControlloreListaClienti import ControlloreListaClienti
 
 
 class VistaRegistrazione(QWidget):
 
     def __init__(self, parent=None):
-
         super(VistaRegistrazione, self).__init__(parent)
+        self.controller = ControlloreListaClienti()
+
         self.v_layout = QVBoxLayout()
         self.font_label = QFont("Arial", 17)
 
@@ -63,6 +68,7 @@ class VistaRegistrazione(QWidget):
         self.v_layout.addWidget(self.label_password)
 
         self.campo_password = QLineEdit()
+        self.campo_password.setEchoMode(QLineEdit.Password)
         self.v_layout.addWidget(self.campo_password)
 
         self.v_layout.addSpacing(30)
@@ -70,8 +76,35 @@ class VistaRegistrazione(QWidget):
         self.bottone_conferma = QPushButton("Conferma")
         self.bottone_conferma.setFont(self.font_label)
         self.bottone_conferma.setStyleSheet("background-color:#ccd9ff;")
+        self.bottone_conferma.clicked.connect(self.registra_cliente)
         self.v_layout.addWidget(self.bottone_conferma)
 
         self.setLayout(self.v_layout)
         self.resize(200, 600)
         self.setWindowTitle("Registrazione")
+
+    def registra_cliente(self):
+        nome = self.campo_nome.text()
+        cognome = self.campo_cognome.text()
+        dt_nascita = self.campo_nascita.text()
+        indirizzo = self.campo_indirizzo.text()
+        telefono = self.campo_telefono.text()
+        email = self.campo_email.text()
+        password = self.campo_password.text()
+
+        if nome == "" or cognome == "" or dt_nascita == "" or indirizzo == "" or telefono == "" or email == "" or password == "":
+            QMessageBox.critical(self, "Errore", "Compila tutti i campi richiesti", QMessageBox.Ok, QMessageBox.Ok)
+        elif self.controller.get_cliente_by_email(email) is not None:
+            QMessageBox.critical(self, "Errore", "L'email che hai inserito è già stata utilizzata", QMessageBox.Ok, QMessageBox.Ok)
+        else:
+            try:
+                data_nascita = datetime.strptime(dt_nascita, "%d/%m/%Y")
+                da_aggiungere = Cliente(nome, cognome, data_nascita, indirizzo, telefono, email, password)
+                self.controller.aggiungi_cliente(da_aggiungere)
+                self.close()
+            except:
+                QMessageBox.critical(self, "Errore", "Inserisci la data di nascita nel formato richiesto", QMessageBox.Ok, QMessageBox.Ok)
+
+    def closeEvent(self, event):
+        self.controller.save_data()
+
