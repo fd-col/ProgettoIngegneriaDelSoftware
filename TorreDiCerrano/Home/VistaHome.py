@@ -9,8 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from TorreDiCerrano.Registrazione.VistaRegistrazione import VistaRegistrazione
-from TorreDiCerrano.Login.VistaLogin import VistaLogin
+from Registrazione.VistaRegistrazione import VistaRegistrazione
+from Login.VistaLogin import VistaLogin
 from PyQt5.QtGui import QFont
 
 
@@ -42,7 +42,7 @@ class Ui_HOME(object):
         self.label.setAutoFillBackground(False)
         self.label.setStyleSheet("background-color: rgba(255, 168, 29, 0);")
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("images/torre_di_cerrano[325].jpg"))
+        self.label.setPixmap(QtGui.QPixmap('images/torre_di_cerrano[325].jpg'))
         self.label.setScaledContents(False)
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)

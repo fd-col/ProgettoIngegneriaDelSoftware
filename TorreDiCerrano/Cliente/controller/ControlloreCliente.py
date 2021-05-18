@@ -1,4 +1,4 @@
-from TorreDiCerrano.Cliente.model.Cliente import Cliente
+from Cliente.model.Cliente import Cliente
 
 class ControlloreCliente():
 
