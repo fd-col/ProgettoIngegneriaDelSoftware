@@ -1,11 +1,15 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QFont
 
+from TorreDiCerrano.ListaClienti.controller.ControlloreListaClienti import ControlloreListaClienti
+
 
 class VistaLogin(QWidget):
 
     def __init__(self, parent=None):
         super(VistaLogin, self).__init__(parent)
+
+        self.controllore = ControlloreListaClienti()
 
         self.font = QFont("Arial", 17)
 
@@ -41,3 +45,20 @@ class VistaLogin(QWidget):
         self.setLayout(self.v_layout)
         self.resize(200, 200)
         self.setWindowTitle("Login")
+
+    def login(self):
+        email = self.campo_email.text()
+        password = self.campo_password.text()
+
+        if self.controllore.get_cliente_by_email(email) is not None:
+            cliente = self.controllore.get_cliente_by_email(email)
+        else:
+            QMessageBox.critical(self, "Errore", "L'email inserita non è associata ad alcun cliente", QMessageBox.Ok,
+                                 QMessageBox.Ok)
+
+        if cliente.password == password:
+            pass
+        else
+            QMessageBox.critical(self, "Errore", "La password è errata", QMessageBox.Ok,
+                                 QMessageBox.Ok)
+
