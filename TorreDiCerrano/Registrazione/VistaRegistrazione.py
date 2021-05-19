@@ -2,8 +2,8 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QFont
 from datetime import datetime
 
-from TorreDiCerrano.Cliente.model.Cliente import Cliente
-from TorreDiCerrano.ListaClienti.controller.ControlloreListaClienti import ControlloreListaClienti
+from Cliente.model.Cliente import Cliente
+from ListaClienti.controller.ControlloreListaClienti import ControlloreListaClienti
 
 
 class VistaRegistrazione(QWidget):

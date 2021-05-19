@@ -1,4 +1,3 @@
-from TorreDiCerrano.Cliente.model.Cliente import Cliente
 import os
 import pickle
 
