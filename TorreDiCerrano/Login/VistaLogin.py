@@ -4,10 +4,10 @@ import os
 import json
 import time
 
-from TorreDiCerrano.Amministratore.view.VistaAmministratore import VistaAmministratore
-from TorreDiCerrano.Cliente.controller.ControlloreCliente import ControlloreCliente
-from TorreDiCerrano.Cliente.views.VistaCliente import VistaCliente
-from TorreDiCerrano.ListaClienti.controller.ControlloreListaClienti import ControlloreListaClienti
+from Amministratore.views.VistaAmministratore import VistaAmministratore
+from Cliente.controller.ControlloreCliente import ControlloreCliente
+from Cliente.views.VistaCliente import VistaCliente
+from ListaClienti.controller.ControlloreListaClienti import ControlloreListaClienti
 
 
 class VistaLogin(QWidget):

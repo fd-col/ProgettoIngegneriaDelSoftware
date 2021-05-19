@@ -9,8 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from TorreDiCerrano.Registrazione.VistaRegistrazione import VistaRegistrazione
-from TorreDiCerrano.Login.VistaLogin import VistaLogin
+from Registrazione.VistaRegistrazione import VistaRegistrazione
+from Login.VistaLogin import VistaLogin
 from PyQt5.QtGui import QFont
 
 

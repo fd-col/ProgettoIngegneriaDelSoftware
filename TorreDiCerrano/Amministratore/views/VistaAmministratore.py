@@ -1,6 +1,9 @@
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import *
 
+from ListaDipendenti.views.VistaListaDipendenti import VistaListaDipendenti
+
+
 class VistaAmministratore(QWidget):
 
     def __init__(self, nome, parent=None):
@@ -21,6 +24,7 @@ class VistaAmministratore(QWidget):
         self.h_layout = QHBoxLayout()
 
         self.bottonone_lista_dipendenti = QPushButton("Lista Dipendenti")
+        self.bottonone_lista_dipendenti.clicked.connect(self.go_lista_dipendenti)
         self.h_layout.addWidget(self.bottonone_lista_dipendenti)
 
         self.bottone_lista_prenotazioni = QPushButton("Lista Prenotazioni")
@@ -34,3 +38,7 @@ class VistaAmministratore(QWidget):
         self.setLayout(self.v_layout)
         self.setWindowTitle(nome)
         self.resize(200, 200)
+
+    def go_lista_dipendenti(self):
+        self.vista_lista_dipendenti = VistaListaDipendenti()
+        self.vista_lista_dipendenti.show()
