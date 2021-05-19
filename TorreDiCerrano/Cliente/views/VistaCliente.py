@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QFont
 from Cliente.views.VistaEliminaProfilo import VistaEliminaProfilo
 from Cliente.views.VistaScannerizzaDocumento import VistaScannerizzaDocumento
+from ListaClienti.controller.ControlloreListaClienti import ControlloreListaClienti
 
 class VistaCliente(QWidget):
 
@@ -57,9 +58,12 @@ class VistaCliente(QWidget):
 
 
     def go_vista_elimina_profilo(self):
-        self.vista_elimina_profilo = VistaEliminaProfilo()
+        self.vista_elimina_profilo = VistaEliminaProfilo(self.conferma_eliminazione)
         self.vista_elimina_profilo.show()
+
 
     def go_vista_scannerizza_documento(self):
         self.vista_scannerizza_documento = VistaScannerizzaDocumento(self.controllore_cliente)
         self.vista_scannerizza_documento.show()
+
+

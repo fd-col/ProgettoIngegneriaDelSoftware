@@ -3,22 +3,18 @@ from Cliente.controller.ControlloreCliente import ControlloreCliente
 
 class VistaScannerizzaDocumento():
 
-    def __init__(self, controllore_cliente):
+    def __init__(self):
         super(VistaScannerizzaDocumento, self).__init__()
 
         self.load_pdf_document()
-        self.set_documento_identita(documento = QFileDialog.getOpenFileName(None, "", str(self.path)))
-        #documento = QFileDialog.getOpenFileName(None, "", str(self.path))
-
-
 
 
 
     def load_pdf_document(self):
         file_name = QFileDialog.getOpenFileName(self, 'Open file',
-                                                'c:\\Users\\fedju\\Downloads', "Image files (*.pdf)")
+                                                'c:\\Users\\fedju\\Downloads', "Image files (*.jpg *.jpeg *.png)")
         self.path = file_name[0]
-        print(self.path) #solo un controllo del path del file
+        print(self.path)
 
-    def set_documento_identita(self, documento):
-        self.controllore_cliente.set_documento_identita(documento)
+    def visualizza_documento_caricato(self):
+        document = QFileDialog.getOpenFileName(None, "", str(self.path))
