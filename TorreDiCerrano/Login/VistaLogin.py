@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QFont, QKeySequence
+from PyQt5.QtGui import QFont
 import os
 import json
 import time
