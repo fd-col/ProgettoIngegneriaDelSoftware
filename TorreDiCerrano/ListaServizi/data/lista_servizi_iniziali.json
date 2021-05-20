@@ -1,0 +1,58 @@
+[
+  [
+    {
+      "nome" : "Mezza Pensione",
+      "campo" : "Ristorazione",
+      "prezzo" : 60
+    },
+    {
+      "nome" : "Pensione completa",
+      "campo" : "Ristorazione",
+      "prezzo" : 90
+    },
+    {
+      "nome" : "Colazione",
+      "campo" : "Ristorazione",
+      "prezzo" : 30
+    }
+  ],
+  [
+    {
+      "nome" : "Suite",
+      "campo" : "Alloggio",
+      "prezzo" : 235
+    },
+    {
+      "nome" : "Camera doppia",
+      "campo" : "Alloggio",
+      "prezzo" : 80
+    },
+    {
+      "nome" : "Camera famigliare",
+      "campo" : "Alloggio",
+      "prezzo" : 125
+    },
+    {
+      "nome" : "Bungalow",
+      "campo" : "Alloggio",
+      "prezzo" : 150
+    }
+  ],
+  [
+    {
+      "nome" : "Noleggio monopattini elettrici",
+      "campo" : "Servizi aggiuntivi",
+      "prezzo" : 30
+    },
+    {
+      "nome" : "Escursione turistica",
+      "campo" : "Servizi aggiuntivi",
+      "prezzo" : 50
+    },
+    {
+      "nome" : "Centro benessere",
+      "campo" : "Servizi aggiuntivi",
+      "prezzo" : 50
+    }
+  ]
+]
