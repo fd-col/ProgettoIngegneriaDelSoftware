@@ -1,7 +1,8 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 
-from Dipendente.model.Dipendente import Dipendente
+from Dipendente.controller.ControlloreDipendente import ControlloreDipendente
+from Dipendente.views.VistaModificaDipendente import VistaModificaDipendente
 from ListaDipendenti.controller.ControlloreListaDipendenti import ControlloreListaDipendenti
 from ListaDipendenti.views.VistaInserisciDipendente import VistaInserisciDipendente
 
@@ -35,6 +36,7 @@ class VistaListaDipendenti(QWidget):
 
         self.bottone_modifica_dipendente = QPushButton("Modifica Dipendente")
         self.bottone_modifica_dipendente.setFont(self.font_bottoni)
+        self.bottone_modifica_dipendente.clicked.connect(self.go_modifica_dipendente)
         self.h_layout.addWidget(self.bottone_modifica_dipendente)
 
         self.v_layout.addLayout(self.h_layout)
@@ -78,3 +80,12 @@ class VistaListaDipendenti(QWidget):
         else:
             return
 
+    def go_modifica_dipendente(self):
+        try:
+            indice = self.list_view.selectedIndexes()[0].row()
+            da_visualizzare = self.controller.get_lista_dipendenti()[indice]
+        except:
+            QMessageBox.critical(self, "Errore", "Seleziona il dipendente da visualizzare", QMessageBox.Ok, QMessageBox.Ok)
+            return
+        self.vista_modifica_dipendente = VistaModificaDipendente(ControlloreDipendente(da_visualizzare), self.aggiorna_dati, self.controller.get_lista_dipendenti())
+        self.vista_modifica_dipendente.show()

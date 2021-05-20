@@ -9,7 +9,6 @@ class VistaEliminaProfilo(QWidget):
         super(VistaEliminaProfilo, self).__init__(parent)
 
         self.controllore_lista_clienti = ControlloreListaClienti()
-        self.email_da_eliminare = email
 
         self.v_layout = QVBoxLayout()
 

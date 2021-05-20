@@ -107,7 +107,7 @@ class Ui_HOME(object):
 
     def retranslateUi(self, HOME):
         _translate = QtCore.QCoreApplication.translate
-        HOME.setWindowTitle(_translate("HOME", "MainWindow"))
+        HOME.setWindowTitle(_translate("HOME", "Home"))
         self.login.setText(_translate("HOME", "Login"))
         self.registrati.setText(_translate("HOME", "Registrati"))
         self.label_5.setText(_translate("HOME", "Resort Torre di Cerrano"))
