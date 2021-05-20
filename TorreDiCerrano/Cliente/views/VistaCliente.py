@@ -45,22 +45,28 @@ class VistaCliente(QWidget):
 
         self.bottone_scannerizza = QPushButton("Scannerizza documento")
         self.h_layout.addWidget(self.bottone_scannerizza)
+        self.bottone_scannerizza.clicked.connect(self.go_vista_scannerizza_documento)
 
         self.bottone_elimina_profilo = QPushButton("Elimina profilo")
         self.h_layout.addWidget(self.bottone_elimina_profilo)
-        self.bottone_elimina_profilo.clicked.connect(self.go_vista_elimina_profilo)
+        self.bottone_elimina_profilo.clicked.connect(self.conferma_elimina_profilo)
 
         self.v_layout.addLayout(self.h_layout)
 
         self.setLayout(self.v_layout)
         self.setWindowTitle(self.controllore_cliente.get_nome_cliente() + " " + self.controllore_cliente.get_cognome_cliente())
-        self.resize(300, 300)
+        self.resize(325, 450)
 
 
-    def go_vista_elimina_profilo(self):
-        self.vista_elimina_profilo = VistaEliminaProfilo(self.conferma_eliminazione)
-        self.vista_elimina_profilo.show()
-
+    def conferma_elimina_profilo(self):
+        self.controllore_lista_clienti = ControlloreListaClienti()
+        risposta = QMessageBox.warning(self, "Elimina Profilo", "Sei sicuro di voler elimare il tuo profilo ?\nCancellerai tutti i tuoi dati.", QMessageBox.Yes, QMessageBox.No)
+        if risposta == QMessageBox.Yes:
+            self.close()
+            self.controllore_lista_clienti.elimina_cliente_by_email(self.controllore_cliente.get_email_cliente())
+            self.controllore_lista_clienti.save_data()
+        else:
+            pass
 
     def go_vista_scannerizza_documento(self):
         self.vista_scannerizza_documento = VistaScannerizzaDocumento(self.controllore_cliente)

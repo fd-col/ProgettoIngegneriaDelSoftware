@@ -26,4 +26,14 @@ class ControlloreCliente():
     def get_password_cliente(self):
         return self.model.password
 
+    def get_documento_identita(self):
+        return self.model.documento
+
+    def set_documento_identita(self, path):
+        #se il documento di identità non è presente, allora può essere aggiunto. Altrimenti viene restituito quello già presente
+        if self.model.documento == None:
+            self.model.documento = QFileDialog.getOpenFileName(None, "", str(path))
+        else:
+            self.get_documento_identita()
+
     

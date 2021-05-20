@@ -8,4 +8,5 @@ class Cliente():
         self.telefono = telefono
         self.e_mail = e_mail
         self.password = password
+        self.documento = None
 

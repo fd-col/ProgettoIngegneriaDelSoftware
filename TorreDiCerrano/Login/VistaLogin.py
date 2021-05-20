@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QFont, QKeySequence
 import os
 import json
 import time
@@ -54,6 +54,7 @@ class VistaLogin(QWidget):
         self.resize(200, 200)
         self.setWindowTitle("Login")
 
+
     def login(self):
         email = self.campo_email.text()
         password = self.campo_password.text()
@@ -73,6 +74,7 @@ class VistaLogin(QWidget):
         else:
             QMessageBox.critical(self, "Errore", "L'email inserita non è associata ad alcun cliente", QMessageBox.Ok,
                                  QMessageBox.Ok)
+
 
     def controlla_admin(self, email, password):
 
