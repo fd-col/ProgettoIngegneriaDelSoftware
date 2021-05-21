@@ -1,5 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QFont
+
+from Cliente.controller.ControlloreCliente import ControlloreCliente
 from Cliente.views.VistaEliminaProfilo import VistaEliminaProfilo
 from Cliente.views.VistaScannerizzaDocumento import VistaScannerizzaDocumento
 from ListaClienti.controller.ControlloreListaClienti import ControlloreListaClienti
@@ -38,6 +40,16 @@ class VistaCliente(QWidget):
         self.label_email.setFont(self.font_email)
         self.v_layout.addWidget(self.label_email)
 
+        if self.controllore_cliente.get_documento_identita() is None:
+            self.nome_documento = "Nessuno"
+        else:
+            self.path = self.controllore_cliente.get_documento_identita().split("/")
+            self.nome_documento = self.path[-1]
+
+        self.label_documento = QLabel("Documento: " + self.nome_documento)
+        self.label_documento.setFont(self.font_email)
+        self.v_layout.addWidget(self.label_documento)
+
         self.h_layout = QHBoxLayout()
 
         self.bottone_prenotazioni = QPushButton("Prenotazioni")
@@ -70,6 +82,5 @@ class VistaCliente(QWidget):
 
     def go_vista_scannerizza_documento(self):
         self.vista_scannerizza_documento = VistaScannerizzaDocumento(self.controllore_cliente)
-        self.vista_scannerizza_documento.show()
 
 

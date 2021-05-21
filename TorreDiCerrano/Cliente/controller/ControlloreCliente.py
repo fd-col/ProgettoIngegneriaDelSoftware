@@ -1,3 +1,5 @@
+from PyQt5.QtWidgets import QFileDialog
+
 from Cliente.model.Cliente import Cliente
 
 class ControlloreCliente():
@@ -30,10 +32,6 @@ class ControlloreCliente():
         return self.model.documento
 
     def set_documento_identita(self, path):
-        #se il documento di identità non è presente, allora può essere aggiunto. Altrimenti viene restituito quello già presente
-        if self.model.documento == None:
-            self.model.documento = QFileDialog.getOpenFileName(None, "", str(path))
-        else:
-            self.get_documento_identita()
+        self.model.documento = path
 
     

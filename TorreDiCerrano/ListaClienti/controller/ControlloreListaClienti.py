@@ -10,7 +10,7 @@ class ControlloreListaClienti():
         self.model.aggiungi_cliente(cliente)
 
     def get_lista_clienti(self):
-        return self.model.get_lista_clienti()
+        return self.model.lista_clienti
 
     def get_cliente_by_email(self, email):
         return self.model.get_cliente_by_email(email)
@@ -20,3 +20,4 @@ class ControlloreListaClienti():
 
     def save_data(self):
         self.model.save_data()
+
