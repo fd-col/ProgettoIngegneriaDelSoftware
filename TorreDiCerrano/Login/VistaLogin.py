@@ -17,12 +17,13 @@ class VistaLogin(QWidget):
 
         self.controllore = ControlloreListaClienti()
 
-        self.font = QFont("Arial", 17)
+        self.font = QFont("Arial", 15, 15, True)
 
         self.v_layout = QVBoxLayout()
 
         self.label_alto = QLabel("Inserisci i dati per il login")
         self.label_alto.setFont(self.font)
+        self.label_alto.setStyleSheet("color: rgb(0, 0, 255)")
         self.v_layout.addWidget(self.label_alto)
 
         self.v_layout.addSpacing(10)
