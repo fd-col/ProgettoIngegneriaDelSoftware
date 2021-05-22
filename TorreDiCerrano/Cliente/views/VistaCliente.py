@@ -1,8 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QFont
 
-from Cliente.controller.ControlloreCliente import ControlloreCliente
-from Cliente.views.VistaEliminaProfilo import VistaEliminaProfilo
+
 from Cliente.views.VistaScannerizzaDocumento import VistaScannerizzaDocumento
 from ListaClienti.controller.ControlloreListaClienti import ControlloreListaClienti
 
@@ -69,6 +68,11 @@ class VistaCliente(QWidget):
         self.setWindowTitle(self.controllore_cliente.get_nome_cliente() + " " + self.controllore_cliente.get_cognome_cliente())
         self.resize(325, 450)
 
+    def go_vista_scannerizza_documento(self):
+        self.vista_scannerizza_documento = VistaScannerizzaDocumento(self.controllore_cliente)
+        self.aggiorna_documento()
+
+    #Nelle prossime funzioni ci starà anche il controllore lista clienti che serve per salvare o aggiornare i dati
 
     def conferma_elimina_profilo(self):
         self.controllore_lista_clienti = ControlloreListaClienti()
@@ -80,7 +84,9 @@ class VistaCliente(QWidget):
         else:
             pass
 
-    def go_vista_scannerizza_documento(self):
-        self.vista_scannerizza_documento = VistaScannerizzaDocumento(self.controllore_cliente)
-
+    def aggiorna_documento(self):
+        self.label_documento.setText("Documento: " + self.controllore_cliente.get_documento_identita().split("/")[-1])
+        self.controllore_lista_clienti = ControlloreListaClienti()
+        self.controllore_lista_clienti.get_cliente_by_email(self.controllore_cliente.get_email_cliente()).documento = self.controllore_cliente.get_documento_identita()
+        self.controllore_lista_clienti.save_data()
 
