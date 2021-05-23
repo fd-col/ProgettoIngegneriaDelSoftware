@@ -1,4 +1,5 @@
-from PyQt5.QtGui import QFont
+from PyQt5.QtCore import QSize
+from PyQt5.QtGui import QFont, QIcon, QPixmap
 from PyQt5.QtWidgets import *
 
 from ListaDipendenti.views.VistaListaDipendenti import VistaListaDipendenti
@@ -23,21 +24,28 @@ class VistaAmministratore(QWidget):
 
         self.h_layout = QHBoxLayout()
 
-        self.bottonone_lista_dipendenti = QPushButton("Lista Dipendenti")
-        self.bottonone_lista_dipendenti.clicked.connect(self.go_lista_dipendenti)
-        self.h_layout.addWidget(self.bottonone_lista_dipendenti)
+        self.bottone_lista_dipendenti = QPushButton(" Lista Dipendenti")
+        self.bottone_lista_dipendenti.setStyleSheet("background-color:#FFD800;")
+        self.bottone_lista_dipendenti.setIcon(QIcon("images\icon_dipendenti.png"))
+        self.bottone_lista_dipendenti.clicked.connect(self.go_lista_dipendenti)
+        self.h_layout.addWidget(self.bottone_lista_dipendenti)
 
-        self.bottone_lista_prenotazioni = QPushButton("Lista Prenotazioni")
+        self.bottone_lista_prenotazioni = QPushButton(" Lista Prenotazioni")
+        self.bottone_lista_prenotazioni.setStyleSheet("background-color:#FFD800;")
+        self.bottone_lista_prenotazioni.setIcon(QIcon("images\icon_prenotazione.png"))
         self.h_layout.addWidget(self.bottone_lista_prenotazioni)
 
         self.bottone_resoconti = QPushButton("Resoconti")
+        self.bottone_resoconti.setStyleSheet("background-color:#FFD800;")
+        self.bottone_resoconti.setIcon(QIcon("images\icon_resoconti.png"))
+        self.bottone_resoconti.setIconSize(QSize(50,50))
         self.h_layout.addWidget(self.bottone_resoconti)
 
         self.v_layout.addLayout(self.h_layout)
 
         self.setLayout(self.v_layout)
         self.setWindowTitle(nome)
-        self.resize(200, 200)
+        self.resize(350, 400)
 
     def go_lista_dipendenti(self):
         self.vista_lista_dipendenti = VistaListaDipendenti()
