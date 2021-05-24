@@ -1,7 +1,5 @@
 from PyQt5.QtWidgets import *
 
-from ListaClienti.controller.ControlloreListaClienti import ControlloreListaClienti
-
 
 class VistaScannerizzaDocumento(QFileDialog):
 

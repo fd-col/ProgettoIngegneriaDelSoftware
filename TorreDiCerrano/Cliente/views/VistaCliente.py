@@ -6,6 +6,7 @@ from Cliente.views.VistaScannerizzaDocumento import VistaScannerizzaDocumento
 from ListaClienti.controller.ControlloreListaClienti import ControlloreListaClienti
 from ListaPrenotazioni.views.VistaPrenotazioni import VistaPrenotazioni
 
+
 class VistaCliente(QWidget):
 
     def __init__(self, controllore_cliente, parent=None):
