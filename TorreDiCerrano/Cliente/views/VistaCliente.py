@@ -4,6 +4,7 @@ from PyQt5.QtGui import QFont
 
 from Cliente.views.VistaScannerizzaDocumento import VistaScannerizzaDocumento
 from ListaClienti.controller.ControlloreListaClienti import ControlloreListaClienti
+from ListaPrenotazioni.views.VistaPrenotazioni import VistaPrenotazioni
 
 class VistaCliente(QWidget):
 
@@ -52,6 +53,7 @@ class VistaCliente(QWidget):
         self.h_layout = QHBoxLayout()
 
         self.bottone_prenotazioni = QPushButton("Prenotazioni")
+        self.bottone_prenotazioni.clicked.connect(self.go_lista_prenotazioni)
         self.h_layout.addWidget(self.bottone_prenotazioni)
 
         self.bottone_scannerizza = QPushButton("Scannerizza documento")
@@ -90,3 +92,6 @@ class VistaCliente(QWidget):
         self.controllore_lista_clienti.get_cliente_by_email(self.controllore_cliente.get_email_cliente()).documento = self.controllore_cliente.get_documento_identita()
         self.controllore_lista_clienti.save_data()
 
+    def go_lista_prenotazioni(self):
+        self.vista_prenotazioni = VistaPrenotazioni(self.controllore_cliente.get_email_cliente())
+        self.vista_prenotazioni.show()
