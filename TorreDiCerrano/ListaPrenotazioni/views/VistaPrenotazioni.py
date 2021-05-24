@@ -2,6 +2,8 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 
 from ListaPrenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
+from ListaPrenotazioni.views.VistaAggiungiPrenotazione import VistaAggiungiPrenotazione
+from Prenotazione.views.VistaPrenotazione import VistaPrenotazione
 
 
 class VistaPrenotazioni(QWidget):
@@ -26,6 +28,7 @@ class VistaPrenotazioni(QWidget):
 
         self.bottone_nuova_prenotazione = QPushButton("Nuova prenotazione")
         self.bottone_nuova_prenotazione.setFont(self.font)
+        self.bottone_nuova_prenotazione.clicked.connect(self.go_aggiungi_prenotazione)
         self.h_layout.addWidget(self.bottone_nuova_prenotazione)
 
         self.bottone_apri_prenotaizone = QPushButton("Apri prenotazione")
@@ -52,3 +55,7 @@ class VistaPrenotazioni(QWidget):
             item.setFont(self.font)
             self.modello_lista_prenotazioni.appendRow(item)
         self.lista_prenotazioni.setModel(self.modello_lista_prenotazioni)
+
+    def go_aggiungi_prenotazione(self):
+        self.vista_aggiungi_prenotazione = VistaAggiungiPrenotazione()
+        self.vista_aggiungi_prenotazione.show()
