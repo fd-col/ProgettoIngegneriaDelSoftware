@@ -1,7 +1,7 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton
 
-from TorreDiCerrano.ListaServizi.controller.ControlloreListaServizi import ControlloreListaServizi
+from TorreDiCerrano.ListeServizi.controller.ControlloreListaServizi import ControlloreListaServizi
 
 
 class VistaListaServizi(QWidget):

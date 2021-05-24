@@ -1,10 +1,10 @@
-from TorreDiCerrano.ListaServizi.model.ListaServizi import ListaServizi
+from TorreDiCerrano.ListeServizi.model.ListeServizi import ListeServizi
 
 
 class ControlloreListaServizi():
     def __init__(self):
         super(ControlloreListaServizi, self).__init__()
-        self.model = ListaServizi()
+        self.model = ListeServizi()
 
     def get_lista_dei_servizi(self):
         return self.model.get_lista_servizi()

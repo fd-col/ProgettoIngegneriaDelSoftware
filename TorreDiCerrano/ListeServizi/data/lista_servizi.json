@@ -11,7 +11,7 @@
       "prezzo" : 90
     },
     {
-      "nome" : "Colazione",
+      "nome" : "Solo colazione",
       "campo" : "Ristorazione",
       "prezzo" : 30
     }
@@ -20,39 +20,46 @@
     {
       "nome" : "Suite",
       "campo" : "Alloggio",
-      "prezzo" : 235
+      "prezzo" : 235,
+      "disponibilita_giornaliera" : 5
     },
     {
       "nome" : "Camera doppia",
       "campo" : "Alloggio",
-      "prezzo" : 80
+      "prezzo" : 80,
+      "disponibilita_giornaliera" : 20
     },
     {
       "nome" : "Camera famigliare",
       "campo" : "Alloggio",
-      "prezzo" : 125
+      "prezzo" : 125,
+      "disponibilita_giornaliera" : 35
     },
     {
       "nome" : "Bungalow",
       "campo" : "Alloggio",
-      "prezzo" : 150
+      "prezzo" : 150,
+      "disponibilita_giornaliera" : 10
     }
   ],
   [
     {
-      "nome" : "Noleggio monopattini elettrici",
+      "nome" : "Noleggio mezzi elettrici",
       "campo" : "Servizi aggiuntivi",
-      "prezzo" : 30
+      "prezzo" : 30,
+      "disponibilita_giornaliera" : 20
     },
     {
       "nome" : "Escursione turistica",
       "campo" : "Servizi aggiuntivi",
-      "prezzo" : 50
+      "prezzo" : 50,
+      "disponibilita_giornaliera" : 20
     },
     {
       "nome" : "Centro benessere",
       "campo" : "Servizi aggiuntivi",
-      "prezzo" : 50
+      "prezzo" : 50,
+      "disponibilita_giornaliera" : 20
     }
   ]
 ]

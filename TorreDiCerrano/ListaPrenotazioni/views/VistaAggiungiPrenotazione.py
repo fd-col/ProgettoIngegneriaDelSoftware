@@ -1,7 +1,13 @@
+import os
+import pickle
+
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from datetime import datetime
+
+from ListeServizi.model.ListeServizi import ListeServizi
+from Servizio.model.Servizio import Servizio
 
 
 class VistaAggiungiPrenotazione(QWidget):
@@ -44,61 +50,41 @@ class VistaAggiungiPrenotazione(QWidget):
         self.label_alloggio.setFont(self.font)
         self.layout.addWidget(self.label_alloggio, 3, 0)
 
-        self.menu_alloggio = QComboBox()
-        self.model_menu_alloggio = QStandardItemModel(self.menu_alloggio)
-        item1 = QStandardItem()
-        item1.setText("Alloggio 1")
-        item1.setEditable(False)
-        self.model_menu_alloggio.appendRow(item1)
-        item2 = QStandardItem()
-        item2.setText("Alloggio 2")
-        item2.setEditable(False)
-        self.model_menu_alloggio.appendRow(item2)
-        item3 = QStandardItem()
-        item3.setText("Alloggio 3")
-        item3.setEditable(False)
-        self.model_menu_alloggio.appendRow(item3)
-        item4 = QStandardItem()
-        item4.setText("Alloggio 4")
-        item4.setEditable(False)
-        self.model_menu_alloggio.appendRow(item4)
-        self.menu_alloggio.setModel(self.model_menu_alloggio)
-        self.layout.addWidget(self.menu_alloggio, 4, 0)
-
         self.label_ristorazione = QLabel("Seleziona il tipo di ristorazione:")
         self.label_ristorazione.setFont(self.font)
         self.layout.addWidget(self.label_ristorazione, 3, 1)
 
-        self.menu_ristorazione = QComboBox()
-        self.model_menu_ristorazione = QStandardItemModel(self.menu_ristorazione)
-        item1 = QStandardItem()
-        item1.setText("risto 1")
-        item1.setEditable(False)
-        self.model_menu_ristorazione.appendRow(item1)
-        item2 = QStandardItem()
-        item2.setText("risto  2")
-        item2.setEditable(False)
-        self.model_menu_ristorazione.appendRow(item2)
-        item3 = QStandardItem()
-        item3.setText("risto  3")
-        item3.setEditable(False)
-        self.model_menu_ristorazione.appendRow(item3)
-        item4 = QStandardItem()
-        item4.setText("risto  4")
-        item4.setEditable(False)
-        self.model_menu_ristorazione.appendRow(item4)
-        self.menu_ristorazione.setModel(self.model_menu_ristorazione)
-        self.layout.addWidget(self.menu_ristorazione, 4, 1)
-
-        self.box_spa = QCheckBox("Servizio spa")
-        self.layout.addWidget(self.box_spa, 5, 0)
-
-        self.box_mezzi = QCheckBox("Mezzi elettrici")
-        self.layout.addWidget(self.box_mezzi, 6, 0)
-
-        self.box_escursione = QCheckBox("Escursione")
-        self.layout.addWidget(self.box_escursione, 7, 0)
+        self.get_servizi()
 
         self.setLayout(self.layout)
         self.resize(1000, 600)
         self.setWindowTitle("Aggiungi Prenotazione")
+
+    def get_servizi(self):
+        self.liste_servizi = ListeServizi()
+
+        self.menu_alloggio = QComboBox()
+        self.model_menu_alloggio = QStandardItemModel(self.menu_alloggio)
+        for servizio_alloggio in self.liste_servizi.get_servizi_alloggio():
+            item = QStandardItem()
+            item.setText(servizio_alloggio.nome)
+            item.setEditable(False)
+            self.model_menu_alloggio.appendRow(item)
+        self.menu_alloggio.setModel(self.model_menu_alloggio)
+        self.layout.addWidget(self.menu_alloggio, 4, 0)
+
+        self.menu_ristorazione = QComboBox()
+        self.model_menu_ristorazione = QStandardItemModel(self.menu_ristorazione)
+        for servizio_ristorazione in self.liste_servizi.get_servizi_ristorazione():
+            item = QStandardItem()
+            item.setText(servizio_ristorazione.nome)
+            item.setEditable(False)
+            self.model_menu_ristorazione.appendRow(item)
+        self.menu_ristorazione.setModel(self.model_menu_ristorazione)
+        self.layout.addWidget(self.menu_ristorazione, 4, 1)
+
+        riga_servizi_aggiuntivi = 5
+        for servizio_aggiuntivo in self.liste_servizi.get_servizi_aggiuntivi():
+            check_box = QCheckBox(servizio_aggiuntivo.nome)
+            self.layout.addWidget(check_box, riga_servizi_aggiuntivi, 0)
+            riga_servizi_aggiuntivi = riga_servizi_aggiuntivi + 1
