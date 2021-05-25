@@ -2,7 +2,7 @@ import json
 import pickle
 import os.path
 
-from TorreDiCerrano.Servizio.model.Servizio import Servizio
+from Servizio.model.Servizio import Servizio
 
 
 class ListeServizi():
