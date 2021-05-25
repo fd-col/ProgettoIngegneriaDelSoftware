@@ -20,3 +20,6 @@ class ControllorePrenotazione():
 
     def get_servizi_aggiuntivi(self):
         return self.model.servizi_aggiuntivi
+
+    def get_prezzo_totale(self):
+        return self.model.get_prezzo_totale()

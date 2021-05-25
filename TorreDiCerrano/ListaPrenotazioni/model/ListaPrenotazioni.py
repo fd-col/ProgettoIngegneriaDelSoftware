@@ -6,8 +6,8 @@ class ListaPrenotazioni():
 
     def __init__(self):
         self.lista_prenotazioni = []
-        if os.path.isfile("TorreDiCerrano/ListaPrenotazioni/data/lista_prenotazioni_salvata.pickle"):
-            with open("TorreDiCerrano/ListaPrenotazioni/data/lista_prenotazioni_salvata.pickle", "rb") as file:
+        if os.path.isfile("ListaPrenotazioni/data/lista_prenotazioni_salvata.pickle"):
+            with open("ListaPrenotazioni/data/lista_prenotazioni_salvata.pickle", "rb") as file:
                 self.lista_prenotazioni = pickle.load(file)
 
     #Aggiungo una prenotazione e riordino la lista in base alle date
@@ -32,10 +32,10 @@ class ListaPrenotazioni():
 
     def elimina_prenotazione_singola(self, email, data_inizio):
         for prenotazione in self.lista_prenotazioni:
-            if prenotazione.email_cliente == email and prenotazione.data_inizio.strftime("%d/%m/%Y") == prenotazione.data_inizio.strftime("%d/%m/%Y"):
+            if prenotazione.email_cliente == email and prenotazione.data_inizio.strftime("%d/%m/%Y") == data_inizio.strftime("%d/%m/%Y"):
                 self.lista_prenotazioni.remove(prenotazione)
                 return
 
     def save_data(self):
-        with open("TorreDiCerrano/ListaPrenotazioni/data/lista_prenotazioni_salvata.pickle", "wb") as handle:
+        with open("ListaPrenotazioni/data/lista_prenotazioni_salvata.pickle", "wb") as handle:
             pickle.dump(self.lista_prenotazioni, handle, pickle.HIGHEST_PROTOCOL)

@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 
 from ListaPrenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
-from ListaPrenotazioni.views.VistaAggiungiPrenotazione import VistaAggiungiPrenotazione
+from ListaPrenotazioni.views.VistaNuovaPrenotazione import VistaNuovaPrenotazione
 from Prenotazione.views.VistaPrenotazione import VistaPrenotazione
 
 
@@ -57,5 +57,5 @@ class VistaPrenotazioni(QWidget):
         self.lista_prenotazioni.setModel(self.modello_lista_prenotazioni)
 
     def go_aggiungi_prenotazione(self):
-        self.vista_aggiungi_prenotazione = VistaAggiungiPrenotazione()
+        self.vista_aggiungi_prenotazione = VistaNuovaPrenotazione(self.email_cliente)
         self.vista_aggiungi_prenotazione.show()

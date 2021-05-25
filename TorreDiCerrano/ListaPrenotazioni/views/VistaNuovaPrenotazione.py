@@ -6,15 +6,18 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from datetime import datetime
 
+from ListaPrenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
 from ListeServizi.model.ListeServizi import ListeServizi
+from Prenotazione.model.Prenotazione import Prenotazione
 from Servizio.model.Servizio import Servizio
 
 
-class VistaAggiungiPrenotazione(QWidget):
+class VistaNuovaPrenotazione(QWidget):
 
-    def __init__(self, parent = None):
-        super(VistaAggiungiPrenotazione, self).__init__(parent)
+    def __init__(self, email_cliente, parent = None):
+        super(VistaNuovaPrenotazione, self).__init__(parent)
         self.font = QFont("Arial", 16)
+        self.email_cliente = email_cliente
 
         self.layout = QGridLayout()
 
@@ -56,6 +59,11 @@ class VistaAggiungiPrenotazione(QWidget):
 
         self.get_servizi()
 
+        self.bottone_conferma = QPushButton("Conferma")
+        self.bottone_conferma.setFont(self.font)
+        self.bottone_conferma.clicked.connect(self.aggiungi_prenotazione)
+        self.layout.addWidget(self.bottone_conferma, 5, 1)
+
         self.setLayout(self.layout)
         self.resize(1000, 600)
         self.setWindowTitle("Aggiungi Prenotazione")
@@ -83,8 +91,52 @@ class VistaAggiungiPrenotazione(QWidget):
         self.menu_ristorazione.setModel(self.model_menu_ristorazione)
         self.layout.addWidget(self.menu_ristorazione, 4, 1)
 
-        riga_servizi_aggiuntivi = 5
-        for servizio_aggiuntivo in self.liste_servizi.get_servizi_aggiuntivi():
-            check_box = QCheckBox(servizio_aggiuntivo.nome)
-            self.layout.addWidget(check_box, riga_servizi_aggiuntivi, 0)
-            riga_servizi_aggiuntivi = riga_servizi_aggiuntivi + 1
+        self.checkbox_noleggio = QCheckBox("Noleggio Mezzi Elettrici")
+        self.layout.addWidget(self.checkbox_noleggio, 5, 0)
+
+        self.checkbox_spa = QCheckBox("Centro Benessere")
+        self.layout.addWidget(self.checkbox_spa, 6, 0)
+
+        self.checkbox_escursione = QCheckBox("Escursione Turistica")
+        self.layout.addWidget(self.checkbox_escursione, 7, 0)
+
+    def aggiungi_prenotazione(self):
+        data_inizio_q = self.calendario_inizio.selectedDate()
+        data_inizio = datetime(data_inizio_q.year(), data_inizio_q.month(), data_inizio_q.day())
+
+        data_fine_q = self.calendario_fine.selectedDate()
+        data_fine = datetime(data_fine_q.year(), data_fine_q.month(), data_fine_q.day())
+
+        if data_fine <= data_inizio:
+            QMessageBox.critical(self, "Errore", "La data di fine non può essere precedente la data di inizio della vacanza", QMessageBox.Ok, QMessageBox.Ok)
+            return
+
+        servizio_alloggio = self.liste_servizi.get_servizi_alloggio()[self.menu_alloggio.currentIndex()]
+        servizio_ristorazione = self.liste_servizi.get_servizi_ristorazione()[self.menu_ristorazione.currentIndex()]
+        servizi_aggiuntivi = []
+
+        if self.checkbox_noleggio.isChecked():
+            servizi_aggiuntivi.append(self.liste_servizi.get_servizi_aggiuntivi()[0])
+
+        if self.checkbox_escursione.isChecked():
+            servizi_aggiuntivi.append(self.liste_servizi.get_servizi_aggiuntivi()[1])
+
+        if self.checkbox_spa.isChecked():
+            servizi_aggiuntivi.append(self.liste_servizi.get_servizi_aggiuntivi()[2])
+
+        prenotazione = Prenotazione(self.email_cliente, data_inizio,data_fine, servizio_ristorazione, servizio_alloggio, servizi_aggiuntivi)
+
+        risposta = QMessageBox.question(self, "Conferma", "Il costo della prenotazione è " + str(prenotazione.get_prezzo_totale()) + " € \n Confermare?", QMessageBox.Yes, QMessageBox.No)
+        if risposta == QMessageBox.No:
+            return
+        else:
+            controllore_lista_prenotazioni = ControlloreListaPrenotazioni()
+            controllore_lista_prenotazioni.aggiungi_prenotazione(prenotazione)
+            QMessageBox.about(self, "Confermata", "La Prenotazione è stata Confermata")
+            controllore_lista_prenotazioni.save_data()
+            self.close()
+
+
+
+
+
