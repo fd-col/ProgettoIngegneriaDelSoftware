@@ -29,7 +29,7 @@ class VistaPrenotazioni(QWidget):
 
         self.bottone_nuova_prenotazione = QPushButton("Nuova prenotazione")
         self.bottone_nuova_prenotazione.setFont(self.font)
-        self.bottone_nuova_prenotazione.clicked.connect(self.go_aggiungi_prenotazione)
+        self.bottone_nuova_prenotazione.clicked.connect(self.go_nuova_prenotazione)
         self.h_layout.addWidget(self.bottone_nuova_prenotazione)
 
         self.bottone_apri_prenotaizone = QPushButton("Apri prenotazione")
@@ -51,6 +51,7 @@ class VistaPrenotazioni(QWidget):
 
     def aggiorna_dati_prenotazioni(self):
         self.modello_lista_prenotazioni = QStandardItemModel()
+        self.controllore_lista_prenotazioni = ControlloreListaPrenotazioni()
         for prenotazione in self.controllore_lista_prenotazioni.get_lista_prenotazioni_cliente(self.email_cliente):
             item = QStandardItem()
             item.setText("Prenotazione del " + prenotazione.data_inizio.strftime("%d/%m/%Y") + " - " + prenotazione.data_fine.strftime("%d/%m/%Y"))
@@ -59,29 +60,36 @@ class VistaPrenotazioni(QWidget):
             self.modello_lista_prenotazioni.appendRow(item)
         self.lista_prenotazioni.setModel(self.modello_lista_prenotazioni)
 
-    def go_aggiungi_prenotazione(self):
-        self.vista_aggiungi_prenotazione = VistaNuovaPrenotazione(self.email_cliente)
-        self.vista_aggiungi_prenotazione.show()
+    def go_nuova_prenotazione(self):
+        self.vista_nuova_prenotazione = VistaNuovaPrenotazione(self.email_cliente, self.aggiorna_dati_prenotazioni)
+        self.vista_nuova_prenotazione.show()
 
     def apri_prenotazione(self):
-        prenotazione_selezionata = self.modello_lista_prenotazioni.currentRow()
-        if prenotazione_selezionata == None:
-            QMessageBox.critical(self, "Attenzione", "Non hai selezionato alcuna prenotazione da visualizzare",
-                                 QMessageBox.Ok, QMessageBox.Ok)
-        prenotazione_presa = self.controllore_lista_prenotazioni.get_lista_prenotazioni_cliente(self.email_cliente)[
-            prenotazione_selezionata]
-        self.vista_prenotazione = VistaPrenotazione(ControllorePrenotazione(prenotazione_presa))
-        self.show()
+        try:
+            indice = self.lista_prenotazioni.selectedIndexes()[0].row()
+            da_visualizzare = self.controllore_lista_prenotazioni.get_lista_prenotazioni_cliente(self.email_cliente)[indice]
+        except:
+            QMessageBox.critical(self, "Errore", "Seleziona la prenotazione da visualizzare", QMessageBox.Ok, QMessageBox.Ok)
+            return
+
+        self.vista_prenotazione = VistaPrenotazione(ControllorePrenotazione(da_visualizzare))
+        self.vista_prenotazione.show()
 
     def conferma_elimina_prenotazione(self):
-        self.controllore_prenotazione = ControllorePrenotazione()
-        risposta = QMessageBox(self, "Elimina prenotazione",
-                               "Sei sicuro di voler elimare la prenotazione selezionata? ", QMessageBox.Yes,
+        try:
+            indice = self.lista_prenotazioni.selectedIndexes()[0].row()
+            da_eliminare = self.controllore_lista_prenotazioni.get_lista_prenotazioni_cliente(self.email_cliente)[
+                indice]
+        except:
+            QMessageBox.critical(self, "Errore", "Seleziona la prenotazione da eliminare", QMessageBox.Ok,
+                                 QMessageBox.Ok)
+            return
+        risposta = QMessageBox.question(self, "Elimina prenotazione",
+                               "Sei sicuro di voler elimare la prenotazione selezionata? \nPerderai la caparra versata", QMessageBox.Yes,
                                QMessageBox.No)
         if risposta == QMessageBox.Yes:
-            self.close()
-            self.controllore_lista_prenotazioni.elimina_prenotazione_singola(self.email_cliente(),
-                                                                             self.controllore_prenotazione.get_data_inizio_prenotazione())
+            self.controllore_lista_prenotazioni.elimina_prenotazione_singola(self.email_cliente, da_eliminare.data_inizio)
             self.controllore_lista_prenotazioni.save_data()
+            self.aggiorna_dati_prenotazioni()
         else:
-            pass
+            return

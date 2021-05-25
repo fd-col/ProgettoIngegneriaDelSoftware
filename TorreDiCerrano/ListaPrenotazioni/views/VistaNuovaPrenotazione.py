@@ -14,10 +14,11 @@ from Servizio.model.Servizio import Servizio
 
 class VistaNuovaPrenotazione(QWidget):
 
-    def __init__(self, email_cliente, parent = None):
+    def __init__(self, email_cliente, aggiorna_dati_prenotazioni, parent = None):
         super(VistaNuovaPrenotazione, self).__init__(parent)
         self.font = QFont("Arial", 16)
         self.email_cliente = email_cliente
+        self.aggiorna_dati_prenotazioni = aggiorna_dati_prenotazioni
 
         self.layout = QGridLayout()
 
@@ -126,7 +127,7 @@ class VistaNuovaPrenotazione(QWidget):
 
         prenotazione = Prenotazione(self.email_cliente, data_inizio,data_fine, servizio_ristorazione, servizio_alloggio, servizi_aggiuntivi)
 
-        risposta = QMessageBox.question(self, "Conferma", "Il costo della prenotazione è " + str(prenotazione.get_prezzo_totale()) + " € \n Confermare?", QMessageBox.Yes, QMessageBox.No)
+        risposta = QMessageBox.question(self, "Conferma", "Il costo della prenotazione è " + str(prenotazione.get_prezzo_totale()) + " € \nDovrai versare una caparra di " + str(prenotazione.get_prezzo_totale()*20/100.0) + " € \nConfermare?", QMessageBox.Yes, QMessageBox.No)
         if risposta == QMessageBox.No:
             return
         else:
@@ -134,6 +135,7 @@ class VistaNuovaPrenotazione(QWidget):
             controllore_lista_prenotazioni.aggiungi_prenotazione(prenotazione)
             QMessageBox.about(self, "Confermata", "La Prenotazione è stata Confermata")
             controllore_lista_prenotazioni.save_data()
+            self.aggiorna_dati_prenotazioni()
             self.close()
 
 

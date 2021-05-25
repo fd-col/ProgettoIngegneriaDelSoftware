@@ -94,5 +94,8 @@ class VistaCliente(QWidget):
         self.controllore_lista_clienti.save_data()
 
     def go_lista_prenotazioni(self):
+        if self.controllore_cliente.get_documento_identita() is None:
+            QMessageBox.critical(self, "Errore", "Seleziona un documento prima di prenotare la tua vacanza", QMessageBox.Ok, QMessageBox.Ok)
+            return
         self.vista_prenotazioni = VistaPrenotazioni(self.controllore_cliente.get_email_cliente())
         self.vista_prenotazioni.show()

@@ -20,15 +20,15 @@ class VistaPrenotazione(QWidget):
         self.label_data.setFont(self.font_label)
         self.v_layout.addWidget(self.label_data)
 
-        self.label_servizio_ristorazione = QLabel("Servizio ristorazione: " + self.controllore_prenotazione.get_servizio_ristorazione())
+        self.label_servizio_ristorazione = QLabel("Servizio ristorazione: " + self.controllore_prenotazione.get_servizio_ristorazione().nome)
         self.label_servizio_ristorazione.setFont(self.font_label)
         self.v_layout.addWidget(self.label_servizio_ristorazione)
 
-        self.label_servizio_alloggio = QLabel("Servizio alloggio: " + self.controllore_prenotazione.get_servizio_alloggio())
+        self.label_servizio_alloggio = QLabel("Servizio alloggio: " + self.controllore_prenotazione.get_servizio_alloggio().nome)
         self.label_servizio_alloggio.setFont(self.font_label)
         self.v_layout.addWidget(self.label_servizio_alloggio)
 
-        self.label_servizi_aggiuntivi = QLabel("Servizi aggintivi:")
+        self.label_servizi_aggiuntivi = QLabel("Servizi aggiuntivi:")
         self.label_servizi_aggiuntivi.setFont(self.font_label)
         self.v_layout.addWidget(self.label_servizi_aggiuntivi)
 
@@ -38,10 +38,9 @@ class VistaPrenotazione(QWidget):
 
         self.setLayout(self.v_layout)
         self.setWindowTitle("Prenotazione")
-        self.resize(300, 500)
+        self.resize(300, 300)
 
     def get_dati_lista_servizi(self):
-
         self.list_view_model = QStandardItemModel()
         for servizio in self.controllore_prenotazione.get_servizi_aggiuntivi():
             item = QStandardItem()
