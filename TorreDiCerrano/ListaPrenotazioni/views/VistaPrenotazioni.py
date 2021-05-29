@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
+from datetime import datetime
 
 from ListaPrenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
 from ListaPrenotazioni.views.VistaNuovaPrenotazione import VistaNuovaPrenotazione
@@ -78,11 +79,13 @@ class VistaPrenotazioni(QWidget):
     def conferma_elimina_prenotazione(self):
         try:
             indice = self.lista_prenotazioni.selectedIndexes()[0].row()
-            da_eliminare = self.controllore_lista_prenotazioni.get_lista_prenotazioni_cliente(self.email_cliente)[
-                indice]
+            da_eliminare = self.controllore_lista_prenotazioni.get_lista_prenotazioni_cliente(self.email_cliente)[indice]
         except:
-            QMessageBox.critical(self, "Errore", "Seleziona la prenotazione da eliminare", QMessageBox.Ok,
-                                 QMessageBox.Ok)
+            QMessageBox.critical(self, "Errore", "Seleziona la prenotazione da eliminare", QMessageBox.Ok,QMessageBox.Ok)
+            return
+
+        if da_eliminare.data_inizio < datetime.now():
+            QMessageBox.critical(self, "Errore", "Non puoi eliminare prenotazioni passate", QMessageBox.Ok, QMessageBox.Ok)
             return
         risposta = QMessageBox.question(self, "Elimina prenotazione",
                                "Sei sicuro di voler elimare la prenotazione selezionata? \nPerderai la caparra versata", QMessageBox.Yes,

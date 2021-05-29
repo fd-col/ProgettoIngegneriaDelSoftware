@@ -32,7 +32,7 @@ class ListaPrenotazioni():
 
     def elimina_prenotazione_singola(self, email, data_inizio):
         for prenotazione in self.lista_prenotazioni:
-            if prenotazione.email_cliente == email and prenotazione.data_inizio.strftime("%d/%m/%Y") == data_inizio.strftime("%d/%m/%Y"):
+            if prenotazione.email_cliente == email and prenotazione.data_inizio == data_inizio:
                 self.lista_prenotazioni.remove(prenotazione)
                 return
 
