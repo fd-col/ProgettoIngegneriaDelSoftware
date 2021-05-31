@@ -4,7 +4,7 @@ from PyQt5.QtGui import QFont
 
 from Cliente.views.VistaScannerizzaDocumento import VistaScannerizzaDocumento
 from ListaClienti.controller.ControlloreListaClienti import ControlloreListaClienti
-from ListaPrenotazioni.views.VistaPrenotazioni import VistaPrenotazioni
+from ListaPrenotazioni.views.VistaPrenotazioniCliente import VistaPrenotazioniCliente
 
 
 class VistaCliente(QWidget):
@@ -97,5 +97,5 @@ class VistaCliente(QWidget):
         if self.controllore_cliente.get_documento_identita() is None:
             QMessageBox.critical(self, "Errore", "Seleziona un documento prima di prenotare la tua vacanza", QMessageBox.Ok, QMessageBox.Ok)
             return
-        self.vista_prenotazioni = VistaPrenotazioni(self.controllore_cliente.get_email_cliente())
-        self.vista_prenotazioni.show()
+        self.vista_prenotazioni_cliente = VistaPrenotazioniCliente(self.controllore_cliente.get_email_cliente())
+        self.vista_prenotazioni_cliente.show()

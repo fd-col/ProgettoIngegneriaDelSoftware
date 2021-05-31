@@ -3,6 +3,7 @@ from PyQt5.QtGui import QFont, QIcon, QPixmap
 from PyQt5.QtWidgets import *
 
 from ListaDipendenti.views.VistaListaDipendenti import VistaListaDipendenti
+from ListaPrenotazioni.views.VistaListaPrenotazioni import VistaListaPrenotazioni
 
 
 class VistaAmministratore(QWidget):
@@ -33,6 +34,7 @@ class VistaAmministratore(QWidget):
         self.bottone_lista_prenotazioni = QPushButton(" Lista Prenotazioni")
         self.bottone_lista_prenotazioni.setStyleSheet("background-color:#FFD800;")
         self.bottone_lista_prenotazioni.setIcon(QIcon("images\icon_prenotazione.png"))
+        self.bottone_lista_prenotazioni.clicked.connect(self.go_lista_prenotazioni)
         self.h_layout.addWidget(self.bottone_lista_prenotazioni)
 
         self.bottone_resoconti = QPushButton("Resoconti")
@@ -50,3 +52,7 @@ class VistaAmministratore(QWidget):
     def go_lista_dipendenti(self):
         self.vista_lista_dipendenti = VistaListaDipendenti()
         self.vista_lista_dipendenti.show()
+
+    def go_lista_prenotazioni(self):
+        self.vista_lista_prenotazioni = VistaListaPrenotazioni()
+        self.vista_lista_prenotazioni.show()

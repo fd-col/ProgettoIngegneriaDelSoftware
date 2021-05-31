@@ -1,6 +1,3 @@
-import os
-import pickle
-
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
@@ -9,7 +6,6 @@ from datetime import datetime
 from ListaPrenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
 from ListeServizi.model.ListeServizi import ListeServizi
 from Prenotazione.model.Prenotazione import Prenotazione
-from Servizio.model.Servizio import Servizio
 
 
 class VistaNuovaPrenotazione(QWidget):

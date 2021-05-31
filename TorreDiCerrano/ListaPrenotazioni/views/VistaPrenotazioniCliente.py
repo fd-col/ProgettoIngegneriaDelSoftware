@@ -8,10 +8,10 @@ from Prenotazione.controller.ControllorePrenotazione import ControllorePrenotazi
 from Prenotazione.views.VistaPrenotazione import VistaPrenotazione
 
 
-class VistaPrenotazioni(QWidget):
+class VistaPrenotazioniCliente(QWidget):
 
     def __init__(self, email_cliente, parent = None):
-        super(VistaPrenotazioni, self).__init__(parent)
+        super(VistaPrenotazioniCliente, self).__init__(parent)
         self.controllore_lista_prenotazioni = ControlloreListaPrenotazioni()
         self.email_cliente = email_cliente
 
@@ -52,7 +52,8 @@ class VistaPrenotazioni(QWidget):
 
     def aggiorna_dati_prenotazioni(self):
         self.modello_lista_prenotazioni = QStandardItemModel()
-        self.controllore_lista_prenotazioni = ControlloreListaPrenotazioni()
+        # SI PUO' TOGLIERE, PERCHE' GIA' PRESENTE SOPRA
+        #self.controllore_lista_prenotazioni = ControlloreListaPrenotazioni()
         for prenotazione in self.controllore_lista_prenotazioni.get_lista_prenotazioni_cliente(self.email_cliente):
             item = QStandardItem()
             item.setText("Prenotazione del " + prenotazione.data_inizio.strftime("%d/%m/%Y") + " - " + prenotazione.data_fine.strftime("%d/%m/%Y"))
