@@ -8,7 +8,7 @@ from Prenotazione.views.VistaPrenotazione import VistaPrenotazione
 
 class VistaListaPrenotazioniAdmin(QWidget):
 
-    def __init__(self, data_inizio, parent=None):
+    def __init__(self, data_inizio=None, parent=None):
         super(VistaListaPrenotazioniAdmin, self).__init__(parent)
         self.controllore_lista_prenotazioni = ControlloreListaPrenotazioni()
         self.data_inizio = data_inizio
@@ -16,7 +16,10 @@ class VistaListaPrenotazioniAdmin(QWidget):
         self.v_layout = QVBoxLayout()
         self.font = QFont("Arial", 16)
 
-        self.label_prenotazioni_data = QLabel("Arrivi di oggi: ")
+        if data_inizio is not None:
+            self.label_prenotazioni_data = QLabel("Arrivi di oggi: ")
+        else:
+            self.label_prenotazioni_data = QLabel("Tutte le prenotazioni: ")
         self.label_prenotazioni_data.setFont(self.font)
         self.v_layout.addWidget(self.label_prenotazioni_data)
 
@@ -40,9 +43,17 @@ class VistaListaPrenotazioniAdmin(QWidget):
         for prenotazione in self.controllore_lista_prenotazioni.get_lista_prenotazioni():
 
         #il confronto non funziona bene
-            if self.data_inizio == prenotazione.data_inizio.strftime("%d/%m/%Y"):
+            if self.data_inizio == prenotazione.data_inizio:
                 item = QStandardItem()
-                item.setText("Prenotazione del " + prenotazione.data_inizio.strftime("%d/%m/%Y") + " - " + prenotazione.data_fine.strftime("%d/%m/%Y"))
+                item.setText("Prenotazione del " + prenotazione.data_inizio.strftime("%d/%m/%Y")
+                             + " - " + prenotazione.data_fine.strftime("%d/%m/%Y"))
+                item.setEditable(False)
+                item.setFont(self.font)
+                self.modello_lista_prenotazioni.appendRow(item)
+            elif self.data_inizio is None:
+                item = QStandardItem()
+                item.setText("Prenotazione del " + prenotazione.data_inizio.strftime("%d/%m/%Y")
+                             + " - " + prenotazione.data_fine.strftime("%d/%m/%Y"))
                 item.setEditable(False)
                 item.setFont(self.font)
                 self.modello_lista_prenotazioni.appendRow(item)
