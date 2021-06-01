@@ -17,11 +17,11 @@ class VistaListaPrenotazioniAdmin(QWidget):
         self.font = QFont("Arial", 16)
 
         if data_inizio is not None:
-            self.label_prenotazioni_data = QLabel("Arrivi di oggi: ")
+            self.label_prenotazioni_by_data = QLabel("Arrivi di oggi: ")
         else:
-            self.label_prenotazioni_data = QLabel("Tutte le prenotazioni: ")
-        self.label_prenotazioni_data.setFont(self.font)
-        self.v_layout.addWidget(self.label_prenotazioni_data)
+            self.label_prenotazioni_by_data = QLabel("Tutte le prenotazioni: ")
+        self.label_prenotazioni_by_data.setFont(self.font)
+        self.v_layout.addWidget(self.label_prenotazioni_by_data)
 
         self.lista_prenotazioni = QListView()
         self.aggiorna_dati_prenotazioni()
@@ -36,14 +36,14 @@ class VistaListaPrenotazioniAdmin(QWidget):
         self.resize(700, 600)
         self.setWindowTitle("Lista Prenotazioni")
 
-
-
     def aggiorna_dati_prenotazioni(self):
         self.modello_lista_prenotazioni = QStandardItemModel()
-        for prenotazione in self.controllore_lista_prenotazioni.get_lista_prenotazioni():
 
-        #il confronto non funziona bene
+        for prenotazione in self.controllore_lista_prenotazioni.get_lista_prenotazioni():
+            #print(prenotazione.data_inizio) #RIESCE A SCORRERE TUTTE LE DATE DELLE PRENOTAZIONI CORRETTAMENTE
+            #print(self.data_inizio) INVECE QUI PRENDE DI DEFAULT IL GIORNO 01/06/2021
             if self.data_inizio == prenotazione.data_inizio:
+
                 item = QStandardItem()
                 item.setText("Prenotazione del " + prenotazione.data_inizio.strftime("%d/%m/%Y")
                              + " - " + prenotazione.data_fine.strftime("%d/%m/%Y"))
@@ -59,7 +59,6 @@ class VistaListaPrenotazioniAdmin(QWidget):
                 self.modello_lista_prenotazioni.appendRow(item)
 
         self.lista_prenotazioni.setModel(self.modello_lista_prenotazioni)
-
 
     def dettagli_prenotazione(self):
         try:

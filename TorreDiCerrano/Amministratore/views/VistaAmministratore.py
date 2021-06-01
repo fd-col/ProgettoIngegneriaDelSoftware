@@ -1,5 +1,5 @@
 from PyQt5.QtCore import QSize
-from PyQt5.QtGui import QFont, QIcon, QPixmap
+from PyQt5.QtGui import QFont, QIcon
 from PyQt5.QtWidgets import *
 
 from ListaDipendenti.views.VistaListaDipendenti import VistaListaDipendenti
@@ -40,7 +40,7 @@ class VistaAmministratore(QWidget):
         self.bottone_resoconti = QPushButton("Resoconti")
         self.bottone_resoconti.setStyleSheet("background-color:#FFD800;")
         self.bottone_resoconti.setIcon(QIcon("images\icon_resoconti.png"))
-        self.bottone_resoconti.setIconSize(QSize(50,50))
+        self.bottone_resoconti.setIconSize(QSize(50, 50))
         self.h_layout.addWidget(self.bottone_resoconti)
 
         self.v_layout.addLayout(self.h_layout)

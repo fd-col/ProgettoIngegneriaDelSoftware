@@ -2,7 +2,6 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QFont
 import os
 import json
-import time
 
 from Amministratore.views.VistaAmministratore import VistaAmministratore
 from Cliente.controller.ControlloreCliente import ControlloreCliente
