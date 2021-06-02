@@ -52,8 +52,7 @@ class VistaPrenotazioniCliente(QWidget):
 
     def aggiorna_dati_prenotazioni(self):
         self.modello_lista_prenotazioni = QStandardItemModel()
-        # SI PUO' TOGLIERE, PERCHE' GIA' PRESENTE SOPRA
-        #self.controllore_lista_prenotazioni = ControlloreListaPrenotazioni()
+        self.controllore_lista_prenotazioni = ControlloreListaPrenotazioni()
         for prenotazione in self.controllore_lista_prenotazioni.get_lista_prenotazioni_cliente(self.email_cliente):
             item = QStandardItem()
             item.setText("Prenotazione del " + prenotazione.data_inizio.strftime("%d/%m/%Y") + " - " + prenotazione.data_fine.strftime("%d/%m/%Y"))
