@@ -26,8 +26,7 @@ class VistaListaPrenotazioni(QWidget):
         self.calendario.setVerticalHeaderFormat(QCalendarWidget.NoVerticalHeader)
         self.calendario.setMinimumDate(QDate(2021, 6, 1))
         self.calendario.setMaximumDate(QDate(2021, 9, 15))
-        data_inizio_q = self.calendario.selectedDate()
-        self.data_inizio = datetime(data_inizio_q.year(), data_inizio_q.month(), data_inizio_q.day())
+
         self.g_layout.addWidget(self.calendario, 1, 0)
 
         self.h_layout = QHBoxLayout()
@@ -52,6 +51,8 @@ class VistaListaPrenotazioni(QWidget):
 
 
     def go_lista_prenotazioni_by_data(self):
+        data_inizio_q = self.calendario.selectedDate()
+        self.data_inizio = datetime(data_inizio_q.year(), data_inizio_q.month(), data_inizio_q.day())
         self.lista_prenotazioni_by_data = VistaListaPrenotazioniAdmin(self.data_inizio)
         self.lista_prenotazioni_by_data.show()
 

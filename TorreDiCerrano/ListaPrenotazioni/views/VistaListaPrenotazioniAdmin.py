@@ -46,14 +46,14 @@ class VistaListaPrenotazioniAdmin(QWidget):
 
                 item = QStandardItem()
                 item.setText("Prenotazione del " + prenotazione.data_inizio.strftime("%d/%m/%Y")
-                             + " - " + prenotazione.data_fine.strftime("%d/%m/%Y"))
+                             + " - " + prenotazione.data_fine.strftime("%d/%m/%Y") + " effettuata da " + prenotazione.email_cliente)
                 item.setEditable(False)
                 item.setFont(self.font)
                 self.modello_lista_prenotazioni.appendRow(item)
             elif self.data_inizio is None:
                 item = QStandardItem()
                 item.setText("Prenotazione del " + prenotazione.data_inizio.strftime("%d/%m/%Y")
-                             + " - " + prenotazione.data_fine.strftime("%d/%m/%Y"))
+                             + " - " + prenotazione.data_fine.strftime("%d/%m/%Y") + " effettuata da " + prenotazione.email_cliente)
                 item.setEditable(False)
                 item.setFont(self.font)
                 self.modello_lista_prenotazioni.appendRow(item)
