@@ -33,7 +33,7 @@ class VistaListaPrenotazioniAdmin(QWidget):
         self.v_layout.addWidget(self.bottone_dettagli_prenotaizone)
 
         self.setLayout(self.v_layout)
-        self.resize(700, 600)
+        self.resize(900, 600)
         self.setWindowTitle("Lista Prenotazioni")
 
     def aggiorna_dati_prenotazioni(self):

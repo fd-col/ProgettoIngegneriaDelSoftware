@@ -11,8 +11,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from Registrazione.VistaRegistrazione import VistaRegistrazione
 from Login.VistaLogin import VistaLogin
-from PyQt5.QtGui import QFont
-
 
 
 class Ui_HOME(object):
