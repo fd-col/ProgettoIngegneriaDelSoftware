@@ -1,5 +1,5 @@
 from PyQt5.QtCore import QSize
-from PyQt5.QtGui import QFont, QIcon
+from PyQt5.QtGui import QFont, QIcon, QPixmap
 from PyQt5.QtWidgets import *
 
 from ListaDipendenti.views.VistaListaDipendenti import VistaListaDipendenti
@@ -12,6 +12,11 @@ class VistaAmministratore(QWidget):
         super(VistaAmministratore, self).__init__(parent)
 
         self.v_layout = QVBoxLayout()
+
+        self.label_icona = QLabel("Cliente")
+        self.label_icona.setPixmap(QPixmap('images/profilo_amministratore.jpg'))
+        self.label_icona.setScaledContents(False)
+        self.v_layout.addWidget(self.label_icona)
 
         self.label_nome = QLabel(nome)
         self.font_nome = QFont("Arial", 20)
@@ -45,9 +50,11 @@ class VistaAmministratore(QWidget):
 
         self.v_layout.addLayout(self.h_layout)
 
+        self.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.setLayout(self.v_layout)
         self.setWindowTitle(nome)
         self.resize(350, 400)
+        self.move(750, 200)
 
     def go_lista_dipendenti(self):
         self.vista_lista_dipendenti = VistaListaDipendenti()
