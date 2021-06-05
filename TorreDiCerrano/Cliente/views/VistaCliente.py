@@ -73,7 +73,7 @@ class VistaCliente(QWidget):
 
         label = QLabel(testo)
         label.setStyleSheet("color: rgb(0, 0, 0);\n""font: 100 18pt \"Times New Roman\";\n"
-                            "background-color: rgb(178, 225, 255, 20);")
+                            "background-color: rgba(178, 225, 255, 20);")
         h_layout.addWidget(label)
 
         label_di_testo = QLabel(text_label)
