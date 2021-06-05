@@ -3,5 +3,10 @@
     "nome": "admin",
     "email": "admin",
     "password": "admin"
+  },
+  {
+    "nome": "admin2",
+    "email": "admin2",
+    "password": "admin2"
   }
 ]

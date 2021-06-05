@@ -29,10 +29,28 @@ class VistaCliente(QWidget):
         self.v_layout.addSpacing(40)
 
         self.create_label("Data di nascita:  ", self.controllore_cliente.get_data_nascita_cliente().strftime('%m/%d/%Y'))
-        self.create_label("Indirizzo:                ", self.controllore_cliente.get_indirizzo_cliente())
-        self.create_label("Telefono:            ", self.controllore_cliente.get_telefono_cliente())
-        self.create_label("Email:                     ", self.controllore_cliente.get_email_cliente())
-        self.aggiorna_documento()
+        self.create_label("Indirizzo:        ", self.controllore_cliente.get_indirizzo_cliente())
+        self.create_label("Telefono:         ", self.controllore_cliente.get_telefono_cliente())
+        self.create_label("Email:            ", self.controllore_cliente.get_email_cliente())
+
+        self.v_layout.addSpacing(25)
+
+        self.h_label_layout = QHBoxLayout()
+        if self.controllore_cliente.get_documento_identita() is None:
+            self.nome_documento = "Nessuno"
+        else:
+            self.path = self.controllore_cliente.get_documento_identita().split("/")
+            self.nome_documento = self.path[-1]
+
+        self.label_documento = QLabel("Documento:        " )
+        self.label_documento.setStyleSheet("color: rgb(255, 0, 0);\n""font: 100 18pt \"Times New Roman\";\n"
+                            "background-color: rgb(178, 225, 255, 20);")
+        self.h_label_layout.addWidget(self.label_documento)
+
+        self.label_documento_testo = QLabel(self.controllore_cliente.get_documento_identita().split("/")[-1])
+        self.label_documento_testo.setFont(QFont("Arial", 16))
+        self.h_label_layout.addWidget(self.label_documento_testo)
+        self.v_layout.addLayout(self.h_label_layout)
 
         self.v_layout.addSpacing(25)
 
@@ -47,7 +65,7 @@ class VistaCliente(QWidget):
         self.setStyleSheet("background-color: rgb(178, 225, 255);")
         self.setLayout(self.v_layout)
         self.setWindowTitle(self.controllore_cliente.get_nome_cliente() + " " + self.controllore_cliente.get_cognome_cliente())
-        self.resize(325, 450)
+        self.resize(600, 450)
         self.move(650, 20)
 
     def create_label(self, testo, text_label):
@@ -80,7 +98,7 @@ class VistaCliente(QWidget):
 
     def go_vista_scannerizza_documento(self):
         self.vista_scannerizza_documento = VistaScannerizzaDocumento(self.controllore_cliente)
-        self.aggiorna_documento(True)
+        self.aggiorna_documento()
 
     def conferma_elimina_profilo(self):
         self.controllore_lista_clienti = ControlloreListaClienti()
@@ -92,21 +110,11 @@ class VistaCliente(QWidget):
         else:
             pass
 
-    def aggiorna_documento(self, aggiorna=None):
-#gestire meglio gli if else
-        if aggiorna==True:
-            self.nome_documento = self.controllore_cliente.get_documento_identita().split("/")[-1]
-            self.controllore_lista_clienti = ControlloreListaClienti()
-            self.controllore_lista_clienti.get_cliente_by_email(self.controllore_cliente.get_email_cliente()).documento = self.controllore_cliente.get_documento_identita()
-            self.controllore_lista_clienti.save_data()
-
-        elif self.controllore_cliente.get_documento_identita() is None:
-            self.nome_documento = "Nessuno"
-        else:
-            self.path = self.controllore_cliente.get_documento_identita().split("/")
-            self.nome_documento = self.path[-1]
-        self.close()
-        self.create_label("Documento:               ", self.nome_documento)
+    def aggiorna_documento(self):
+        self.label_documento_testo.setText(self.controllore_cliente.get_documento_identita().split("/")[-1])
+        self.controllore_lista_clienti = ControlloreListaClienti()
+        self.controllore_lista_clienti.get_cliente_by_email(self.controllore_cliente.get_email_cliente()).documento = self.controllore_cliente.get_documento_identita()
+        self.controllore_lista_clienti.save_data()
 
 
 

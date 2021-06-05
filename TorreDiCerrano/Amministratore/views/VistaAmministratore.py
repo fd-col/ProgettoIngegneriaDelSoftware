@@ -22,11 +22,13 @@ class VistaAmministratore(QWidget):
         self.font_nome = QFont("Arial", 20)
         self.label_nome.setFont(self.font_nome)
         self.v_layout.addWidget(self.label_nome)
+        self.v_layout.addSpacing(20)
 
         self.label_admin = QLabel("Account Amministratore")
         self.font_admin = QFont("Arial", 16)
         self.label_admin.setFont(self.font_admin)
         self.v_layout.addWidget(self.label_admin)
+        self.v_layout.addSpacing(20)
 
         self.h_layout = QHBoxLayout()
 

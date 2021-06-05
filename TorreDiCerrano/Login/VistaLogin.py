@@ -54,7 +54,6 @@ class VistaLogin(QWidget):
         self.resize(200, 200)
         self.setWindowTitle("Login")
 
-
     def login(self):
         email = self.campo_email.text()
         password = self.campo_password.text()
@@ -75,13 +74,12 @@ class VistaLogin(QWidget):
             QMessageBox.critical(self, "Errore", "L'email inserita non è associata ad alcun cliente", QMessageBox.Ok,
                                  QMessageBox.Ok)
 
-
     def controlla_admin(self, email, password):
 
         if os.path.isfile("Amministratore/data/lista_amministratori.json"):
             with open("Amministratore/data/lista_amministratori.json") as file:
-                self.lista_admin = json.load(file)
-                for admin in self.lista_admin:
+                lista_admin = json.load(file)
+                for admin in lista_admin:
                     if email == admin["email"] and password == admin["password"]:
                         self.vista_admin = VistaAmministratore(admin["nome"])
                         self.vista_admin.show()
