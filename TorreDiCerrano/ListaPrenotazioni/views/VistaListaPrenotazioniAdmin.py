@@ -1,5 +1,6 @@
 from PyQt5.QtGui import QFont, QStandardItem, QStandardItemModel
 from PyQt5.QtWidgets import QListView, QVBoxLayout, QLabel, QWidget, QPushButton, QMessageBox
+from PyQt5.QtCore import Qt
 
 from ListaPrenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
 from Prenotazione.controller.ControllorePrenotazione import ControllorePrenotazione
@@ -17,11 +18,13 @@ class VistaListaPrenotazioniAdmin(QWidget):
         self.font = QFont("Arial", 16)
 
         if data_inizio is not None:
-            self.label_prenotazioni_by_data = QLabel("Arrivi di oggi: ")
+            self.label_prenotazioni_by_data = QLabel("Arrivi del giorno " + data_inizio.strftime("%d/%m/%Y") + ":")
         else:
             self.label_prenotazioni_by_data = QLabel("Tutte le prenotazioni: ")
-        self.label_prenotazioni_by_data.setFont(self.font)
+        self.label_prenotazioni_by_data.setStyleSheet("font:  20pt \"Papyrus\";""color: rgb(0,0,255);")
+        self.label_prenotazioni_by_data.setAlignment(Qt.AlignCenter)
         self.v_layout.addWidget(self.label_prenotazioni_by_data)
+        self.v_layout.addSpacing(30)
 
         self.lista_prenotazioni = QListView()
         self.aggiorna_dati_prenotazioni()
@@ -40,8 +43,7 @@ class VistaListaPrenotazioniAdmin(QWidget):
         self.modello_lista_prenotazioni = QStandardItemModel()
 
         for prenotazione in self.controllore_lista_prenotazioni.get_lista_prenotazioni():
-            #print(prenotazione.data_inizio) #RIESCE A SCORRERE TUTTE LE DATE DELLE PRENOTAZIONI CORRETTAMENTE
-            #print(self.data_inizio) INVECE QUI PRENDE DI DEFAULT IL GIORNO 01/06/2021
+
             if self.data_inizio == prenotazione.data_inizio:
 
                 item = QStandardItem()
