@@ -1,5 +1,9 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QFont
+
+from PyQt5.QtWidgets import (QWidget, QHBoxLayout, QApplication,
+    QPushButton, QMessageBox, QSizePolicy)
+from PyQt5.QtGui import QKeySequence
 import os
 import json
 
@@ -48,6 +52,8 @@ class VistaLogin(QWidget):
         self.bottone_login.setFont(self.font)
         self.bottone_login.setStyleSheet("background-color:#ccd9ff;")
         self.bottone_login.clicked.connect(self.login)
+        self.shortcut_open = QShortcut(QKeySequence('Return'), self)
+        self.shortcut_open.activated.connect(self.login)
         self.v_layout.addWidget(self.bottone_login)
 
         self.setLayout(self.v_layout)

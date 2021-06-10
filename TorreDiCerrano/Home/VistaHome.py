@@ -105,6 +105,7 @@ class Ui_HOME(object):
         bottone.setGeometry(dimensioni)
         bottone.setStyleSheet("background-color: " + background_color + ";\n""font: 75 16pt \"Arial\";\n"
                               "color: " + text_color + ";")
+        bottone.setDefault(True)
         bottone.setObjectName(nome)
         bottone.clicked.connect(comando)
 
