@@ -1,10 +1,9 @@
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QFont, QIcon, QPixmap
-from PyQt5.QtCore import *
+from PyQt5.QtGui import QFont, QPixmap
 
 from Cliente.views.VistaScannerizzaDocumento import VistaScannerizzaDocumento
 from ListaClienti.controller.ControlloreListaClienti import ControlloreListaClienti
-from ListaPrenotazioni.views.VistaPrenotazioniCliente import VistaPrenotazioniCliente
+from Cliente.views.VistaPrenotazioniCliente import VistaPrenotazioniCliente
 
 
 class VistaCliente(QWidget):
@@ -72,7 +71,7 @@ class VistaCliente(QWidget):
         h_layout = QHBoxLayout()
 
         label = QLabel(testo)
-        label.setStyleSheet("color: rgb(0, 0, 0);\n""font: 100 18pt \"Times New Roman\";\n"
+        label.setStyleSheet("color: rgb(0, 0, 0);\n""font: 200 18pt \"Times New Roman\";\n"
                             "background-color: rgba(178, 225, 255, 20);")
         h_layout.addWidget(label)
 

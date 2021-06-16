@@ -32,30 +32,12 @@ class VistaAmministratore(QWidget):
 
         self.h_layout = QHBoxLayout()
 
-        self.bottone_lista_dipendenti = QPushButton(" Lista Dipendenti")
-        self.bottone_lista_dipendenti.setStyleSheet("background-color:#FFD800;")
-        self.bottone_lista_dipendenti.setIcon(QIcon("images\icon_dipendenti.png"))
-        self.bottone_lista_dipendenti.clicked.connect(self.go_lista_dipendenti)
-        self.shortcut_open = QShortcut(QKeySequence('Alt+D'), self)
-        self.shortcut_open.activated.connect(self.go_lista_dipendenti)
-        self.h_layout.addWidget(self.bottone_lista_dipendenti)
-
-        self.bottone_lista_prenotazioni = QPushButton(" Lista Prenotazioni")
-        self.bottone_lista_prenotazioni.setStyleSheet("background-color:#FFD800;")
-        self.bottone_lista_prenotazioni.setIcon(QIcon("images\icon_prenotazione.png"))
-        self.bottone_lista_prenotazioni.clicked.connect(self.go_lista_prenotazioni)
-        self.shortcut_open = QShortcut(QKeySequence('Alt+P'), self)
-        self.shortcut_open.activated.connect(self.go_lista_prenotazioni)
-        self.h_layout.addWidget(self.bottone_lista_prenotazioni)
-
-        self.bottone_resoconti = QPushButton("Resoconti")
-        self.bottone_resoconti.setStyleSheet("background-color:#FFD800;")
-        self.bottone_resoconti.setIcon(QIcon("images\icon_resoconti.png"))
-        self.bottone_resoconti.setIconSize(QSize(50, 50))
-        #self.bottone_resoconti.clicked.connect(             )
-        self.shortcut_open = QShortcut(QKeySequence('Alt+R'), self)
-        #self.shortcut_open.activated.connect(                  )
-        self.h_layout.addWidget(self.bottone_resoconti)
+        self.create_button(" Lista Prenotazioni", self.go_lista_prenotazioni, "background-color:#FFD800;", 'Alt+P',
+                           "images\\icon_prenotazione.png", )
+        self.create_button(" Lista Dipendenti", self.go_lista_dipendenti, "background-color:#FFD800;", 'Alt+D',
+                           "images\\icon_dipendenti.png", )
+        self.create_button("Resoconti", self.funzione_al_posto_di_resoconti, "background-color:#FFD800;", 'Alt+R',
+                           "images\\icon_resoconti.png", QSize(50, 50))
 
         self.v_layout.addLayout(self.h_layout)
 
@@ -64,6 +46,19 @@ class VistaAmministratore(QWidget):
         self.setWindowTitle(nome)
         self.resize(350, 400)
         self.move(750, 200)
+
+    def funzione_al_posto_di_resoconti(self):
+        pass
+
+    def create_button(self, testo, comando, background_color, shortcut, icona, icon_size=QSize(30, 30)):
+        bottone = QPushButton(testo)
+        bottone.setStyleSheet(background_color)
+        bottone.setIcon(QIcon(icona))
+        bottone.setIconSize(icon_size)
+        bottone.clicked.connect(comando)
+        shortcut_open = QShortcut(QKeySequence(shortcut), self)
+        shortcut_open.activated.connect(comando)
+        self.h_layout.addWidget(bottone)
 
     def go_lista_dipendenti(self):
         self.vista_lista_dipendenti = VistaListaDipendenti()

@@ -3,7 +3,7 @@ from PyQt5.QtGui import *
 from datetime import datetime
 
 from ListaPrenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
-from ListaPrenotazioni.views.VistaNuovaPrenotazione import VistaNuovaPrenotazione
+from Cliente.views.VistaNuovaPrenotazione import VistaNuovaPrenotazione
 from Prenotazione.controller.ControllorePrenotazione import ControllorePrenotazione
 from Prenotazione.views.VistaPrenotazione import VistaPrenotazione
 
@@ -19,7 +19,7 @@ class VistaPrenotazioniCliente(QWidget):
         self.font = QFont("Arial", 16)
 
         self.label_prenotazioni = QLabel("Prenotazioni: ")
-        self.label_prenotazioni.setFont(self.font)
+        self.label_prenotazioni.setFont(QFont("Times New Roman", 18))
         self.v_layout.addWidget(self.label_prenotazioni)
 
         self.lista_prenotazioni = QListView()
@@ -28,27 +28,21 @@ class VistaPrenotazioniCliente(QWidget):
 
         self.h_layout = QHBoxLayout()
 
-        self.bottone_nuova_prenotazione = QPushButton("Nuova prenotazione")
-        self.bottone_nuova_prenotazione.setFont(self.font)
-        self.bottone_nuova_prenotazione.clicked.connect(self.go_nuova_prenotazione)
-        self.h_layout.addWidget(self.bottone_nuova_prenotazione)
-
-        self.bottone_apri_prenotaizone = QPushButton("Apri prenotazione")
-        self.bottone_apri_prenotaizone.setFont(self.font)
-        self.bottone_apri_prenotaizone.clicked.connect(self.apri_prenotazione)
-        self.h_layout.addWidget(self.bottone_apri_prenotaizone)
-
-        self.bottone_elimina_prenotazione = QPushButton("Elimina prenotazione")
-        self.bottone_elimina_prenotazione.setFont(self.font)
-        self.bottone_elimina_prenotazione.clicked.connect(self.conferma_elimina_prenotazione)
-        self.h_layout.addWidget(self.bottone_elimina_prenotazione)
+        self.create_button("Nuova prenotazione", self.go_nuova_prenotazione, "background-color: rgb(170,180,255);")
+        self.create_button("Apri prenotazione", self.apri_prenotazione, "background-color: rgb(0, 255, 0);")
+        self.create_button("Elimina prenotazione", self.conferma_elimina_prenotazione, "background-color: rgb(255,0,0);")
 
         self.v_layout.addLayout(self.h_layout)
         self.setLayout(self.v_layout)
         self.resize(300, 300)
         self.setWindowTitle("Prenotazioni")
 
-
+    def create_button(self, testo, comando, background_color):
+        bottone = QPushButton(testo)
+        bottone.setFont(self.font)
+        bottone.setStyleSheet(background_color)
+        bottone.clicked.connect(comando)
+        self.h_layout.addWidget(bottone)
 
     def aggiorna_dati_prenotazioni(self):
         self.modello_lista_prenotazioni = QStandardItemModel()
@@ -57,7 +51,7 @@ class VistaPrenotazioniCliente(QWidget):
             item = QStandardItem()
             item.setText("Prenotazione del " + prenotazione.data_inizio.strftime("%d/%m/%Y") + " - " + prenotazione.data_fine.strftime("%d/%m/%Y"))
             item.setEditable(False)
-            item.setFont(self.font)
+            item.setFont(QFont("Candara", 16))
             self.modello_lista_prenotazioni.appendRow(item)
         self.lista_prenotazioni.setModel(self.modello_lista_prenotazioni)
 
