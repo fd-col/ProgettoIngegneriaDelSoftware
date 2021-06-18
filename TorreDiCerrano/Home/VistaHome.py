@@ -1,72 +1,29 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import QSize, Qt
+from PyQt5.QtCore import QSize, Qt, QRect
 from PyQt5.QtGui import QFont, QIcon
-from PyQt5.QtWidgets import QPushButton, QTabWidget, QVBoxLayout, QWidget, QHBoxLayout, QLabel
+from PyQt5.QtWidgets import QPushButton, QTabWidget, QVBoxLayout, QWidget, QHBoxLayout, QLabel, QMainWindow
 
+from Home.TabWidget import TabWidget
 from Registrazione.VistaRegistrazione import VistaRegistrazione
 from Login.VistaLogin import VistaLogin
 
 
-class Home(QWidget):
+class Home(QMainWindow):
 
     def __init__(self, parent=None):
         super(Home, self).__init__(parent)
         self.setObjectName("HOME")
-        self.resize(1900, 1050)
+        self.resize(1910, 1000)
         self.setStyleSheet("background-color: #F0DC83;")
 
-        self.layout = QVBoxLayout(self)
-        self.layout.addSpacing(25)
 
-        # Horizontal layout for buttons
-        self.h_layout = QHBoxLayout()
-        self.h_layout.addStretch(1)
-        self.create_button("        Login        ", "rgb(255,255,255)", "rgb(0, 0, 0)",
-                           "login", self.go_vista_login)
-        self.create_button("     Registrati     ", "rgb(0,0,0)", "rgb(255, 170, 0)",
-                           "registrati", self.go_vista_registrazione)
-        self.h_layout.addSpacing(25)
 
-        # Initialize tab screen
-        self.tabs = QTabWidget()
-        self.tab1 = QWidget()
-        self.tab2 = QWidget()
-        self.tabs.resize(300, 100)
-
-        # Add tabs
-        self.tabs.addTab(self.tab1, QIcon("images\\icona_home.jpg"), "Home")
-        self.tabs.setIconSize(QSize(30, 30))
-        self.tabs.addTab(self.tab2, "Immagini")
-        self.tabs.setFont((QFont("Candara", 15)))
-        self.tabs.setStyleSheet("background-color: #FFFFF0;")  #colore sfondo tabs : avorio
-
-        # Create first tab
-        self.tab1.layout = QVBoxLayout(self)
-
-        self.label_resort = QLabel("Resort Torre di Cerrano")
-        self.label_resort.setStyleSheet("font: 20pt \"Papyrus\";")
-        self.label_resort.setAlignment(Qt.AlignCenter)
-        self.label_resort.setFixedHeight(50)
-        self.label_image = self.create_label_image('images/torre_di_cerrano[325].jpg')
-
-        self.tab1.layout.addWidget(self.label_resort)
-        self.tab1.layout.addWidget(self.label_image)
-        self.tab1.setLayout(self.tab1.layout)
-
-        # Create second tab
-        self.tab2.layout = QVBoxLayout(self)
-
-        self.label_travel = self.create_label_image("images/travel-1677347_1920.jpg")
-        self.label_sea = self.create_label_image("images/sea-3704014_1920.jpg")
-
-        self.tab2.layout.addWidget(self.label_travel)
-        self.tab2.layout.addWidget(self.label_sea)
-        self.tab2.setLayout(self.tab2.layout)
 
         # Add tabs to widget
-        self.layout.addLayout(self.h_layout)
-        self.layout.addWidget(self.tabs)
-        self.setLayout(self.layout)
+
+        self.table_widget = TabWidget()
+        self.setCentralWidget(self.table_widget)
+
         """
         self.centralwidget = QtWidgets.QWidget(HOME)
         self.centralwidget.setObjectName("centralwidget")
@@ -155,29 +112,8 @@ class Home(QWidget):
         item.setText(_translate("HOME", "noleggio mezzi elettrici"))
         self.listWidget.setSortingEnabled(__sortingEnabled)
 
-    def create_button(self, testo, text_color, background_color, nome, comando):
-        bottone = QPushButton(testo)
-        #bottone.setText(testo)
-        #bottone.setGeometry(dimensioni)
-        bottone.setStyleSheet("background-color: " + background_color + ";\n""font: 75 16pt \"Arial\";\n"
-                              "color: " + text_color + ";")
-        bottone.setDefault(True)
-        bottone.setObjectName(nome)
-        bottone.clicked.connect(comando)
-        self.h_layout.addWidget(bottone)
 
-    def create_label_image(self, immagine):
-        label = QtWidgets.QLabel()
-        label.setText("")
-        label.setPixmap(QtGui.QPixmap(immagine))
-        label.setScaledContents(True)
-        label.setObjectName("label")
-        return label
 
-    def go_vista_registrazione(self):
-        self.vista_registrazione = VistaRegistrazione()
-        self.vista_registrazione.show()
 
-    def go_vista_login(self):
-        self.vista_login = VistaLogin()
-        self.vista_login.show()
+
+
