@@ -1,11 +1,9 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from Home.VistaHome import Ui_HOME
+from Home.VistaHome import Home
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    mainwindow = QMainWindow()
-    window = Ui_HOME()
-    window.setupUi(mainwindow)
-    mainwindow.show()
+    window = Home()
+    window.show()
     app.exec_()

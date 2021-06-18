@@ -1,8 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QFont
 
-from PyQt5.QtWidgets import (QWidget, QHBoxLayout, QApplication,
-    QPushButton, QMessageBox, QSizePolicy)
+from PyQt5.QtWidgets import QWidget, QPushButton, QMessageBox
 from PyQt5.QtGui import QKeySequence
 import os
 import json
