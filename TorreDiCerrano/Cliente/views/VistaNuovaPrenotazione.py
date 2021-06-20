@@ -10,7 +10,7 @@ from Prenotazione.model.Prenotazione import Prenotazione
 
 class VistaNuovaPrenotazione(QWidget):
 
-    def __init__(self, email_cliente, aggiorna_dati_prenotazioni, parent = None):
+    def __init__(self, email_cliente, aggiorna_dati_prenotazioni, parent=None):
         super(VistaNuovaPrenotazione, self).__init__(parent)
         self.font = QFont("Arial", 16)
         self.email_cliente = email_cliente

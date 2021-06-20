@@ -27,12 +27,11 @@ class TabWidget(QWidget):
         self.bottone_info.setIcon(QIcon("images\\icon_info.png"))
         self.bottone_info.setIconSize(QSize(150, 70))
 
-        # add buttons to the horizontal layout
+        # add buttons to the horizontal layout on the top
         self.h_button_layout.addStretch(1)
         self.h_button_layout.addWidget(self.bottone_info)
         self.h_button_layout.addWidget(self.bottone_login)
         self.h_button_layout.addWidget(self.bottone_registrati)
-
 
         # Initialize tab screen
         self.tabs = QTabWidget()
@@ -46,9 +45,9 @@ class TabWidget(QWidget):
         self.tabs.setIconSize(QSize(30, 30))
         self.tabs.addTab(self.tab2, QIcon("images\\icons8-pila-di-foto.gif"), "Immagini")
         self.tabs.setIconSize(QSize(30, 30))
-        self.tabs.addTab(self.tab3, QIcon("images\\icons8-pila-di-foto.gif"), "Servizi")
+        self.tabs.addTab(self.tab3, QIcon("images\\icons8-lista-64.png"), "Servizi")
         self.tabs.setIconSize(QSize(30, 30))
-        self.tabs.addTab(self.tab4, QIcon("images\\icons8-pila-di-foto.gif"), "Prezzi")
+        self.tabs.addTab(self.tab4, QIcon("images\\icons8-euro-80.png"), "Prezzi")
         self.tabs.setFont((QFont("Candara", 15)))
         self.tabs.setStyleSheet("background-color: #FFFFF0;")  # colore sfondo tabs : avorio
 
@@ -59,15 +58,16 @@ class TabWidget(QWidget):
         self.h_title_layout = QHBoxLayout()
 
         # widgets
-        self.label_resort = QLabel("                Resort Torre di Cerrano")
-        self.label_resort.setStyleSheet("color: rgb(51, 102, 255);\n""font: 100 18pt \"Papyrus\";\n"
+        self.label_resort = QLabel("Resort Torre di Cerrano")
+        self.label_resort.setStyleSheet("color: rgb(51, 102, 255);\n""font: 100 30pt \"Papyrus\";\n"
                                         "background-color: rgba(255, 168, 29, 0);")
         self.label_logo = QLabel()
         self.label_logo.setPixmap(QPixmap("images\\icon_logo_rt.png"))
 
         # add widgets to horizontal title layout
-        self.h_title_layout.addWidget(self.label_resort)
+        self.h_title_layout.setAlignment(Qt.AlignCenter)
         self.h_title_layout.addWidget(self.label_logo)
+        self.h_title_layout.addWidget(self.label_resort)
 
         self.label_descrizione = QLabel("Se cerchi un Resort in Abruzzo sul mare il Resort Torre di Cerrano   "
                                         "ti Aspetta con il suo impeccabile Staff, le stanze curate ed accoglienti "
@@ -85,11 +85,11 @@ class TabWidget(QWidget):
         self.v_layout.addLayout(self.h_title_layout)
         self.v_layout.addWidget(self.label_descrizione)
 
-        self.label_image = self.create_label_image('images/torre_di_cerrano[325].jpg')
-        self.label_image.setScaledContents(True)
-        self.label_image.setMaximumHeight(650)
+        self.label_image = self.create_label_image('images/torre_cerrano.jpg')
+        self.label_image.setMargin(25)
+        self.label_image.setFixedSize(1050,750)
 
-        # add everything to tab1
+        # add v_layout and label_image to tab1
         self.tab1.layout.addLayout(self.v_layout)
         self.tab1.layout.addWidget(self.label_image)
 
@@ -126,31 +126,31 @@ class TabWidget(QWidget):
         self.tab3.layout = QVBoxLayout(self)
 
         self.listWidget = QListWidget()
-        self.listWidget.setGeometry(QRect(40, 30, 270, 145))
-        self.listWidget.setMinimumSize(QSize(261, 0))
+        self.listWidget.setSpacing(20)
         self.listWidget.setStyleSheet("font: 12pt \"Papyrus\";\n""color: rgb(0, 0, 0);\n"
                                       "selection-color: rgb(170, 255, 0);")
         self.listWidget.setObjectName("listWidget")
-        item = QListWidgetItem(QIcon("images\\icon_info.png"), "Hotel", )
-        item.setCheckState(Qt.Checked)
 
-        font = QFont("Arial", 16)
-        font.setBold(False)
-        font.setWeight(50)
-        item.setFont(font)
-        self.listWidget.addItem(item)
+        self.aggiungi_item("Hotel")
+        self.aggiungi_item("Bungalow")
+        self.aggiungi_item("Ristorante")
+        self.aggiungi_item("Stabilimento balneare")
+        self.aggiungi_item("Campi sportivi")
+        self.aggiungi_item("Area ricretiva")
+        self.aggiungi_item("Piscine")
+        self.aggiungi_item("Centro benessere")
+        self.aggiungi_item("Noleggi mezzi elettrici")
 
         self.tab3.layout.addWidget(self.listWidget)
         self.tab3.setLayout(self.tab3.layout)
-
 
         self.layout.addLayout(self.h_button_layout)
         self.layout.addWidget(self.tabs)
 
     def create_button(self, testo, text_color, background_color, nome, comando):
         bottone = QPushButton(testo)
-        bottone.setStyleSheet("background-color: " + background_color + ";\n""font: 75 16pt \"Arial\";\n"
-                              "color: " + text_color + ";")
+        bottone.setStyleSheet("background-color: " + background_color + ";\n""font: 100 18pt \"Arial\";\n"
+                              "color: " + text_color + ";""border-radius: 15px;")
         bottone.setDefault(True)
         bottone.setObjectName(nome)
         bottone.clicked.connect(comando)
@@ -177,3 +177,11 @@ class TabWidget(QWidget):
                                          QMessageBox.Ok, QMessageBox.Ok)
         if info == QMessageBox.Ok:
             pass
+
+    def aggiungi_item(self, nome):
+        item = QListWidgetItem(nome)
+        item.setCheckState(Qt.Checked)
+        font = QFont("Arial", 16)
+        font.setWeight(50)
+        item.setFont(font)
+        self.listWidget.addItem(item)
