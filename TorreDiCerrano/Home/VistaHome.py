@@ -13,42 +13,14 @@ class Home(QMainWindow):
     def __init__(self, parent=None):
         super(Home, self).__init__(parent)
         self.setObjectName("HOME")
+        self.setWindowTitle("RESORT TORRE DI CERRANO")
         self.resize(1910, 1000)
         self.setStyleSheet("background-color: #F0DC83;")
-
-
-
-
-        # Add tabs to widget
 
         self.table_widget = TabWidget()
         self.setCentralWidget(self.table_widget)
 
         """
-        self.centralwidget = QtWidgets.QWidget(HOME)
-        self.centralwidget.setObjectName("centralwidget")
-
-        self.create_button("Login", QRect(900, 20, 171, 45), "rgb(255,255,255)", "rgb(0, 0, 0)",
-                           "login", self.go_vista_login)
-        self.create_button("Registrati", QRect(1080, 20, 171, 45), "rgb(0,0,0)", "rgb(255, 170, 0)",
-                           "registrati", self.go_vista_registrazione)
-
-        self.create_label_image(QRect(40, 250, 991, 550), 'images/torre_di_cerrano[325].jpg')
-        self.create_label_image(QRect(1050, 350, 181, 161), "images/travel-1677347_1920.jpg")
-        self.create_label_image(QRect(1050, 580, 191, 121), "images/sea-3704014_1920.jpg")
-
-        self.label_resort = QtWidgets.QLabel(self.centralwidget)
-        self.label_resort.setGeometry(QtCore.QRect(70, 270, 450, 111))
-        self.label_resort.setStyleSheet("color: rgb(255, 255, 255);\n"
-"background-color: rgba(255, 255, 255, 0);\n"
-"font: 40pt \"Papyrus\";")
-        self.label_resort.setObjectName("label_5")
-        self.label_benvenuto = QtWidgets.QLabel(self.centralwidget)
-        self.label_benvenuto.setGeometry(QtCore.QRect(360, 90, 500, 91))
-        self.label_benvenuto.setStyleSheet("color: rgb(51, 102, 255);\n""font: 100 90pt \"Papyrus\";\n"
-                                           "background-color: rgba(255, 168, 29, 0);")
-        self.label_benvenuto.setObjectName("label_4")
-
         self.listWidget = QtWidgets.QListWidget(self.centralwidget)
         self.listWidget.setGeometry(QtCore.QRect(40, 30, 270, 145))
         self.listWidget.setMinimumSize(QtCore.QSize(261, 0))
