@@ -16,7 +16,6 @@ class VistaPrenotazioniCliente(QWidget):
         self.email_cliente = email_cliente
 
         self.v_layout = QVBoxLayout()
-        self.font = QFont("Arial", 16)
 
         self.label_prenotazioni = QLabel("Prenotazioni: ")
         self.label_prenotazioni.setFont(QFont("Times New Roman", 18))
@@ -34,12 +33,12 @@ class VistaPrenotazioniCliente(QWidget):
 
         self.v_layout.addLayout(self.h_layout)
         self.setLayout(self.v_layout)
-        self.resize(300, 300)
+        self.resize(250, 500)
         self.setWindowTitle("Prenotazioni")
 
     def create_button(self, testo, comando, background_color):
         bottone = QPushButton(testo)
-        bottone.setFont(self.font)
+        bottone.setFont(QFont("Arial", 14))
         bottone.setStyleSheet(background_color)
         bottone.clicked.connect(comando)
         self.h_layout.addWidget(bottone)

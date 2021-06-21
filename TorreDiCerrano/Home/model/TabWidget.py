@@ -1,8 +1,7 @@
 from PyQt5.QtCore import QSize, Qt
 from PyQt5.QtGui import QIcon, QFont, QPixmap
 from PyQt5.QtWidgets import QWidget, QTabWidget, QVBoxLayout, QLabel, QHBoxLayout, QPushButton, QGridLayout, \
-    QListWidget, QListWidgetItem, QDialog, QTableWidget, QTableWidgetItem, QAbstractScrollArea, QHeaderView, \
-    QSizePolicy, QCheckBox
+    QListWidget, QListWidgetItem, QDialog, QTableWidget, QTableWidgetItem, QHeaderView, QCheckBox
 
 from Login.VistaLogin import VistaLogin
 from Registrazione.VistaRegistrazione import VistaRegistrazione
@@ -20,7 +19,7 @@ class TabWidget(QWidget):
 
         self.bottone_info = self.create_button("", "", "", "Info", self.visualizza_info)
         self.bottone_info.setStyleSheet("border-radius: 10px;")
-        self.bottone_info.setIcon(QIcon("images\\icon_info.png"))
+        self.bottone_info.setIcon(QIcon("images/icon_info.png"))
         self.bottone_info.setIconSize(QSize(150, 70))
 
         self.bottone_login = self.create_button("        Login        ", "rgb(255,255,255)", "rgb(0, 0, 0)",
@@ -42,13 +41,13 @@ class TabWidget(QWidget):
         self.tab4 = QWidget()
 
         # Add tabs
-        self.tabs.addTab(self.tab1, QIcon("images\\icona_home.jpg"), "Home")
+        self.tabs.addTab(self.tab1, QIcon("images/icona_home.jpg"), "Home")
         self.tabs.setIconSize(QSize(30, 30))
-        self.tabs.addTab(self.tab2, QIcon("images\\icons8-pila-di-foto.gif"), "Immagini")
+        self.tabs.addTab(self.tab2, QIcon("images/icons8-pila-di-foto.gif"), "Immagini")
         self.tabs.setIconSize(QSize(30, 30))
-        self.tabs.addTab(self.tab3, QIcon("images\\icons8-lista-64.png"), "Servizi")
+        self.tabs.addTab(self.tab3, QIcon("images/icons8-lista-64.png"), "Servizi")
         self.tabs.setIconSize(QSize(30, 30))
-        self.tabs.addTab(self.tab4, QIcon("images\\icons8-euro-80.png"), "Prezzi")
+        self.tabs.addTab(self.tab4, QIcon("images/icons8-euro-80.png"), "Prezzi")
         self.tabs.setFont((QFont("Candara", 15)))
         self.tabs.setStyleSheet("background-color: #FFFFF0;")  # colore sfondo tabs : avorio
 
@@ -86,7 +85,7 @@ class TabWidget(QWidget):
         self.v_layout.addLayout(self.h_title_layout)
         self.v_layout.addWidget(self.label_descrizione)
 
-        self.label_image = self.create_label_image('images/torre_cerrano.jpg')
+        self.label_image = self.create_label_image('images\\torre_cerrano.jpg')
         self.label_image.setMargin(25)
         self.label_image.setFixedSize(1050, 750)
 

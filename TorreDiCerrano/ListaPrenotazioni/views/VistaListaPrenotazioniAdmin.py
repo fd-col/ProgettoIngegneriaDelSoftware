@@ -15,7 +15,7 @@ class VistaListaPrenotazioniAdmin(QWidget):
         self.data_inizio = data_inizio
 
         self.v_layout = QVBoxLayout()
-        self.font = QFont("Arial", 16)
+        self.font = QFont("Arial", 15, 15, True)
 
         if data_inizio is not None:
             self.label_prenotazioni_by_data = QLabel("Arrivi del giorno " + data_inizio.strftime("%d/%m/%Y") + ":")

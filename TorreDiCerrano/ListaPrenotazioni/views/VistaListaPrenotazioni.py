@@ -12,7 +12,7 @@ class VistaListaPrenotazioni(QWidget):
         super(VistaListaPrenotazioni, self).__init__(parent)
 
         self.g_layout = QGridLayout()
-        self.font = QFont("Arial", 16)
+        self.font = QFont("Arial", 15, 15, True)
 
         self.label_prenotazioni_by_data = QLabel("\nSeleziona una data, poi premi  'Vai'  per vedere gli arrivi alla data selezionata: \n")
         self.label_prenotazioni_by_data.setStyleSheet("font: 200 14pt \"Papyrus\";\n"

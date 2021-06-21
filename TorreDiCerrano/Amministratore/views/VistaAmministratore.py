@@ -58,13 +58,14 @@ class VistaAmministratore(QWidget):
         self.setLayout(self.v_layout)
         self.setWindowTitle(nome)
         self.resize(350, 400)
-        self.move(750, 200)
+        self.move(750, 150)
 
     def funzione_al_posto_di_resoconti(self):
         pass
 
     def create_button(self, testo, comando, background_color, shortcut, icona, icon_size=QSize(30, 30)):
         bottone = QPushButton(testo)
+        bottone.setFont(QFont("Arial", 15, 15, True))
         bottone.setStyleSheet(background_color)
         bottone.setIcon(QIcon(icona))
         bottone.setIconSize(icon_size)

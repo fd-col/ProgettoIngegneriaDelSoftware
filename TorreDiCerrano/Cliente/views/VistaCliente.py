@@ -64,7 +64,7 @@ class VistaCliente(QWidget):
         self.setStyleSheet("background-color: rgb(178, 225, 255);")
         self.setLayout(self.v_layout)
         self.setWindowTitle(self.controllore_cliente.get_nome_cliente() + " " + self.controllore_cliente.get_cognome_cliente())
-        self.resize(600, 450)
+        self.resize(650, 450)
         self.move(650, 20)
 
     def create_label(self, testo, text_label):
@@ -83,6 +83,7 @@ class VistaCliente(QWidget):
 
     def create_button(self, testo, comando):
         bottone = QPushButton(testo)
+        bottone.setFont(QFont("Arial", 15, 15, True))
         bottone.setStyleSheet("background-color:#FFD800;")
         bottone.clicked.connect(comando)
         self.h_layout.addWidget(bottone)

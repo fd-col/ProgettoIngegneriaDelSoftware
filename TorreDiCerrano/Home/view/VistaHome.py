@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QMainWindow
 
-from Home.TabWidget import TabWidget
+from Home.model.TabWidget import TabWidget
 
 
 class Home(QMainWindow):
