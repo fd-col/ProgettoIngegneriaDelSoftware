@@ -1,7 +1,8 @@
-from PyQt5.QtCore import QSize, Qt, QRect
+from PyQt5.QtCore import QSize, Qt
 from PyQt5.QtGui import QIcon, QFont, QPixmap
-from PyQt5.QtWidgets import QWidget, QTabWidget, QVBoxLayout, QLabel, QHBoxLayout, QPushButton, QMessageBox, \
-    QGridLayout, QListWidget, QListWidgetItem
+from PyQt5.QtWidgets import QWidget, QTabWidget, QVBoxLayout, QLabel, QHBoxLayout, QPushButton, QGridLayout, \
+    QListWidget, QListWidgetItem, QDialog, QTableWidget, QTableWidgetItem, QAbstractScrollArea, QHeaderView, \
+    QSizePolicy, QCheckBox
 
 from Login.VistaLogin import VistaLogin
 from Registrazione.VistaRegistrazione import VistaRegistrazione
@@ -17,15 +18,15 @@ class TabWidget(QWidget):
         # Horizontal layout for buttons and labels
         self.h_button_layout = QHBoxLayout()
 
-        self.bottone_login = self.create_button("        Login        ", "rgb(255,255,255)", "rgb(0, 0, 0)",
-                                                "login", self.go_vista_login)
-        self.bottone_registrati = self.create_button("     Registrati     ", "rgb(0,0,0)", "rgb(255, 170, 0)",
-                                                "registrati", self.go_vista_registrazione)
-
         self.bottone_info = self.create_button("", "", "", "Info", self.visualizza_info)
         self.bottone_info.setStyleSheet("border-radius: 10px;")
         self.bottone_info.setIcon(QIcon("images\\icon_info.png"))
         self.bottone_info.setIconSize(QSize(150, 70))
+
+        self.bottone_login = self.create_button("        Login        ", "rgb(255,255,255)", "rgb(0, 0, 0)",
+                                                "login", self.go_vista_login)
+        self.bottone_registrati = self.create_button("     Registrati     ", "rgb(0,0,0)", "rgb(255, 170, 0)",
+                                                "registrati", self.go_vista_registrazione)
 
         # add buttons to the horizontal layout on the top
         self.h_button_layout.addStretch(1)
@@ -72,7 +73,7 @@ class TabWidget(QWidget):
         self.label_descrizione = QLabel("Se cerchi un Resort in Abruzzo sul mare il Resort Torre di Cerrano   "
                                         "ti Aspetta con il suo impeccabile Staff, le stanze curate ed accoglienti "
                                         "e la spiaggia dedicata con tutti i migliori servizi a disposizione dei Nostri Clienti"
-                                        "nella località balneare di Pineto.\n"
+                                        " nella località balneare di Pineto.\n"
                                         "Con noi puoi trascorrere tranquillamente la tua vacanza e rilassarti grazie ai servizi "
                                         "offerti. ")
         self.label_descrizione.setWordWrap(True)
@@ -87,7 +88,7 @@ class TabWidget(QWidget):
 
         self.label_image = self.create_label_image('images/torre_cerrano.jpg')
         self.label_image.setMargin(25)
-        self.label_image.setFixedSize(1050,750)
+        self.label_image.setFixedSize(1050, 750)
 
         # add v_layout and label_image to tab1
         self.tab1.layout.addLayout(self.v_layout)
@@ -98,6 +99,7 @@ class TabWidget(QWidget):
 
         # Create second tab
         self.tab2.layout = QGridLayout(self)
+
         # images to insert into tab2
         self.label_travel = self.create_label_image("images\\travel-1677347_1920.jpg")
         self.label_travel.setMaximumSize(550, 250)
@@ -125,25 +127,69 @@ class TabWidget(QWidget):
         # Create third tab
         self.tab3.layout = QVBoxLayout(self)
 
-        self.listWidget = QListWidget()
-        self.listWidget.setSpacing(20)
-        self.listWidget.setStyleSheet("font: 12pt \"Papyrus\";\n""color: rgb(0, 0, 0);\n"
+        lista1 = QListWidget()
+        lista1.setSpacing(20)
+        lista1.setStyleSheet("font: 12pt \"Papyrus\";\n""color: rgb(0, 0, 0);\n"
                                       "selection-color: rgb(170, 255, 0);")
-        self.listWidget.setObjectName("listWidget")
+        lista1.setObjectName("listWidget")
 
-        self.aggiungi_item("Hotel")
-        self.aggiungi_item("Bungalow")
-        self.aggiungi_item("Ristorante")
-        self.aggiungi_item("Stabilimento balneare")
-        self.aggiungi_item("Campi sportivi")
-        self.aggiungi_item("Area ricretiva")
-        self.aggiungi_item("Piscine")
-        self.aggiungi_item("Centro benessere")
-        self.aggiungi_item("Noleggi mezzi elettrici")
+        self.aggiungi_item(lista1, "Hotel")
+        self.aggiungi_item(lista1, "Bungalow")
+        self.aggiungi_item(lista1, "Ristorante")
+        self.aggiungi_item(lista1, "Stabilimento balneare")
+        self.aggiungi_item(lista1, "Campi sportivi")
+        self.aggiungi_item(lista1, "Area ricretiva")
+        self.aggiungi_item(lista1, "Piscine")
+        self.aggiungi_item(lista1, "Centro benessere")
+        self.aggiungi_item(lista1, "Noleggi mezzi elettrici")
 
-        self.tab3.layout.addWidget(self.listWidget)
+        self.tab3.layout.addWidget(lista1)
         self.tab3.setLayout(self.tab3.layout)
 
+
+        # Create fourth tab
+        self.tab4.layout = QVBoxLayout(self)
+
+        self.h_table_layout = QHBoxLayout()
+        self.v1_layout = QVBoxLayout()
+        self.v2_layout = QVBoxLayout()
+
+        self.v2_layout.addSpacing(30)
+
+        # servizi compresi
+        self.label_servizi_compresi = QLabel("  Nelle offerte proposte dal Resort Torre di Cerrano "
+                                             "alcuni servizi sono compresi :")
+        self.label_servizi_compresi.setFont(QFont("Times new roman", 20))
+        self.label_servizi_compresi.setWordWrap(True)
+
+        #elenco dei servizi compresi
+        self.check1 = self.create_check_box("Ingresso in piscina con lettini")
+        self.check2 = self.create_check_box("Ombrellone, sdraio, lettino in spiaggia")
+        self.check3 = self.create_check_box("Animazione grandi e piccoli")
+
+        # add section "servizi compresi" nella prenotazione
+        self.v2_layout.addWidget(self.label_servizi_compresi)
+        self.v2_layout.addSpacing(30)
+
+        self.v2_layout.addWidget(self.check1)
+        self.v2_layout.addWidget(self.check2)
+        self.v2_layout.addWidget(self.check3)
+        self.v2_layout.addSpacing(118)
+
+        self.create_table(3, 2, "Pacchetto del soggiorno", "  Sola colazione;  Mezza pensione;  Pensione completa; ",
+                        "   30 €;   60 €;   90 €; ", True)
+        self.create_table(4, 2, "Tipologia di alloggio", "  Suite;  Camera familiare;  Camera doppia;  Bungalow ",
+                        "  235 €;  125 €;  80 €;  150 €", True)
+        self.create_table(3, 2, "Servizi aggiuntivi", "  Noleggio mezzi elettrici;  Escursione turistica;  Centro benessere; ",
+                          "  30 €;  50 €;  50 €; ", False)
+
+        self.h_table_layout.addLayout(self.v1_layout)
+        self.h_table_layout.addLayout(self.v2_layout)
+
+        self.tab4.layout.addLayout(self.h_table_layout)
+        self.tab4.setLayout(self.tab4.layout)
+
+        # Final layout
         self.layout.addLayout(self.h_button_layout)
         self.layout.addWidget(self.tabs)
 
@@ -173,15 +219,54 @@ class TabWidget(QWidget):
         self.vista_login.show()
 
     def visualizza_info(self):
-        info = QMessageBox().information(self, "Informazioni", "",
-                                         QMessageBox.Ok, QMessageBox.Ok)
-        if info == QMessageBox.Ok:
-            pass
+        dialog = QDialog()
+        dialog.setWindowTitle("Dove puoi trovarci :")
 
-    def aggiungi_item(self, nome):
+        v_layout = QVBoxLayout()
+        label = QLabel()
+        label.setPixmap(QPixmap("images\\posizione_torre_cerrano.png"))
+
+        v_layout.addWidget(label)
+
+        dialog.setLayout(v_layout)
+        dialog.exec()
+
+    def aggiungi_item(self, lista, nome):
         item = QListWidgetItem(nome)
         item.setCheckState(Qt.Checked)
         font = QFont("Arial", 16)
         font.setWeight(50)
         item.setFont(font)
-        self.listWidget.addItem(item)
+        lista.addItem(item)
+
+    def create_table(self, row, column, header, nomi, prezzi, side):
+        table_widget = QTableWidget(row, column)
+
+        # table settings
+        table_widget.setFont(QFont("Candara", 18))
+        table_widget.verticalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+        table_widget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+        # header
+        table_widget.horizontalHeader().setFont(QFont("Times new roman", 22))
+        table_widget.setHorizontalHeaderItem(0, QTableWidgetItem(header))
+        table_widget.setHorizontalHeaderItem(1, QTableWidgetItem("Prezzo"))
+        # add items to table
+        table_widget.setItem(0, 0, QTableWidgetItem(nomi.split(";")[0]))
+        table_widget.setItem(0, 1, QTableWidgetItem(prezzi.split(";")[0]))
+        table_widget.setItem(1, 0, QTableWidgetItem(nomi.split(";")[1]))
+        table_widget.setItem(1, 1, QTableWidgetItem(prezzi.split(";")[1]))
+        table_widget.setItem(2, 0, QTableWidgetItem(nomi.split(";")[2]))
+        table_widget.setItem(2, 1, QTableWidgetItem(prezzi.split(";")[2]))
+        table_widget.setItem(3, 0, QTableWidgetItem(nomi.split(";")[3]))
+        table_widget.setItem(3, 1, QTableWidgetItem(prezzi.split(";")[3]))
+
+        if side is True:    # (put the table in the vertical layout on the left side)
+            self.v1_layout.addWidget(table_widget)
+        else:
+            self.v2_layout.addWidget(table_widget)
+
+    def create_check_box(self, text):
+        check_box = QCheckBox(text)
+        check_box.setFont(QFont("Candara", 16))
+        check_box.setChecked(True)
+        return check_box

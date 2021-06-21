@@ -19,7 +19,10 @@ class VistaNuovaPrenotazione(QWidget):
         self.layout = QGridLayout()
 
         self.label_inizio = QLabel("Seleziona la data di inizio della vacanza:")
-        self.label_inizio.setFont(self.font)
+        self.label_inizio.setStyleSheet("font: 200 14pt \"Papyrus\";\n"
+                                                      "color: rgb(0, 0, 0);\n"
+                                                      "background-color: rgb(178, 225, 255);\n"
+                                                      "selection-color: rgb(170, 255, 0);")
         self.layout.addWidget(self.label_inizio, 0, 0)
 
         self.calendario_inizio = QCalendarWidget()
@@ -33,7 +36,10 @@ class VistaNuovaPrenotazione(QWidget):
         self.layout.addWidget(self.calendario_inizio, 1, 0)
 
         self.label_fine = QLabel("Seleziona la data di fine della vacanza:")
-        self.label_fine.setFont(self.font)
+        self.label_fine.setStyleSheet("font: 200 14pt \"Papyrus\";\n"
+                                                      "color: rgb(0, 0, 0);\n"
+                                                      "background-color: rgb(178, 225, 255);\n"
+                                                      "selection-color: rgb(170, 255, 0);")
         self.layout.addWidget(self.label_fine, 0, 1)
 
         self.calendario_fine = QCalendarWidget()
@@ -47,11 +53,17 @@ class VistaNuovaPrenotazione(QWidget):
         self.layout.addWidget(self.calendario_fine, 1, 1)
 
         self.label_alloggio = QLabel("Seleziona il tipo di alloggio:")
-        self.label_alloggio.setFont(self.font)
+        self.label_alloggio.setStyleSheet("font: 200 14pt \"Papyrus\";\n"
+                                                      "color: rgb(0, 0, 0);\n"
+                                                      "background-color: rgb(178, 225, 255);\n"
+                                                      "selection-color: rgb(170, 255, 0);")
         self.layout.addWidget(self.label_alloggio, 3, 0)
 
         self.label_ristorazione = QLabel("Seleziona il tipo di ristorazione:")
-        self.label_ristorazione.setFont(self.font)
+        self.label_ristorazione.setStyleSheet("font: 200 14pt \"Papyrus\";\n"
+                                                      "color: rgb(0, 0, 0);\n"
+                                                      "background-color: rgb(178, 225, 255);\n"
+                                                      "selection-color: rgb(170, 255, 0);")
         self.layout.addWidget(self.label_ristorazione, 3, 1)
 
         self.get_servizi()
