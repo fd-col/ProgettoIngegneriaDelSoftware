@@ -32,6 +32,7 @@ class VistaListaPrenotazioniAdmin(QWidget):
 
         self.bottone_dettagli_prenotaizone = QPushButton("Dettagli prenotazione")
         self.bottone_dettagli_prenotaizone.setFont(self.font)
+        self.bottone_dettagli_prenotaizone.setStyleSheet("background-color: rgb(170,180,255);")
         self.bottone_dettagli_prenotaizone.clicked.connect(self.dettagli_prenotazione)
         self.v_layout.addWidget(self.bottone_dettagli_prenotaizone)
 

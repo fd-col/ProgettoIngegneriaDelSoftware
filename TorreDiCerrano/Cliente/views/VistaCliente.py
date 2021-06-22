@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import QWidget, QLabel, QMessageBox, QPushButton, QVBoxLayout, QHBoxLayout
 from PyQt5.QtGui import QFont, QPixmap
 
 from Cliente.views.VistaScannerizzaDocumento import VistaScannerizzaDocumento
@@ -34,7 +34,9 @@ class VistaCliente(QWidget):
 
         self.v_layout.addSpacing(25)
 
+        # horizontal layout for "documento"
         self.h_label_layout = QHBoxLayout()
+
         if self.controllore_cliente.get_documento_identita() is None:
             self.nome_documento = "Nessuno"
         else:

@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QListView, QHBoxLayout, QPushButton, QMessageBox
+from PyQt5.QtGui import QFont, QStandardItemModel, QStandardItem
 from datetime import datetime
 
 from ListaPrenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
@@ -10,7 +10,7 @@ from Prenotazione.views.VistaPrenotazione import VistaPrenotazione
 
 class VistaPrenotazioniCliente(QWidget):
 
-    def __init__(self, email_cliente, parent = None):
+    def __init__(self, email_cliente, parent=None):
         super(VistaPrenotazioniCliente, self).__init__(parent)
         self.controllore_lista_prenotazioni = ControlloreListaPrenotazioni()
         self.email_cliente = email_cliente
@@ -27,8 +27,8 @@ class VistaPrenotazioniCliente(QWidget):
 
         self.h_layout = QHBoxLayout()
 
-        self.create_button("Nuova prenotazione", self.go_nuova_prenotazione, "background-color: rgb(170,180,255);")
-        self.create_button("Apri prenotazione", self.apri_prenotazione, "background-color: rgb(0, 255, 0);")
+        self.create_button("Nuova prenotazione", self.go_nuova_prenotazione, "background-color: rgb(0, 255, 0);")
+        self.create_button("Apri prenotazione", self.apri_prenotazione, "background-color: rgb(170,180,255);")
         self.create_button("Elimina prenotazione", self.conferma_elimina_prenotazione, "background-color: rgb(255,0,0);")
 
         self.v_layout.addLayout(self.h_layout)

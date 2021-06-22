@@ -1,44 +1,54 @@
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QListView, QHBoxLayout
+from PyQt5.QtGui import QFont, QStandardItemModel, QStandardItem
+
 
 class VistaPrenotazione(QWidget):
 
-    def __init__(self, controllore_prenotazione, parent = None):
+    def __init__(self, controllore_prenotazione, parent=None):
         super(VistaPrenotazione, self).__init__(parent)
         self.controllore_prenotazione = controllore_prenotazione
+        self.font_label = QFont("Arial", 14)
+
         self.v_layout = QVBoxLayout()
 
-        self.font_label = QFont("Arial", 16)
-
-        self.label_email = QLabel("Email: " + self.controllore_prenotazione.get_email_prenotazione())
-        self.label_email.setFont(self.font_label)
-        self.v_layout.addWidget(self.label_email)
-
-        self.label_data = QLabel()
-        self.label_data.setText("Periodo: " + self.controllore_prenotazione.get_data_inizio_prenotazione().strftime('%d/%m/%Y')
+        # labels
+        self.create_label("Email: ", self.controllore_prenotazione.get_email_prenotazione())
+        self.create_label("Periodo: ", self.controllore_prenotazione.get_data_inizio_prenotazione().strftime('%d/%m/%Y')
                                 + " - " + self.controllore_prenotazione.get_data_fine_prenotazione().strftime('%d/%m/%Y'))
-        self.label_data.setFont(self.font_label)
-        self.v_layout.addWidget(self.label_data)
+        self.create_label("Servizio ristorazione: ", self.controllore_prenotazione.get_servizio_ristorazione().nome)
+        self.create_label("Servizio alloggio: ", self.controllore_prenotazione.get_servizio_alloggio().nome)
 
-        self.label_servizio_ristorazione = QLabel("Servizio ristorazione: " + self.controllore_prenotazione.get_servizio_ristorazione().nome)
-        self.label_servizio_ristorazione.setFont(self.font_label)
-        self.v_layout.addWidget(self.label_servizio_ristorazione)
-
-        self.label_servizio_alloggio = QLabel("Servizio alloggio: " + self.controllore_prenotazione.get_servizio_alloggio().nome)
-        self.label_servizio_alloggio.setFont(self.font_label)
-        self.v_layout.addWidget(self.label_servizio_alloggio)
-
+        # label servizi aggiuntivi
         self.label_servizi_aggiuntivi = QLabel("Servizi aggiuntivi:")
-        self.label_servizi_aggiuntivi.setFont(self.font_label)
-        self.v_layout.addWidget(self.label_servizi_aggiuntivi)
+        self.label_servizi_aggiuntivi.setStyleSheet("color: rgb(0, 0, 0);\n""font: 300 18pt \"Times New Roman\";\n"
+                                                    "background-color: rgba(178, 225, 255, 20);")
 
+        self.v_layout.addWidget(self.label_servizi_aggiuntivi)
+        self.v_layout.addSpacing(20)
+
+        # lista servizi aggiuntivi
         self.lista_servizi_aggiuntivi = QListView()
         self.get_dati_lista_servizi()
         self.v_layout.addWidget(self.lista_servizi_aggiuntivi)
 
         self.setLayout(self.v_layout)
         self.setWindowTitle("Prenotazione")
-        self.resize(300, 300)
+        self.resize(800, 500)
+
+    def create_label(self, testo, text_label):
+        h_layout = QHBoxLayout()
+
+        label = QLabel(testo)
+        label.setStyleSheet("color: rgb(0, 0, 0);\n""font: 300 18pt \"Times New Roman\";\n"
+                            "background-color: rgba(178, 225, 255, 20);")
+        h_layout.addWidget(label)
+
+        label_di_testo = QLabel(text_label)
+        label_di_testo.setFont(self.font_label)
+        h_layout.addWidget(label_di_testo)
+
+        self.v_layout.addLayout(h_layout)
+        self.v_layout.addSpacing(20)
 
     def get_dati_lista_servizi(self):
         self.list_view_model = QStandardItemModel()
@@ -48,4 +58,5 @@ class VistaPrenotazione(QWidget):
             item.setEditable(False)
             item.setFont(self.font_label)
             self.list_view_model.appendRow(item)
+            self.list_view_model.appendRow(None)
         self.lista_servizi_aggiuntivi.setModel(self.list_view_model)

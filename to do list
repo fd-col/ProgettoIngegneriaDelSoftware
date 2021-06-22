@@ -1,9 +1,9 @@
 CODICE:
 - Resconti per l'admin
-- aggiunstare il fatto che se l'admin sbaglia password, gli arriva il messo "email errata"
-- usare l'icona info nella home per visualizzare la cartina/mappa
-- finire tab3 e tab4 con lista items
--
+- aggiunstare il fatto che se l'admin sbaglia password, gli arriva il mex "email errata"
+- aggiungere tasto "visualizza dipendente" dentro lista dipendenti del profilo admin
+- dentro la directory dipendente, refactor di VistaModificaDipendente
+- dentro la directory dipendente, creare VistaDipendente
 
 
 TEST:

@@ -19,7 +19,7 @@ class TabWidget(QWidget):
 
         self.bottone_info = self.create_button("", "", "", "Info", self.visualizza_info)
         self.bottone_info.setStyleSheet("border-radius: 10px;")
-        self.bottone_info.setIcon(QIcon("images/icon_info.png"))
+        self.bottone_info.setIcon(QIcon("images\\icon_info.png"))
         self.bottone_info.setIconSize(QSize(150, 70))
 
         self.bottone_login = self.create_button("        Login        ", "rgb(255,255,255)", "rgb(0, 0, 0)",
@@ -62,7 +62,7 @@ class TabWidget(QWidget):
         self.label_resort.setStyleSheet("color: rgb(51, 102, 255);\n""font: 100 30pt \"Papyrus\";\n"
                                         "background-color: rgba(255, 168, 29, 0);")
         self.label_logo = QLabel()
-        self.label_logo.setPixmap(QPixmap("images\\icon_logo_rt.png"))
+        self.label_logo.setPixmap(QPixmap("images/icon_logo_rt.png"))
 
         # add widgets to horizontal title layout
         self.h_title_layout.setAlignment(Qt.AlignCenter)
@@ -223,7 +223,7 @@ class TabWidget(QWidget):
 
         v_layout = QVBoxLayout()
         label = QLabel()
-        label.setPixmap(QPixmap("images\\posizione_torre_cerrano.png"))
+        label.setPixmap(QPixmap("images/posizione_torre_cerrano.png"))
 
         v_layout.addWidget(label)
 

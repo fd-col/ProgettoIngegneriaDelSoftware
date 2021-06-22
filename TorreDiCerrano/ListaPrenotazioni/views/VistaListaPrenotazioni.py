@@ -1,6 +1,6 @@
 from PyQt5.QtCore import QDate
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
+from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QCalendarWidget, QHBoxLayout, QPushButton
+from PyQt5.QtGui import QFont
 from datetime import datetime
 
 from ListaPrenotazioni.views.VistaListaPrenotazioniAdmin import VistaListaPrenotazioniAdmin
@@ -15,10 +15,9 @@ class VistaListaPrenotazioni(QWidget):
         self.font = QFont("Arial", 15, 15, True)
 
         self.label_prenotazioni_by_data = QLabel("\nSeleziona una data, poi premi  'Vai'  per vedere gli arrivi alla data selezionata: \n")
-        self.label_prenotazioni_by_data.setStyleSheet("font: 200 14pt \"Papyrus\";\n"
-                                      "color: rgb(0, 0, 0);\n"
-                                      "background-color: rgb(178, 225, 255);\n"
-                                      "selection-color: rgb(170, 255, 0);")
+        self.label_prenotazioni_by_data.setStyleSheet("font: 200 14pt \"Papyrus\";\n""color: rgb(0, 0, 0);\n"
+                                                    "background-color: rgb(178, 225, 255);\n"
+                                                    "selection-color: rgb(170, 255, 0);")
         self.g_layout.addWidget(self.label_prenotazioni_by_data, 0, 0)
 
         self.calendario = QCalendarWidget()
@@ -31,17 +30,8 @@ class VistaListaPrenotazioni(QWidget):
 
         self.h_layout = QHBoxLayout()
 
-        self.bottone_prenotazioni_totali = QPushButton("Mostra tutte")
-        self.bottone_prenotazioni_totali.setFont(self.font)
-        self.bottone_prenotazioni_totali.setStyleSheet("background-color:#FFD800;")
-        self.bottone_prenotazioni_totali.clicked.connect(self.go_lista_prenotazioni)
-        self.h_layout.addWidget(self.bottone_prenotazioni_totali)
-
-        self.bottone_prenotazioni_selezionate = QPushButton("Vai")
-        self.bottone_prenotazioni_selezionate.setFont(self.font)
-        self.bottone_prenotazioni_selezionate.setStyleSheet("background-color:#00FF00;")
-        self.bottone_prenotazioni_selezionate.clicked.connect(self.go_lista_prenotazioni_by_data)
-        self.h_layout.addWidget(self.bottone_prenotazioni_selezionate)
+        self.create_button("Mostra tutte", self.go_lista_prenotazioni, "background-color:#FFD800;")
+        self.create_button("Vai", self.go_lista_prenotazioni_by_data, "background-color:#00FF00;")
 
         self.g_layout.addLayout(self.h_layout, 2, 0)
 
@@ -49,6 +39,12 @@ class VistaListaPrenotazioni(QWidget):
         self.resize(700, 600)
         self.setWindowTitle("Lista Prenotazioni")
 
+    def create_button(self, testo, comando, background_color):
+        bottone = QPushButton(testo)
+        bottone.setFont(self.font)
+        bottone.setStyleSheet(background_color)
+        bottone.clicked.connect(comando)
+        self.h_layout.addWidget(bottone)
 
     def go_lista_prenotazioni_by_data(self):
         data_inizio_q = self.calendario.selectedDate()
