@@ -12,7 +12,6 @@ class VistaListaDipendenti(QWidget):
     def __init__(self, parent=None):
         super(VistaListaDipendenti, self).__init__(parent)
         self.controller = ControlloreListaDipendenti()
-        self.font = QFont("Arial", 16)
 
         self.v_layout = QVBoxLayout()
 
@@ -35,7 +34,7 @@ class VistaListaDipendenti(QWidget):
 
     def create_button(self, testo, comando, background_color):
         bottone = QPushButton(testo)
-        bottone.setFont(self.font)
+        bottone.setFont(QFont("Candara", 15, 1, True))
         bottone.setStyleSheet(background_color)
         bottone.clicked.connect(comando)
         self.h_layout.addWidget(bottone)
@@ -47,7 +46,7 @@ class VistaListaDipendenti(QWidget):
             item = QStandardItem()
             item.setText(dipendente.nome + " " + dipendente.cognome)
             item.setEditable(False)
-            item.setFont(self.font)
+            item.setFont(QFont("Arial", 16))
             self.list_view_model.appendRow(item)
         self.list_view.setModel(self.list_view_model)
 

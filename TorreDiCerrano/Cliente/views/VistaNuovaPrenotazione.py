@@ -1,5 +1,5 @@
 from PyQt5.QtCore import QDate
-from PyQt5.QtGui import QFont, QStandardItemModel, QStandardItem
+from PyQt5.QtGui import QFont, QStandardItemModel, QStandardItem, QTextCharFormat, QColor
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QCalendarWidget, QComboBox, QCheckBox, QMessageBox, \
     QPushButton
 from datetime import datetime
@@ -21,10 +21,8 @@ class VistaNuovaPrenotazione(QWidget):
 
         # prenotazione data inizio vacanza
         self.label_inizio = QLabel("Seleziona la data di inizio della vacanza:")
-        self.label_inizio.setStyleSheet("font: 200 14pt \"Papyrus\";\n"
-                                                      "color: rgb(0, 0, 0);\n"
-                                                      "background-color: rgb(178, 225, 255);\n"
-                                                      "selection-color: rgb(170, 255, 0);")
+        self.label_inizio.setStyleSheet("font: 200 14pt \"Papyrus\";\n""color: rgb(0, 0, 0);\n"
+                                        "background-color: rgb(178, 225, 255);\n""selection-color: rgb(170, 255, 0);")
         self.layout.addWidget(self.label_inizio, 0, 0)
 
         self.calendario_inizio = QCalendarWidget()
@@ -35,6 +33,14 @@ class VistaNuovaPrenotazione(QWidget):
         else:
             self.calendario_inizio.setMinimumDate(QDate(2021, 6, 1))
         self.calendario_inizio.setMaximumDate(QDate(2021, 9, 15))
+
+        cell_inizio_start = QTextCharFormat()
+        cell_inizio_start.setBackground(QColor("yellow"))
+        cell_inizio_stop = QTextCharFormat()
+        cell_inizio_stop.setBackground(QColor("red"))
+        self.calendario_inizio.setDateTextFormat(self.calendario_inizio.selectedDate(), cell_inizio_start)
+        self.calendario_inizio.setDateTextFormat(QDate(2021,9,14), cell_inizio_stop)
+
         self.layout.addWidget(self.calendario_inizio, 1, 0)
 
         # prenotazione data fine vacanza
@@ -53,6 +59,11 @@ class VistaNuovaPrenotazione(QWidget):
         else:
             self.calendario_fine.setMinimumDate(QDate(2021, 6, 1))
         self.calendario_fine.setMaximumDate(QDate(2021, 9, 15))
+
+        cell_fine_stop = QTextCharFormat()
+        cell_fine_stop.setBackground(QColor("red"))
+        self.calendario_fine.setDateTextFormat(QDate(2021, 9, 15), cell_fine_stop)
+
         self.layout.addWidget(self.calendario_fine, 1, 1)
 
         # selezione tipologia di alloggio
@@ -83,7 +94,8 @@ class VistaNuovaPrenotazione(QWidget):
 
         # bottone finale di conferma
         self.bottone_conferma = QPushButton("Conferma")
-        self.bottone_conferma.setStyleSheet("background-color: rgb(0,255,0);""font: 16pt \"Arial\";")
+        self.bottone_conferma.setFont(QFont("Arial", 15, 15, True))
+        self.bottone_conferma.setStyleSheet("background-color: rgb(0,255,0);")
         self.bottone_conferma.clicked.connect(self.aggiungi_prenotazione)
         self.layout.addWidget(self.bottone_conferma, 8, 1)
 

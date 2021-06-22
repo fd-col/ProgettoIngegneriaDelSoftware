@@ -12,7 +12,6 @@ class VistaListaPrenotazioni(QWidget):
         super(VistaListaPrenotazioni, self).__init__(parent)
 
         self.g_layout = QGridLayout()
-        self.font = QFont("Arial", 15, 15, True)
 
         self.label_prenotazioni_by_data = QLabel("\nSeleziona una data, poi premi  'Vai'  per vedere gli arrivi alla data selezionata: \n")
         self.label_prenotazioni_by_data.setStyleSheet("font: 200 14pt \"Papyrus\";\n""color: rgb(0, 0, 0);\n"
@@ -41,7 +40,7 @@ class VistaListaPrenotazioni(QWidget):
 
     def create_button(self, testo, comando, background_color):
         bottone = QPushButton(testo)
-        bottone.setFont(self.font)
+        bottone.setFont(QFont("Candara", 15, 1, True))
         bottone.setStyleSheet(background_color)
         bottone.clicked.connect(comando)
         self.h_layout.addWidget(bottone)

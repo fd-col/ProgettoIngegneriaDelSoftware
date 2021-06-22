@@ -1,4 +1,4 @@
-from PyQt5.QtCore import QSize
+from PyQt5.QtCore import QSize, Qt
 from PyQt5.QtGui import QFont, QIcon, QPixmap, QKeySequence
 from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QPushButton, QShortcut, QMessageBox
 
@@ -14,8 +14,7 @@ class VistaAmministratore(QWidget):
         self.v_layout = QVBoxLayout()
 
         self.label_icona = QLabel("Cliente")
-        self.label_icona.setPixmap(QPixmap('images/profilo_amministratore.jpg'))
-        self.label_icona.setScaledContents(False)
+        self.label_icona.setPixmap(QPixmap('images/profilo_amministratore.jpg').scaled(QSize(250,250), Qt.KeepAspectRatio, Qt.SmoothTransformation))
         self.v_layout.addWidget(self.label_icona)
 
         self.label_nome = QLabel(nome)
@@ -60,7 +59,7 @@ class VistaAmministratore(QWidget):
         self.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.setLayout(self.v_layout)
         self.setWindowTitle(nome)
-        self.resize(350, 400)
+        self.resize(350, 650)
         self.move(850, 130)
 
     def funzione_al_posto_di_resoconti(self):
@@ -68,7 +67,7 @@ class VistaAmministratore(QWidget):
 
     def create_button(self, testo, comando, background_color, shortcut, icona, icon_size=QSize(30, 30)):
         bottone = QPushButton(testo)
-        bottone.setFont(QFont("Arial", 15, 15, True))
+        bottone.setFont(QFont("Candara", 15, 1, True))
         bottone.setStyleSheet(background_color)
         bottone.setIcon(QIcon(icona))
         bottone.setIconSize(icon_size)

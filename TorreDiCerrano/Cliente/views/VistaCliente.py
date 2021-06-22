@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QLabel, QMessageBox, QPushButton, QVBoxLayout, QHBoxLayout
 from PyQt5.QtGui import QFont, QPixmap
+from PyQt5.QtCore import QSize, Qt
 
 from Cliente.views.VistaScannerizzaDocumento import VistaScannerizzaDocumento
 from ListaClienti.controller.ControlloreListaClienti import ControlloreListaClienti
@@ -16,8 +17,9 @@ class VistaCliente(QWidget):
         self.v_layout = QVBoxLayout()
 
         self.label_icona = QLabel("Cliente")
-        self.label_icona.setPixmap(QPixmap('images/profilo_utente.png'))
-        self.label_icona.setScaledContents(False)
+        self.pixmap = QPixmap('images\\profilo_utente.png').scaled(QSize(250,250), Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        self.label_icona.setPixmap(self.pixmap)
+
         self.v_layout.addWidget(self.label_icona)
 
 
@@ -85,7 +87,7 @@ class VistaCliente(QWidget):
 
     def create_button(self, testo, comando):
         bottone = QPushButton(testo)
-        bottone.setFont(QFont("Arial", 15, 15, True))
+        bottone.setFont(QFont("Candara", 15, 1, True))
         bottone.setStyleSheet("background-color:#FFD800;")
         bottone.clicked.connect(comando)
         self.h_layout.addWidget(bottone)
