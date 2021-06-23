@@ -2,7 +2,7 @@ import os
 import pickle
 
 
-class ListaDipendenti():
+class ListaDipendenti:
     def __init__(self):
         self.lista_dipendenti = []
         if os.path.isfile("ListaDipendenti/data/lista_dipendenti_salvata.pickle"):

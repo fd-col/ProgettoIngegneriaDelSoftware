@@ -1,8 +1,5 @@
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QFont
-
-from PyQt5.QtWidgets import QWidget, QPushButton, QMessageBox
-from PyQt5.QtGui import QKeySequence
+from PyQt5.QtWidgets import QWidget, QPushButton, QMessageBox, QVBoxLayout, QLabel, QLineEdit, QShortcut
+from PyQt5.QtGui import QKeySequence, QFont
 import os
 import json
 
@@ -23,6 +20,7 @@ class VistaLogin(QWidget):
 
         self.v_layout = QVBoxLayout()
 
+        # titolo
         self.label_alto = QLabel("Inserisci i dati per il login")
         self.label_alto.setFont(self.font)
         self.label_alto.setStyleSheet("color: rgb(0, 0, 255)")
@@ -30,6 +28,7 @@ class VistaLogin(QWidget):
 
         self.v_layout.addSpacing(10)
 
+        # campo email
         self.label_email = QLabel("E-mail")
         self.label_email.setFont(self.font)
         self.v_layout.addWidget(self.label_email)
@@ -37,6 +36,7 @@ class VistaLogin(QWidget):
         self.campo_email = QLineEdit()
         self.v_layout.addWidget(self.campo_email)
 
+        # campo password
         self.label_password = QLabel("Password")
         self.label_password.setFont(self.font)
         self.v_layout.addWidget(self.label_password)
@@ -47,6 +47,7 @@ class VistaLogin(QWidget):
 
         self.v_layout.addSpacing(20)
 
+        # bottone login
         self.bottone_login = QPushButton("Login")
         self.bottone_login.setFont(self.font)
         self.bottone_login.setStyleSheet("background-color:#ccd9ff;")

@@ -1,7 +1,7 @@
 from PyQt5.QtCore import QSize, Qt
 from PyQt5.QtGui import QIcon, QFont, QPixmap
 from PyQt5.QtWidgets import QWidget, QTabWidget, QVBoxLayout, QLabel, QHBoxLayout, QPushButton, QGridLayout, \
-    QListWidget, QListWidgetItem, QDialog, QTableWidget, QTableWidgetItem, QHeaderView, QCheckBox
+    QListWidget, QListWidgetItem, QDialog, QTableWidget, QTableWidgetItem, QHeaderView, QCheckBox, QAbstractItemView
 
 from Login.VistaLogin import VistaLogin
 from Registrazione.VistaRegistrazione import VistaRegistrazione
@@ -63,7 +63,7 @@ class TabWidget(QWidget):
 
         # widgets
         self.label_resort = QLabel("Resort Torre di Cerrano")
-        self.label_resort.setStyleSheet("color: rgb(51, 102, 255);\n""font: 100 50pt \"Papyrus\";\n"
+        self.label_resort.setStyleSheet("color: rgb(51, 102, 255);\n""font: 100 30pt \"Papyrus\";\n"
                                         "background-color: rgba(255, 168, 29, 0);")
         self.label_logo = QLabel()
         self.label_logo.setPixmap(QPixmap("images/icon_logo_rt.png"))
@@ -91,7 +91,7 @@ class TabWidget(QWidget):
 
         self.label_image = self.create_label_image('images/torre_cerrano.jpg')
         self.label_image.setMargin(10)
-        self.label_image.setFixedSize(700, 450)
+        self.label_image.setFixedSize(1000, 650)
 
         # add v_layout and label_image to tab1
         self.tab1.layout.addLayout(self.v_layout)
@@ -132,8 +132,7 @@ class TabWidget(QWidget):
 
         lista1 = QListWidget()
         lista1.setSpacing(20)
-        lista1.setStyleSheet("font: 12pt \"Papyrus\";\n""color: rgb(0, 0, 0);\n"
-                                      "selection-color: rgb(170, 255, 0);")
+        lista1.setStyleSheet("font: 12pt \"Papyrus\";\n""color: rgb(0, 0, 0);\n""selection-color: rgb(170, 255, 0);")
         lista1.setObjectName("listWidget")
 
         self.aggiungi_item(lista1, "Hotel")
@@ -180,9 +179,9 @@ class TabWidget(QWidget):
         self.v2_layout.addSpacing(118)
 
         self.create_table(3, 2, "Pacchetto del soggiorno", "  Sola colazione;  Mezza pensione;  Pensione completa; ",
-                        "   30 €;   60 €;   90 €; ", True)
+                          "   30 €;   60 €;   90 €; ", True)
         self.create_table(4, 2, "Tipologia di alloggio", "  Suite;  Camera familiare;  Camera doppia;  Bungalow ",
-                        "  235 €;  125 €;  80 €;  150 €", True)
+                          "  235 €;  125 €;  80 €;  150 €", True)
         self.create_table(3, 2, "Servizi aggiuntivi", "  Noleggio mezzi elettrici;  Escursione turistica;  Centro benessere; ",
                           "  30 €;  50 €;  50 €; ", False)
 
@@ -247,6 +246,7 @@ class TabWidget(QWidget):
         table_widget = QTableWidget(row, column)
 
         # table settings
+        table_widget.setEditTriggers(QAbstractItemView.NoEditTriggers)
         table_widget.setFont(QFont("Arial", 18))
         table_widget.verticalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
         table_widget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
@@ -263,7 +263,6 @@ class TabWidget(QWidget):
         table_widget.setItem(2, 1, QTableWidgetItem(prezzi.split(";")[2]))
         table_widget.setItem(3, 0, QTableWidgetItem(nomi.split(";")[3]))
         table_widget.setItem(3, 1, QTableWidgetItem(prezzi.split(";")[3]))
-
         if side is True:    # (put the table in the vertical layout on the left side)
             self.v1_layout.addWidget(table_widget)
         else:

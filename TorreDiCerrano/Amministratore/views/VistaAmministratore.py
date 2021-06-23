@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QPushButt
 
 from ListaDipendenti.views.VistaListaDipendenti import VistaListaDipendenti
 from ListaPrenotazioni.views.VistaListaPrenotazioni import VistaListaPrenotazioni
+from Resoconto.views.VistaResoconto import VistaResoconto
 
 
 class VistaAmministratore(QWidget):
@@ -47,7 +48,7 @@ class VistaAmministratore(QWidget):
         self.bottone_dipendenti = self.create_button(" Lista Dipendenti", self.go_lista_dipendenti,
                                                      "background-color:#FFD800;", 'Alt+D',
                                                      "images/icon_dipendenti.png", )
-        self.bottone_resoconti = self.create_button("Resoconto", self.funzione_al_posto_di_resoconti,
+        self.bottone_resoconti = self.create_button("Resoconto", self.go_resoconto,
                                                     "background-color:#FFD800;", 'Alt+R',
                                                     "images/icon_resoconti.png", QSize(50, 50))
         self.h_layout.addWidget(self.bottone_prenotazioni)
@@ -61,9 +62,6 @@ class VistaAmministratore(QWidget):
         self.setWindowTitle(nome)
         self.resize(350, 650)
         self.move(850, 130)
-
-    def funzione_al_posto_di_resoconti(self):
-        pass
 
     def create_button(self, testo, comando, background_color, shortcut, icona, icon_size=QSize(30, 30)):
         bottone = QPushButton(testo)
@@ -83,6 +81,10 @@ class VistaAmministratore(QWidget):
     def go_lista_prenotazioni(self):
         self.vista_lista_prenotazioni = VistaListaPrenotazioni()
         self.vista_lista_prenotazioni.show()
+
+    def go_resoconto(self):
+        self.vista_resoconto = VistaResoconto()
+        self.vista_resoconto.show()
 
     def visualizza_info_shortcut(self):
         info = QMessageBox.information(self, "Info shortcut", "Alt+P --> bottone lista prenotazioni\n"

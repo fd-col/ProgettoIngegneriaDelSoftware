@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox
 from PyQt5.QtGui import QFont
 from datetime import datetime
 from qtwidgets import PasswordEdit
@@ -14,11 +14,13 @@ class VistaRegistrazione(QWidget):
         self.controller = ControlloreListaClienti()
 
         self.v_layout = QVBoxLayout()
-        self.font_label1 = QFont("Arial", 17)   #font semplice per i campi del cliente
-        self.font_label2 = QFont("Arial", 15, 15, True)     #font grassetto per le credenziali di accesso
+        # fonts
+        self.font_label1 = QFont("Arial", 17)               # font semplice per i campi del cliente
+        self.font_label2 = QFont("Arial", 15, 15, True)     # font grassetto per le credenziali di accesso
         self.font_label2.setBold(True)
-        self.font_label3 = QFont("Arial", 17, 15, True)     #font per il titolo del form
+        self.font_label3 = QFont("Arial", 17, 15, True)     # font per il titolo del form
 
+        # titolo
         self.label_alto = QLabel("Compila il form di registrazione")
         self.label_alto.setFont(self.font_label3)
         self.label_alto.setStyleSheet("color: rgb(0, 0, 255)")
@@ -26,64 +28,20 @@ class VistaRegistrazione(QWidget):
 
         self.v_layout.addSpacing(20)
 
-        self.label_nome = QLabel("Nome")
-        self.label_nome.setFont(self.font_label1)
-        self.v_layout.addWidget(self.label_nome)
+        # campi registrazione
+        self.campo_nome = self.create_format_campo("Nome")
+        self.campo_cognome = self.create_format_campo("Cognome")
+        self.campo_nascita = self.create_format_campo("Data di nascita")
+        self.campo_indirizzo = self.create_format_campo("Indirizzo")
+        self.campo_telefono = self.create_format_campo("Telefono")
 
-        self.campo_nome = QLineEdit()
-        self.v_layout.addWidget(self.campo_nome)
-
-        self.label_cognome = QLabel("Cognome")
-        self.label_cognome.setFont(self.font_label1)
-        self.v_layout.addWidget(self.label_cognome)
-
-        self.campo_cognome = QLineEdit()
-        self.v_layout.addWidget(self.campo_cognome)
-
-        self.label_nascita = QLabel("Data di nascita (gg/mm/aaaa)")
-        self.label_nascita.setFont(self.font_label1)
-        self.v_layout.addWidget(self.label_nascita)
-
-        self.campo_nascita = QLineEdit()
-        self.v_layout.addWidget(self.campo_nascita)
-
-        self.label_indirizzo = QLabel("Indirizzo")
-        self.label_indirizzo.setFont(self.font_label1)
-        self.v_layout.addWidget(self.label_indirizzo)
-
-        self.campo_indirizzo = QLineEdit()
-        self.v_layout.addWidget(self.campo_indirizzo)
-
-        self.label_telefono = QLabel("Telefono")
-        self.label_telefono.setFont(self.font_label1)
-        self.v_layout.addWidget(self.label_telefono)
-
-        self.campo_telefono = QLineEdit()
-        self.v_layout.addWidget(self.campo_telefono)
-
-        self.label_email = QLabel("E-mail")
-        self.label_email.setFont(self.font_label2)
-        self.v_layout.addWidget(self.label_email)
-
-        self.campo_email = QLineEdit()
-        self.v_layout.addWidget(self.campo_email)
-
-        self.label_password = QLabel("Password")
-        self.label_password.setFont(self.font_label2)
-        self.v_layout.addWidget(self.label_password)
-
-        self.campo_password = PasswordEdit()
-        self.v_layout.addWidget(self.campo_password)
-
-        self.label_conferma_password = QLabel("Conferma password")
-        self.label_conferma_password.setFont(self.font_label2)
-        self.v_layout.addWidget(self.label_conferma_password)
-
-        self.campo_conferma_password = PasswordEdit()
-        self.v_layout.addWidget(self.campo_conferma_password)
+        self.campo_email = self.create_format_campo("E-mail")
+        self.campo_password = self.create_format_password("Password")
+        self.campo_conferma_password = self.create_format_password("Conferma password")
 
         self.v_layout.addSpacing(30)
 
+        # bottone conferma
         self.bottone_conferma = QPushButton("Conferma")
         self.bottone_conferma.setFont(self.font_label1)
         self.bottone_conferma.setStyleSheet("background-color:#ccd9ff;")
@@ -92,9 +50,28 @@ class VistaRegistrazione(QWidget):
 
         self.setLayout(self.v_layout)
         self.resize(200, 600)
+        self.move(1100, 165)
         self.setWindowTitle("Registrazione")
 
-#in questa funzione ho messo i campi del cliente dopo gli if di controllo, in modo da non occupare memoria prima di controllare
+    def create_format_campo(self, testo):
+        label = QLabel(testo)
+        label.setFont(self.font_label1)
+        self.v_layout.addWidget(label)
+
+        campo = QLineEdit()
+        self.v_layout.addWidget(campo)
+        return campo
+
+    def create_format_password(self, testo):
+        label = QLabel(testo)
+        label.setFont(self.font_label2)
+        self.v_layout.addWidget(label)
+
+        campo = PasswordEdit()
+        campo.setEchoMode(QLineEdit.Password)
+        self.v_layout.addWidget(campo)
+        return campo
+
     def registra_cliente(self):
         if self.campo_nome.text() == "" or self.campo_cognome.text() == "" or self.campo_nascita.text() == "" or self.campo_indirizzo.text() == "" or self.campo_telefono.text() == "" or self.campo_email.text() == "" or self.campo_password.text() == "" or self.campo_conferma_password.text() == "":
             QMessageBox.critical(self, "Errore", "Compila tutti i campi richiesti", QMessageBox.Ok, QMessageBox.Ok)

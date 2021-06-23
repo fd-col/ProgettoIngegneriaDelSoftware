@@ -19,7 +19,7 @@ class VistaModificaDipendente(QWidget):
 
         self.campo_nome = self.create_format_campo("Nome:", self.controller.get_nome_dipendente())
         self.campo_cognome = self.create_format_campo("Cognome:", self.controller.get_cognome_dipendente())
-        self.campo_ruolo = self.create_format_campo("Ruolo:", self.controller.get_ruolo_dipendete())
+        self.campo_ruolo = self.create_format_campo("Ruolo:", self.controller.get_ruolo_dipendente())
         self.campo_id = self.create_format_campo("ID", str(self.controller.get_id_dipendente()))
         self.campo_stipendio = self.create_format_campo("Stipendio:", str(self.controller.get_stipendio_dipendente()))
 
