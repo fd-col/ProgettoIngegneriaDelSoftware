@@ -15,60 +15,35 @@ class VistaModificaDipendente(QWidget):
         self.font_label = QFont("Arial", 16)
         self.font_label.setBold(True)
 
-        self.label_nome = QLabel("Nome:")
-        self.label_nome.setFont(self.font_label)
-        self.v_layout.addWidget(self.label_nome)
+        self.font_campi = QFont("Arial", 16)
 
-        self.campo_nome = QLineEdit()
-        self.campo_nome.setFont(self.font_campi)
-        self.campo_nome.setText(self.controller.get_nome_dipendente())
-        self.v_layout.addWidget(self.campo_nome)
-
-        self.label_cognome = QLabel("Cognome:")
-        self.label_cognome.setFont(self.font_label)
-        self.v_layout.addWidget(self.label_cognome)
-
-        self.campo_cognome = QLineEdit()
-        self.campo_cognome.setFont(self.font_campi)
-        self.campo_cognome.setText(self.controller.get_cognome_dipendente())
-        self.v_layout.addWidget(self.campo_cognome)
-
-        self.label_ruolo = QLabel("Ruolo:")
-        self.label_ruolo.setFont(self.font_label)
-        self.v_layout.addWidget(self.label_ruolo)
-
-        self.campo_ruolo = QLineEdit()
-        self.campo_ruolo.setFont(self.font_campi)
-        self.campo_ruolo.setText(self.controller.get_ruolo_dipendente())
-        self.v_layout.addWidget(self.campo_ruolo)
-
-        self.label_id = QLabel("ID:")
-        self.label_id.setFont(self.font_label)
-        self.v_layout.addWidget(self.label_id)
-
-        self.campo_id = QLineEdit()
-        self.campo_id.setFont(self.font_campi)
-        self.campo_id.setText(str(self.controller.get_id_dipendente()))
-        self.v_layout.addWidget(self.campo_id)
-
-        self.label_stipendio = QLabel("Stipendio:")
-        self.label_stipendio.setFont(self.font_label)
-        self.v_layout.addWidget(self.label_stipendio)
-
-        self.campo_stipendio = QLineEdit()
-        self.campo_stipendio.setFont(self.font_campi)
-        self.campo_stipendio.setText(str(self.controller.get_stipendio_dipendente()))
-        self.v_layout.addWidget(self.campo_stipendio)
+        self.campo_nome = self.create_format_campo("Nome:", self.controller.get_nome_dipendente())
+        self.campo_cognome = self.create_format_campo("Cognome:", self.controller.get_cognome_dipendente())
+        self.campo_ruolo = self.create_format_campo("Ruolo:", self.controller.get_ruolo_dipendete())
+        self.campo_id = self.create_format_campo("ID", str(self.controller.get_id_dipendente()))
+        self.campo_stipendio = self.create_format_campo("Stipendio:", str(self.controller.get_stipendio_dipendente()))
 
         self.h_layout = QHBoxLayout()
 
         self.create_button("Modifica", self.modifica_dipendente, "background-color: rgb(170,180,255);")
-        self.create_button("Chiudi", self.chiudi_finestra, "background-color: red;")
+        self.create_button("Chiudi", self.chiudi_finestra, "background-color: rgb(255,0,0);")
 
         self.v_layout.addLayout(self.h_layout)
         self.setLayout(self.v_layout)
         self.setWindowTitle("Dipendente")
         self.resize(450, 400)
+
+    def create_format_campo(self, testo, get_campo):
+        label = QLabel(testo)
+        label.setFont(self.font_label)
+        self.v_layout.addWidget(label)
+
+        campo = QLineEdit()
+        campo.setFont(QFont("Arial", 16))
+        campo.setText(get_campo)
+        self.v_layout.addWidget(campo)
+        self.v_layout.addSpacing(10)
+        return campo
 
     def create_button(self, testo, comando, background_color):
         bottone = QPushButton(testo)
