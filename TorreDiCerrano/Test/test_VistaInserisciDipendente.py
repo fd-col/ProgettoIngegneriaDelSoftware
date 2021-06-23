@@ -5,9 +5,9 @@ from ListaDipendenti.views.VistaInserisciDipendente import VistaInserisciDipende
 
 class TestVistaInserisciDipendente(TestCase):
 
-    def __init__(self):
+    def crea_campi(self):
 
-        self.finestra_inserisci_dipendente = VistaInserisciDipendente()
+        self.finestra_inserisci_dipendente = VistaInserisciDipendente(None, None)
 
         #Scrivo i campi del dipendente
         self.finestra_inserisci_dipendente.campo_nome.setText("Mario")
@@ -17,7 +17,9 @@ class TestVistaInserisciDipendente(TestCase):
         self.finestra_inserisci_dipendente.campo_stipendio.setText("2000")
 
     def test_conferma_inserimento(self):
-        self.assertEqual(self.finestra_inserisci_dipendente.conferma_inserimento(), )
+        self.crea_campi()
+        self.assertEqual(self.finestra_inserisci_dipendente.conferma_inserimento(), False)
+        
 
     def test_controlla_id_libero(self):
         self.fail()

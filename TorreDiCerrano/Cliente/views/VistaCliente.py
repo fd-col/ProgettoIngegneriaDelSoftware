@@ -39,7 +39,7 @@ class VistaCliente(QWidget):
         # horizontal layout for "documento"
         self.h_label_layout = QHBoxLayout()
 
-        if self.controllore_cliente.get_documento_identita() is None:
+        if self.controllore_cliente.get_documento_identita() is None or  self.controllore_cliente.get_documento_identita() == '':
             self.nome_documento = "Nessuno"
         else:
             self.path = self.controllore_cliente.get_documento_identita().split("/")
@@ -87,14 +87,14 @@ class VistaCliente(QWidget):
 
     def create_button(self, testo, comando):
         bottone = QPushButton(testo)
-        bottone.setFont(QFont("Candara", 15, 1, True))
+        bottone.setFont(QFont("Arial", 15, 1, True))
         bottone.setStyleSheet("background-color:#FFD800;")
         bottone.clicked.connect(comando)
         self.h_layout.addWidget(bottone)
 
     # Nelle prossime funzioni ci starà anche il controllore lista clienti che serve per salvare o aggiornare i dati
     def go_lista_prenotazioni(self):
-        if self.controllore_cliente.get_documento_identita() is None:
+        if self.controllore_cliente.get_documento_identita() is None or self.controllore_cliente.get_documento_identita() == '':
             QMessageBox.critical(self, "Errore", "Seleziona un documento prima di prenotare la tua vacanza", QMessageBox.Ok, QMessageBox.Ok)
             return
         self.vista_prenotazioni_cliente = VistaPrenotazioniCliente(self.controllore_cliente.get_email_cliente())
@@ -115,6 +115,8 @@ class VistaCliente(QWidget):
             pass
 
     def aggiorna_documento(self):
+        if self.controllore_cliente.get_documento_identita() is None or self.controllore_cliente.get_documento_identita() == '':
+            return
         self.label_documento_testo.setText(self.controllore_cliente.get_documento_identita().split("/")[-1])
         self.controllore_lista_clienti = ControlloreListaClienti()
         self.controllore_lista_clienti.get_cliente_by_email(self.controllore_cliente.get_email_cliente()).documento = self.controllore_cliente.get_documento_identita()
