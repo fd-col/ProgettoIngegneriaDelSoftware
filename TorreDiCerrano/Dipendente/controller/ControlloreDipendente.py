@@ -1,4 +1,5 @@
-class ControlloreDipendente():
+class ControlloreDipendente:
+
     def __init__(self, dipendente):
         self.model = dipendente
 

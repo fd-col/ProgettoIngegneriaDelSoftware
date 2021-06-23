@@ -15,8 +15,6 @@ class VistaModificaDipendente(QWidget):
         self.font_label = QFont("Arial", 16)
         self.font_label.setBold(True)
 
-        self.font_campi = QFont("Arial", 16)
-
         self.label_nome = QLabel("Nome:")
         self.label_nome.setFont(self.font_label)
         self.v_layout.addWidget(self.label_nome)
@@ -64,32 +62,31 @@ class VistaModificaDipendente(QWidget):
 
         self.h_layout = QHBoxLayout()
 
-        self.bottone_chiudi = QPushButton("Chiudi")
-        self.bottone_chiudi.setFont(self.font_campi)
-        self.bottone_chiudi.clicked.connect(self.chiudi_finestra)
-        self.h_layout.addWidget(self.bottone_chiudi)
-
-        self.bottone_modifica = QPushButton("Modifica")
-        self.bottone_modifica.setFont(self.font_campi)
-        self.bottone_modifica.clicked.connect(self.modifica_dipendente)
-        self.h_layout.addWidget(self.bottone_modifica)
+        self.create_button("Modifica", self.modifica_dipendente, "background-color: rgb(170,180,255);")
+        self.create_button("Chiudi", self.chiudi_finestra, "background-color: red;")
 
         self.v_layout.addLayout(self.h_layout)
         self.setLayout(self.v_layout)
         self.setWindowTitle("Dipendente")
-        self.resize(300, 400)
+        self.resize(450, 400)
+
+    def create_button(self, testo, comando, background_color):
+        bottone = QPushButton(testo)
+        bottone.setFont(QFont("Candara", 15, 1, True))
+        bottone.setStyleSheet(background_color)
+        bottone.clicked.connect(comando)
+        self.h_layout.addWidget(bottone)
 
     def chiudi_finestra(self):
         self.close()
 
-    def controlla_id_libero(self, id):
+    def controlla_id_libero(self, _id):
         for dipendente in self.lista_dipendenti:
-            if dipendente.id == id:
+            if dipendente.id == _id:
                 return False
         return True
 
     def modifica_dipendente(self):
-
         nome = self.campo_nome.text()
         cognome = self.campo_cognome.text()
         ruolo = self.campo_ruolo.text()

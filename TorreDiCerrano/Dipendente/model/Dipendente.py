@@ -1,4 +1,4 @@
-class Dipendente():
+class Dipendente:
 
     def __init__(self, nome, cognome, ruolo, id, stipendio):
         self.nome = nome

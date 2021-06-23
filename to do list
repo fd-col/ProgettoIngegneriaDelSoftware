@@ -3,7 +3,7 @@ CODICE:
 - aggiunstare il fatto che se l'admin sbaglia password, gli arriva il mex "email errata"
 - aggiungere tasto "visualizza dipendente" dentro lista dipendenti del profilo admin
 - dentro la directory dipendente, refactor di VistaModificaDipendente
-- dentro la directory dipendente, creare VistaDipendente
+- dentro ScanerizzaDocumento creare mex per quando viene premuto Cancel
 
 
 TEST:

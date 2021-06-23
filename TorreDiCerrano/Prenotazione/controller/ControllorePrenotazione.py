@@ -1,4 +1,4 @@
-class ControllorePrenotazione():
+class ControllorePrenotazione:
 
     def __init__(self, prenotazione):
         self.model = prenotazione

@@ -1,7 +1,7 @@
 from TorreDiCerrano.ListeServizi.model.ListeServizi import ListeServizi
 
 
-class ControlloreListaServizi():
+class ControlloreListaServizi:
     def __init__(self):
         super(ControlloreListaServizi, self).__init__()
         self.model = ListeServizi()

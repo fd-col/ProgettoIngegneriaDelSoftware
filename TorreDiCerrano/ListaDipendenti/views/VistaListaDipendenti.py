@@ -22,8 +22,7 @@ class VistaListaDipendenti(QWidget):
         self.h_layout = QHBoxLayout()
 
         self.create_button("Inserisci Dipendente", self.go_inserisci_dipendente, "background-color: rgb(0, 255, 0);")
-        self.create_button("Visualizza", self.visualizza_dipendente, "background-color: rgb(170,180,255);")
-        self.create_button("Modifica", self.go_modifica_dipendente, "background-color:#FFD800;")
+        self.create_button("Visualizza - Modifica", self.go_modifica_dipendente, "background-color: rgb(170,180,255);")
         self.create_button("Elimina Dipendente", self.elimina_dipendente, "background-color: rgb(255, 0, 0);")
 
         self.v_layout.addLayout(self.h_layout)
@@ -54,9 +53,6 @@ class VistaListaDipendenti(QWidget):
         self.vista_inserisci_dipendente = VistaInserisciDipendente(self.controller, self.aggiorna_dati)
         self.vista_inserisci_dipendente.show()
 
-    def visualizza_dipendente(self):
-        pass
-
     def go_modifica_dipendente(self):
         try:
             indice = self.list_view.selectedIndexes()[0].row()
@@ -64,7 +60,9 @@ class VistaListaDipendenti(QWidget):
         except:
             QMessageBox.critical(self, "Errore", "Seleziona il dipendente da visualizzare", QMessageBox.Ok, QMessageBox.Ok)
             return
-        self.vista_modifica_dipendente = VistaModificaDipendente(ControlloreDipendente(da_visualizzare), self.aggiorna_dati, self.controller.get_lista_dipendenti())
+        self.vista_modifica_dipendente = VistaModificaDipendente(ControlloreDipendente(da_visualizzare),
+                                                                 self.aggiorna_dati,
+                                                                 self.controller.get_lista_dipendenti())
         self.vista_modifica_dipendente.show()
 
     def elimina_dipendente(self):

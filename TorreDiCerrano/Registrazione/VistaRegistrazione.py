@@ -120,7 +120,6 @@ class VistaRegistrazione(QWidget):
             except:
                 QMessageBox.critical(self, "Errore", "Inserisci la data di nascita nel formato richiesto", QMessageBox.Ok, QMessageBox.Ok)
 
-
     def closeEvent(self, event):
         self.controller.save_data()
 

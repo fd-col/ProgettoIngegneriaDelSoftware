@@ -1,7 +1,7 @@
 from ListaClienti.model.ListaClienti import ListaClienti
 
 
-class ControlloreListaClienti():
+class ControlloreListaClienti:
 
     def __init__(self):
         self.model = ListaClienti()

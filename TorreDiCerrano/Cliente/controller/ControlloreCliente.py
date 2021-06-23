@@ -1,8 +1,4 @@
-from PyQt5.QtWidgets import QFileDialog
-
-from Cliente.model.Cliente import Cliente
-
-class ControlloreCliente():
+class ControlloreCliente:
 
     def __init__(self, cliente):
         self.model = cliente

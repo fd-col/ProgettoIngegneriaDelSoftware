@@ -1,8 +1,7 @@
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox
+from PyQt5.QtGui import QFont
 
 from Dipendente.model.Dipendente import Dipendente
-from ListaDipendenti.controller.ControlloreListaDipendenti import ControlloreListaDipendenti
 
 
 class VistaInserisciDipendente(QWidget):
@@ -16,56 +15,39 @@ class VistaInserisciDipendente(QWidget):
         self.font_label = QFont("Arial", 17)
 
         self.label_alto = QLabel("Compila il form di inserimento del dipendente")
-        self.label_alto.setFont(self.font_label)
+        self.label_alto.setFont(QFont("Arial", 17, 15, True))
+        self.label_alto.setStyleSheet("color: rgb(0, 0, 255)")
         self.v_layout.addWidget(self.label_alto)
 
-        self.v_layout.addSpacing(10)
+        self.v_layout.addSpacing(25)
 
-        self.label_nome = QLabel("Nome")
-        self.label_nome.setFont(self.font_label)
-        self.v_layout.addWidget(self.label_nome)
+        self.campo_nome = self.create_format_campo("Nome")
+        self.campo_cognome = self.create_format_campo("Cognome")
+        self.campo_ruolo = self.create_format_campo("Ruolo")
+        self.campo_id = self.create_format_campo("ID")
+        self.campo_stipendio = self.create_format_campo("Stipendio")
 
-        self.campo_nome = QLineEdit()
-        self.v_layout.addWidget(self.campo_nome)
-
-        self.label_cognome = QLabel("Cognome")
-        self.label_cognome.setFont(self.font_label)
-        self.v_layout.addWidget(self.label_cognome)
-
-        self.campo_cognome = QLineEdit()
-        self.v_layout.addWidget(self.campo_cognome)
-
-        self.label_ruolo = QLabel("Ruolo")
-        self.label_ruolo.setFont(self.font_label)
-        self.v_layout.addWidget(self.label_ruolo)
-
-        self.campo_ruolo = QLineEdit()
-        self.v_layout.addWidget(self.campo_ruolo)
-
-        self.label_id = QLabel("ID")
-        self.label_id.setFont(self.font_label)
-        self.v_layout.addWidget(self.label_id)
-
-        self.campo_id = QLineEdit()
-        self.v_layout.addWidget(self.campo_id)
-
-        self.label_stipendio = QLabel("Stipendio")
-        self.label_stipendio.setFont(self.font_label)
-        self.v_layout.addWidget(self.label_stipendio)
-
-        self.campo_stipendio = QLineEdit()
-        self.v_layout.addWidget(self.campo_stipendio)
-
-        self.v_layout.addSpacing(10)
+        self.v_layout.addSpacing(25)
 
         self.bottone_conferma = QPushButton("Conferma")
-        self.bottone_conferma.setFont(self.font_label)
+        self.bottone_conferma.setFont(QFont("Candara", 15, 1, True))
+        self.bottone_conferma.setStyleSheet("background-color: rgb(0,255,0);")
         self.bottone_conferma.clicked.connect(self.conferma_inserimento)
         self.v_layout.addWidget(self.bottone_conferma)
 
         self.setLayout(self.v_layout)
         self.resize(300, 500)
         self.setWindowTitle("Inserimento Dipendente")
+
+    def create_format_campo(self, testo):
+        label = QLabel(testo)
+        label.setFont(self.font_label)
+        self.v_layout.addWidget(label)
+
+        campo = QLineEdit()
+        self.v_layout.addWidget(campo)
+        self.v_layout.addSpacing(10)
+        return campo
 
     def conferma_inserimento(self):
         nome = self.campo_nome.text()
@@ -78,7 +60,7 @@ class VistaInserisciDipendente(QWidget):
             QMessageBox.critical(self, "Errore", "Inserisci solo numeri per il codice ID", QMessageBox.Ok, QMessageBox.Ok)
             return
 
-        if id > 99999 or id <10000:
+        if id > 99999 or id < 00000:
             QMessageBox.critical(self, "Errore", "L'ID deve essere composto da 5 cifre", QMessageBox.Ok, QMessageBox.Ok)
             return
 
@@ -105,7 +87,6 @@ class VistaInserisciDipendente(QWidget):
         QMessageBox.about(self, "Completato", "L'inserimento del dipendente è stato completato")
         self.aggiorna_lista()
         self.close()
-
 
     def controlla_id_libero(self, id):
         for dipendente in self.controller.get_lista_dipendenti():

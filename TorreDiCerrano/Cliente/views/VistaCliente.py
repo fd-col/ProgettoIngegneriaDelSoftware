@@ -17,7 +17,7 @@ class VistaCliente(QWidget):
         self.v_layout = QVBoxLayout()
 
         self.label_icona = QLabel("Cliente")
-        self.pixmap = QPixmap('images\\profilo_utente.png').scaled(QSize(250,250), Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        self.pixmap = QPixmap('images/profilo_utente.png').scaled(QSize(250,250), Qt.KeepAspectRatio, Qt.SmoothTransformation)
         self.label_icona.setPixmap(self.pixmap)
 
         self.v_layout.addWidget(self.label_icona)
@@ -47,10 +47,10 @@ class VistaCliente(QWidget):
 
         self.label_documento = QLabel("Documento:        " )
         self.label_documento.setStyleSheet("color: rgb(255, 0, 0);\n""font: 100 18pt \"Times New Roman\";\n"
-                            "background-color: rgb(178, 225, 255, 20);")
+                            "background-color: rgba(178, 225, 255, 20);")
         self.h_label_layout.addWidget(self.label_documento)
 
-        self.label_documento_testo = QLabel(self.controllore_cliente.get_documento_identita().split("/")[-1])
+        self.label_documento_testo = QLabel(self.nome_documento)
         self.label_documento_testo.setFont(QFont("Arial", 16))
         self.h_label_layout.addWidget(self.label_documento_testo)
         self.v_layout.addLayout(self.h_label_layout)
