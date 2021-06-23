@@ -5,7 +5,7 @@ import os.path
 from Servizio.model.Servizio import Servizio
 
 
-class ListeServizi():
+class ListeServizi:
     def __init__(self):
         super(ListeServizi, self).__init__()
 
@@ -17,10 +17,10 @@ class ListeServizi():
             liste_servizi = json.load(file)
 
         for servizio_ristorazione in liste_servizi[0]:
-                self.lista_servizi_ristorazione.append(Servizio(servizio_ristorazione["nome"], servizio_ristorazione["campo"], servizio_ristorazione["prezzo"]))
+            self.lista_servizi_ristorazione.append(Servizio(servizio_ristorazione["nome"], servizio_ristorazione["campo"], servizio_ristorazione["prezzo"]))
 
         for servizio_alloggio in liste_servizi[1]:
-            self.lista_servizi_alloggio.append(Servizio(servizio_alloggio["nome"], servizio_alloggio["campo"], servizio_alloggio["prezzo"], servizio_alloggio["disponibilita_giornaliera"]))
+            self.lista_servizi_alloggio.append(Servizio(servizio_alloggio["nome"], servizio_alloggio["campo"], servizio_alloggio["prezzo"], servizio_alloggio["numero_persone_max"], servizio_alloggio["disponibilita_giornaliera"]))
 
         for servizio_aggiuntivo in liste_servizi[2]:
             self.lista_servizi_aggiuntivi.append(Servizio(servizio_aggiuntivo["nome"], servizio_aggiuntivo["campo"], servizio_aggiuntivo["prezzo"], servizio_aggiuntivo["disponibilita_giornaliera"]))

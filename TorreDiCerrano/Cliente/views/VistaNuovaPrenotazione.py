@@ -16,7 +16,6 @@ class VistaNuovaPrenotazione(QWidget):
         self.font = QFont("Arial", 16)
         self.email_cliente = email_cliente
         self.aggiorna_dati_prenotazioni = aggiorna_dati_prenotazioni
-
         self.layout = QGridLayout()
 
         # prenotazione data inizio vacanza
@@ -66,13 +65,25 @@ class VistaNuovaPrenotazione(QWidget):
 
         self.layout.addWidget(self.calendario_fine, 1, 1)
 
+        # selezione numero di persone
+        self.label_numero_persone = QLabel("Seleziona il numero di persone:")
+        self.label_numero_persone.setStyleSheet("font: 200 14pt \"Papyrus\";\n"
+                                          "color: rgb(0, 0, 0);\n"
+                                          "background-color: rgb(178, 225, 255);\n"
+                                          "selection-color: rgb(170, 255, 0);")
+        self.layout.addWidget(self.label_numero_persone, 3, 0)
+
+
+
+
+
         # selezione tipologia di alloggio
         self.label_alloggio = QLabel("Seleziona il tipo di alloggio:")
         self.label_alloggio.setStyleSheet("font: 200 14pt \"Papyrus\";\n"
                                                       "color: rgb(0, 0, 0);\n"
                                                       "background-color: rgb(178, 225, 255);\n"
                                                       "selection-color: rgb(170, 255, 0);")
-        self.layout.addWidget(self.label_alloggio, 3, 0)
+        self.layout.addWidget(self.label_alloggio, 5, 0)
 
         # selezione tipologia di ristorazione
         self.label_ristorazione = QLabel("Seleziona il tipo di ristorazione:")
@@ -80,7 +91,7 @@ class VistaNuovaPrenotazione(QWidget):
                                                       "color: rgb(0, 0, 0);\n"
                                                       "background-color: rgb(178, 225, 255);\n"
                                                       "selection-color: rgb(170, 255, 0);")
-        self.layout.addWidget(self.label_ristorazione, 6, 0)
+        self.layout.addWidget(self.label_ristorazione, 8, 0)
 
         # selezione servizi aggiuntivi
         self.label_servizi_aggiuntivi = QLabel("Seleziona i servizi aggiunitvi:")
@@ -97,7 +108,7 @@ class VistaNuovaPrenotazione(QWidget):
         self.bottone_conferma.setFont(QFont("Arial", 15, 15, True))
         self.bottone_conferma.setStyleSheet("background-color: rgb(0,255,0);")
         self.bottone_conferma.clicked.connect(self.aggiungi_prenotazione)
-        self.layout.addWidget(self.bottone_conferma, 8, 1)
+        self.layout.addWidget(self.bottone_conferma, 9, 1)
 
         self.setLayout(self.layout)
         self.resize(1000, 600)
@@ -108,13 +119,21 @@ class VistaNuovaPrenotazione(QWidget):
 
         self.menu_alloggio = QComboBox()
         self.model_menu_alloggio = QStandardItemModel(self.menu_alloggio)
+        self.menu_numero_persone = QComboBox()
+        self.model_menu_numero_persone = QStandardItemModel(self.menu_numero_persone)
         for servizio_alloggio in self.liste_servizi.get_servizi_alloggio():
-            item = QStandardItem()
-            item.setText(servizio_alloggio.nome)
-            item.setEditable(False)
-            self.model_menu_alloggio.appendRow(item)
+            item1 = QStandardItem()
+            item1.setText(servizio_alloggio.nome)
+            item1.setEditable(False)
+            item2 = QStandardItem()
+            item2.setText(str(servizio_alloggio.numero_persone_max))
+            item2.setEditable(False)
+            self.model_menu_alloggio.appendRow(item1)
+            self.model_menu_numero_persone.appendRow(item2)
         self.menu_alloggio.setModel(self.model_menu_alloggio)
-        self.layout.addWidget(self.menu_alloggio, 4, 0)
+        self.menu_numero_persone.setModel(self.model_menu_numero_persone)
+        self.layout.addWidget(self.menu_alloggio, 6, 0)
+        self.layout.addWidget(self.menu_numero_persone, 4, 0)
 
         self.menu_ristorazione = QComboBox()
         self.model_menu_ristorazione = QStandardItemModel(self.menu_ristorazione)
@@ -124,7 +143,7 @@ class VistaNuovaPrenotazione(QWidget):
             item.setEditable(False)
             self.model_menu_ristorazione.appendRow(item)
         self.menu_ristorazione.setModel(self.model_menu_ristorazione)
-        self.layout.addWidget(self.menu_ristorazione, 7, 0)
+        self.layout.addWidget(self.menu_ristorazione, 9, 0)
 
         self.checkbox_noleggio = QCheckBox("Noleggio Mezzi Elettrici")
         self.layout.addWidget(self.checkbox_noleggio, 4, 1)
@@ -147,6 +166,7 @@ class VistaNuovaPrenotazione(QWidget):
             return
 
         servizio_alloggio = self.liste_servizi.get_servizi_alloggio()[self.menu_alloggio.currentIndex()]
+        numero_persone = self.liste_servizi.get_servizi_alloggio()[self.menu_numero_persone.currentIndex()]
         servizio_ristorazione = self.liste_servizi.get_servizi_ristorazione()[self.menu_ristorazione.currentIndex()]
         servizi_aggiuntivi = []
 
@@ -159,10 +179,10 @@ class VistaNuovaPrenotazione(QWidget):
         if self.checkbox_spa.isChecked():
             servizi_aggiuntivi.append(self.liste_servizi.get_servizi_aggiuntivi()[2])
 
-        prenotazione = Prenotazione(self.email_cliente, data_inizio,data_fine, servizio_ristorazione, servizio_alloggio, servizi_aggiuntivi)
+        prenotazione = Prenotazione(self.email_cliente, data_inizio, data_fine, numero_persone, servizio_ristorazione, servizio_alloggio, servizi_aggiuntivi)
 
         risposta = QMessageBox.question(self, "Conferma", "Il costo della prenotazione è "
-                                        + str(prenotazione.get_prezzo_totale()) + " €. \nDovrai versare una caparra di "
+                                        + str(prenotazione.get_prezzo_totale()) + " € totali. \nDovrai versare una caparra di "
                                         + str(prenotazione.get_prezzo_totale()*20/100.0) + " €. \n\nConfermare?",
                                         QMessageBox.Yes, QMessageBox.No)
         if risposta == QMessageBox.No:

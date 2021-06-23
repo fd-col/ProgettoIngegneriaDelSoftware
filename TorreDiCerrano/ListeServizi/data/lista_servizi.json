@@ -21,25 +21,29 @@
       "nome" : "Suite",
       "campo" : "Alloggio",
       "prezzo" : 235,
+      "numero_persone_max" : 2,
       "disponibilita_giornaliera" : 5
     },
     {
       "nome" : "Camera doppia",
       "campo" : "Alloggio",
       "prezzo" : 80,
+      "numero_persone_max" : 2,
       "disponibilita_giornaliera" : 20
     },
     {
       "nome" : "Camera famigliare",
       "campo" : "Alloggio",
       "prezzo" : 125,
+      "numero_persone_max" : 6,
       "disponibilita_giornaliera" : 35
     },
     {
       "nome" : "Bungalow",
       "campo" : "Alloggio",
       "prezzo" : 150,
-      "disponibilita_giornaliera" : 10
+      "numero_persone_max" : 8,
+      "disponibilita_giornaliera" : 1
     }
   ],
   [

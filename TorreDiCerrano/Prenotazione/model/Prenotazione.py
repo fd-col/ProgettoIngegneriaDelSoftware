@@ -1,11 +1,14 @@
 from datetime import datetime
 
-class Prenotazione():
 
-    def __init__(self, email_cliente, data_inizio, data_fine, servizio_ristorazione, servizio_alloggio, servizi_aggiuntivi):
+class Prenotazione:
+
+    def __init__(self, email_cliente, data_inizio, data_fine, numero_persone, servizio_ristorazione, servizio_alloggio,
+                 servizi_aggiuntivi):
         self.email_cliente = email_cliente
         self.data_inizio = data_inizio
         self.data_fine = data_fine
+        self.numero_persone = numero_persone
         self.servizio_ristorazione = servizio_ristorazione
         self.servizio_alloggio = servizio_alloggio
         self.servizi_aggiuntivi = servizi_aggiuntivi

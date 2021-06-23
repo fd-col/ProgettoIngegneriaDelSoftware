@@ -1,10 +1,12 @@
-class Servizio():
-    def __init__(self, nome, tipo, prezzo, disponibilità_giornaliera = None):
+class Servizio:
+
+    def __init__(self, nome, tipo, prezzo, numero_persone_max, disponibilita_giornaliera=None):
         super(Servizio, self).__init__()
         self.nome = nome
         self.tipo = tipo
         self.prezzo = prezzo
-        self.disponibilita_giornaliera = disponibilità_giornaliera
+        self.numero_persone_max = numero_persone_max
+        self.disponibilita_giornaliera = disponibilita_giornaliera
         self.disponibile = True
 
     def is_disponibile(self):

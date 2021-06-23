@@ -1,4 +1,4 @@
-from TorreDiCerrano.ListeServizi.model.ListeServizi import ListeServizi
+from ListeServizi.model.ListeServizi import ListeServizi
 
 
 class ControlloreListaServizi:
