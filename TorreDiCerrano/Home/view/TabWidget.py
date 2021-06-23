@@ -53,7 +53,7 @@ class TabWidget(QWidget):
         self.tabs.setIconSize(QSize(30, 30))
         self.tabs.addTab(self.tab4, QIcon("images/icons8-euro-80.png"), "Prezzi")
         self.tabs.setFont((QFont("Arial", 15)))
-        self.tabs.setStyleSheet("QTabBar::tab { height: 100px; width: 200px; }")
+        self.tabs.setStyleSheet("QTabBar::tab { height: 50px; width: 200px; }")
 
         # Create first tab
         self.tab1.layout = QHBoxLayout(self)

@@ -76,35 +76,36 @@ class VistaInserisciDipendente(QWidget):
             id = int(self.campo_id.text())
         except:
             QMessageBox.critical(self, "Errore", "Inserisci solo numeri per il codice ID", QMessageBox.Ok, QMessageBox.Ok)
-            return
+            return False
 
         if id > 99999 or id <10000:
             QMessageBox.critical(self, "Errore", "L'ID deve essere composto da 5 cifre", QMessageBox.Ok, QMessageBox.Ok)
-            return
+            return False
 
         if not self.controlla_id_libero(id):
             QMessageBox.critical(self, "Errore", "L'ID che hai immesso è già stato utilizzato", QMessageBox.Ok, QMessageBox.Ok)
-            return
+            return False
 
         try:
             stipendio = float(self.campo_stipendio.text())
         except:
             QMessageBox.critical(self, "Errore", "Inserisci solo numeri con il punto per lo stipendio", QMessageBox.Ok,QMessageBox.Ok)
-            return
+            return False
 
         if stipendio <= 0:
             QMessageBox.critical(self, "Errore", "Lo stipendio non può essere negativo", QMessageBox.Ok,QMessageBox.Ok)
-            return
+            return False
 
         if nome == "" or cognome == "" or ruolo == "" or id == 0 or stipendio == 0.0:
             QMessageBox.critical(self, "Errore", "Completa tutti i campi", QMessageBox.Ok, QMessageBox.Ok)
-            return
+            return False
 
         self.controller.aggiungi_dipendente(Dipendente(nome, cognome, ruolo, id, stipendio))
         self.controller.save_data()
         QMessageBox.about(self, "Completato", "L'inserimento del dipendente è stato completato")
         self.aggiorna_lista()
         self.close()
+        return True
 
 
     def controlla_id_libero(self, id):

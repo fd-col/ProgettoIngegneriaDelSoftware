@@ -31,7 +31,7 @@ class VistaAmministratore(QWidget):
         self.label_admin.setFont(self.font_admin)
 
         self.bottone_info_shortcut = self.create_button("", self.visualizza_info_shortcut, "border-radius: 10px;",
-                                                        "Alt+I", "images\\icon_info.png", QSize(150, 150))
+                                                        "Alt+I", "images/icon_info.png", QSize(150, 150))
         self.h_admin_layout.addWidget(self.label_admin)
         self.h_admin_layout.addWidget(self.bottone_info_shortcut)
 
@@ -43,13 +43,13 @@ class VistaAmministratore(QWidget):
 
         self.bottone_prenotazioni = self.create_button(" Lista Prenotazioni", self.go_lista_prenotazioni,
                                                        "background-color:#FFD800;", 'Alt+P',
-                                                       "images\\icon_prenotazione.png", )
+                                                       "images/icon_prenotazione.png", )
         self.bottone_dipendenti = self.create_button(" Lista Dipendenti", self.go_lista_dipendenti,
                                                      "background-color:#FFD800;", 'Alt+D',
-                                                     "images\\icon_dipendenti.png", )
+                                                     "images/icon_dipendenti.png", )
         self.bottone_resoconti = self.create_button("Resoconto", self.funzione_al_posto_di_resoconti,
                                                     "background-color:#FFD800;", 'Alt+R',
-                                                    "images\\icon_resoconti.png", QSize(50, 50))
+                                                    "images/icon_resoconti.png", QSize(50, 50))
         self.h_layout.addWidget(self.bottone_prenotazioni)
         self.h_layout.addWidget(self.bottone_dipendenti)
         self.h_layout.addWidget(self.bottone_resoconti)
