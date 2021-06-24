@@ -10,6 +10,7 @@ class VistaResoconto(QWidget):
 
     def __init__(self):
         super(VistaResoconto, self).__init__()
+        self.spese_aggiuntive = []
 
         # periodo totale di cui è possibile richiedere il resoconto
         self.data_inizio = QDate(2021, 6, 1)
@@ -50,12 +51,17 @@ class VistaResoconto(QWidget):
         self.bottone_resoconto = QPushButton("Calcola Resoconto")
         self.bottone_resoconto.setStyleSheet("background-color: rgb(170, 255, 0);""font: 15pt \"Arial\";")
         self.bottone_resoconto.clicked.connect(self.mostra_resoconto)
-        self.layout.addWidget(self.bottone_resoconto, 2, 1)
+        self.layout.addWidget(self.bottone_resoconto, 3, 1)
 
         # aggiungi altre spese
         self.altre_spese = QLineEdit()
         self.altre_spese.setFont(QFont("Arial", 12))
         self.layout.addWidget(self.altre_spese, 2, 0)
+
+        self.bottone_aggiungi_spesa = QPushButton("Aggiungi spesa")
+        self.bottone_aggiungi_spesa.clicked.connect()
+        self.layout.addWidget(self.altre_spese, 2, 1)
+
 
         self.setLayout(self.layout)
         self.setWindowTitle("Resoconto")
@@ -72,11 +78,15 @@ class VistaResoconto(QWidget):
                                  "Il periodo finale non può essere precedente al periodo iniziale da resocontare",
                                  QMessageBox.Ok, QMessageBox.Ok)
             return
+
+        self.tabella_resoconto = VistaTabellaResoconto(data_inizio, data_fine, self.spese_aggiuntive)
+        self.tabella_resoconto.show()
+
+    def aggiungi_spesa(self):
         try:
-            spese = float(self.altre_spese.text())
+            spesa = float(self.altre_spese.text())
+            self.spese_aggiuntive.append(spesa)
         except:
             QMessageBox.critical(self, "Errore", "Inserisci solo dei numeri", QMessageBox.Ok)
             return
-
-        self.tabella_resoconto = VistaTabellaResoconto(data_inizio, data_fine, spese)
-        self.tabella_resoconto.show()
+        self.altre_spese.setText("")
