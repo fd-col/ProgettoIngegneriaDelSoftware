@@ -198,7 +198,7 @@ class TabWidget(QWidget):
 
     def create_button(self, testo, text_color, background_color, nome, comando):
         bottone = QPushButton(testo)
-        bottone.setStyleSheet("background-color: " + background_color + ";\n""font: 100 18pt \"Arial\";\n"
+        bottone.setStyleSheet("background-color: " + background_color + ";\n""font: 100 19pt \"Arial\";\n"
                               "color: " + text_color + ";""border-radius: 15px;")
         bottone.setDefault(True)
         bottone.setObjectName(nome)

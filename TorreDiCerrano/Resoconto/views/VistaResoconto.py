@@ -55,13 +55,13 @@ class VistaResoconto(QWidget):
 
         # aggiungi altre spese
         self.altre_spese = QLineEdit()
-        self.altre_spese.setFont(QFont("Arial", 12))
+        self.altre_spese.setFont(QFont("Arial", 10))
         self.layout.addWidget(self.altre_spese, 2, 0)
 
         self.bottone_aggiungi_spesa = QPushButton("Aggiungi spesa")
-        self.bottone_aggiungi_spesa.clicked.connect()
-        self.layout.addWidget(self.altre_spese, 2, 1)
-
+        self.bottone_aggiungi_spesa.clicked.connect(self.aggiungi_spesa)
+        self.bottone_aggiungi_spesa.setFont(QFont("Arial", 10))
+        self.layout.addWidget(self.bottone_aggiungi_spesa, 2, 1)
 
         self.setLayout(self.layout)
         self.setWindowTitle("Resoconto")
