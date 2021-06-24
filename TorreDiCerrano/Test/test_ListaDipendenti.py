@@ -18,7 +18,7 @@ class TestListaDipendenti(TestCase):
 
     def test_get_dipendente_by_id(self):
         self.crea_ambiente_test()
-        self.assertIsNone(self.lista_dipendenti.get_dipendente_by_id(00000))
+        self.assertIsNone(self.lista_dipendenti.get_dipendente_by_id(1))
         self.assertIsNotNone(self.lista_dipendenti.get_dipendente_by_id(12345))
 
     def test_get_lista_dipendenti(self):

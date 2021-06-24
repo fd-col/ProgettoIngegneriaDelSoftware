@@ -1,6 +1,9 @@
 from PyQt5.QtCore import QDate
-from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QCalendarWidget, QPushButton, QMessageBox
+from PyQt5.QtGui import QFont
+from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QCalendarWidget, QPushButton, QMessageBox, QLineEdit
 from datetime import datetime
+
+from Resoconto.views.VistaTabellaResoconto import VistaTabellaResoconto
 
 
 class VistaResoconto(QWidget):
@@ -49,6 +52,11 @@ class VistaResoconto(QWidget):
         self.bottone_resoconto.clicked.connect(self.mostra_resoconto)
         self.layout.addWidget(self.bottone_resoconto, 2, 1)
 
+        # aggiungi altre spese
+        self.altre_spese = QLineEdit()
+        self.altre_spese.setFont(QFont("Arial", 12))
+        self.layout.addWidget(self.altre_spese, 2, 0)
+
         self.setLayout(self.layout)
         self.setWindowTitle("Resoconto")
 
@@ -64,5 +72,11 @@ class VistaResoconto(QWidget):
                                  "Il periodo finale non può essere precedente al periodo iniziale da resocontare",
                                  QMessageBox.Ok, QMessageBox.Ok)
             return
-        # per non crashare per ora
-        return
+        try:
+            spese = float(self.altre_spese.text())
+        except:
+            QMessageBox.critical(self, "Errore", "Inserisci solo dei numeri", QMessageBox.Ok)
+            return
+
+        self.tabella_resoconto = VistaTabellaResoconto(data_inizio, data_fine, spese)
+        self.tabella_resoconto.show()

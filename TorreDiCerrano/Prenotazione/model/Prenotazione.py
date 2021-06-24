@@ -1,6 +1,3 @@
-from datetime import datetime
-
-
 class Prenotazione:
 
     def __init__(self, email_cliente, data_inizio, data_fine, numero_persone, servizio_ristorazione, servizio_alloggio,

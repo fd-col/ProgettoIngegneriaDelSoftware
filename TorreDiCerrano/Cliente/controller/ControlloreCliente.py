@@ -29,5 +29,3 @@ class ControlloreCliente:
 
     def set_documento_identita(self, path):
         self.model.documento = path
-
-    

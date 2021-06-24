@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QCalendarWidget, QComb
 from datetime import datetime
 
 from ListaPrenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
-from ListeServizi.model.ListeServizi import ListeServizi
+from ListaServizi.model.ListeServizi import ListeServizi
 from Prenotazione.model.Prenotazione import Prenotazione
 
 

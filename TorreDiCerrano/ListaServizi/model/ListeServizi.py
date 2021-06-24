@@ -13,7 +13,7 @@ class ListeServizi:
         self.lista_servizi_alloggio = []
         self.lista_servizi_aggiuntivi = []
 
-        with open("ListeServizi/data/lista_servizi.json") as file:
+        with open("../data/lista_servizi.json") as file:
             liste_servizi = json.load(file)
 
         for servizio_ristorazione in liste_servizi[0]:
@@ -35,5 +35,5 @@ class ListeServizi:
         return self.lista_servizi_aggiuntivi
 
     def save_data(self):
-        with open("ListeServizi/data/lista_servizi_salvata.pickle", "wb") as handle:
+        with open("../data/lista_servizi_salvata.pickle", "wb") as handle:
             pickle.dump(self.lista_servizi, handle, pickle.HIGHEST_PROTOCOL)
