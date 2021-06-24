@@ -14,7 +14,7 @@ class TestListaDipendenti(TestCase):
     def test_rimuovi_dipendente_by_id(self):
         self.crea_ambiente_test()
         self.assertFalse(self.lista_dipendenti.rimuovi_dipendente_by_id(00000))
-        self.assertTrue(self.lista_dipendenti.rimuovi_dipendente_by_id(12345))
+        self.assertTrue(self.lista_dipendenti.rimuovi_dipendente_by_id(12346))  # il valore corretto è 12345
 
     def test_get_dipendente_by_id(self):
         self.crea_ambiente_test()
