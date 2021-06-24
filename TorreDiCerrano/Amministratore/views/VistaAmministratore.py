@@ -65,7 +65,7 @@ class VistaAmministratore(QWidget):
 
     def create_button(self, testo, comando, background_color, shortcut, icona, icon_size=QSize(30, 30)):
         bottone = QPushButton(testo)
-        bottone.setFont(QFont("Candara", 15, 1, True))
+        bottone.setFont(QFont("Arial", 15, 1, True))
         bottone.setStyleSheet(background_color)
         bottone.setIcon(QIcon(icona))
         bottone.setIconSize(icon_size)
