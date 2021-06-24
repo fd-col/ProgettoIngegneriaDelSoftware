@@ -50,7 +50,7 @@ class VistaPrenotazioniCliente(QWidget):
             item = QStandardItem()
             item.setText("Prenotazione del " + prenotazione.data_inizio.strftime("%d/%m/%Y") + " - " + prenotazione.data_fine.strftime("%d/%m/%Y"))
             item.setEditable(False)
-            item.setFont(QFont("Candara", 16))
+            item.setFont(QFont("Arial", 16))
             self.modello_lista_prenotazioni.appendRow(item)
         self.lista_prenotazioni.setModel(self.modello_lista_prenotazioni)
 

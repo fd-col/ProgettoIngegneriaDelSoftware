@@ -14,8 +14,8 @@ class VistaModificaDipendente(QWidget):
 
         self.font_label = QFont("Arial", 16)
         self.font_label.setBold(True)
-
         self.font_campi = QFont("Arial", 16)
+
 
         self.campo_nome = self.create_format_campo("Nome:", self.controller.get_nome_dipendente())
         self.campo_cognome = self.create_format_campo("Cognome:", self.controller.get_cognome_dipendente())
@@ -47,7 +47,7 @@ class VistaModificaDipendente(QWidget):
 
     def create_button(self, testo, comando, background_color):
         bottone = QPushButton(testo)
-        bottone.setFont(QFont("Candara", 15, 1, True))
+        bottone.setFont(QFont("Arial", 15, 1, True))
         bottone.setStyleSheet(background_color)
         bottone.clicked.connect(comando)
         self.h_layout.addWidget(bottone)

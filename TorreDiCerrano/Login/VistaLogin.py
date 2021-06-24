@@ -87,8 +87,8 @@ class VistaLogin(QWidget):
                 lista_admin = json.load(file)
                 for admin in lista_admin:
                     if email == admin["email"] and password == admin["password"]:
-                        self.vista_admin = VistaAmministratore(admin["nome"])
-                        self.vista_admin.show()
-                        self.close()
-                        return True
+                                self.vista_admin = VistaAmministratore(admin["nome"])
+                                self.vista_admin.show()
+                                self.close()
+                                return True
         return False
