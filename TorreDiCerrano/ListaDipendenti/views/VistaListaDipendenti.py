@@ -33,7 +33,7 @@ class VistaListaDipendenti(QWidget):
 
     def create_button(self, testo, comando, background_color):
         bottone = QPushButton(testo)
-        bottone.setFont(QFont("Candara", 15, 1, True))
+        bottone.setFont(QFont("Arial", 15, 1, True))
         bottone.setStyleSheet(background_color)
         bottone.clicked.connect(comando)
         self.h_layout.addWidget(bottone)

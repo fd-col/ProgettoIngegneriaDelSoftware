@@ -55,9 +55,10 @@ class VistaTabellaResoconto(QWidget):
         table_widget.setItem(4, 0, QTableWidgetItem("USCITE"))
         table_widget.setItem(4, 1, QTableWidgetItem(""))
         table_widget.setItem(5, 0, QTableWidgetItem("           Stipendi"))
-        table_widget.setItem(5, 1, QTableWidgetItem(costo_dipendenti))
+        table_widget.setItem(5, 1, QTableWidgetItem(str(costo_dipendenti)))
         table_widget.setItem(6, 0, QTableWidgetItem("           Spese aggiuntive"))
         table_widget.setItem(6, 1, QTableWidgetItem(str(spese_aggiuntive_totali)))
         table_widget.setItem(7, 0, QTableWidgetItem("UTILE"))
-        table_widget.setItem(7, 1, QTableWidgetItem("da calcolare"))
+        utile = self.ricavi_prenotazioni[0]+self.ricavi_prenotazioni[1]+self.ricavi_prenotazioni[2]-self.costo_dipendenti-self.spese_aggiuntive_totali
+        table_widget.setItem(7, 1, QTableWidgetItem(str(utile)))
         return table_widget
