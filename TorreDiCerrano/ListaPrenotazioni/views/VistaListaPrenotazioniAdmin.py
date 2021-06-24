@@ -1,5 +1,5 @@
-from PyQt5.QtGui import QFont, QStandardItem, QStandardItemModel
-from PyQt5.QtWidgets import QListView, QVBoxLayout, QLabel, QWidget, QPushButton, QMessageBox
+from PyQt5.QtGui import QFont, QStandardItem, QStandardItemModel, QKeySequence
+from PyQt5.QtWidgets import QListView, QVBoxLayout, QLabel, QWidget, QPushButton, QMessageBox, QShortcut
 from PyQt5.QtCore import Qt
 
 from ListaPrenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
@@ -34,6 +34,8 @@ class VistaListaPrenotazioniAdmin(QWidget):
         self.bottone_dettagli_prenotaizone.setFont(self.font)
         self.bottone_dettagli_prenotaizone.setStyleSheet("background-color: rgb(170,180,255);")
         self.bottone_dettagli_prenotaizone.clicked.connect(self.dettagli_prenotazione)
+        self.shortcut_open = QShortcut(QKeySequence('Return'), self)
+        self.shortcut_open.activated.connect(self.dettagli_prenotazione)
         self.v_layout.addWidget(self.bottone_dettagli_prenotaizone)
 
         self.setLayout(self.v_layout)
@@ -46,7 +48,6 @@ class VistaListaPrenotazioniAdmin(QWidget):
         for prenotazione in self.controllore_lista_prenotazioni.get_lista_prenotazioni():
 
             if self.data_inizio == prenotazione.data_inizio:
-
                 item = QStandardItem()
                 item.setText("Prenotazione del " + prenotazione.data_inizio.strftime("%d/%m/%Y")
                              + " - " + prenotazione.data_fine.strftime("%d/%m/%Y") + " effettuata da " + prenotazione.email_cliente)

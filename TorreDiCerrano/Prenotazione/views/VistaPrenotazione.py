@@ -19,7 +19,6 @@ class VistaPrenotazione(QWidget):
         self.create_label("Servizio alloggio: ", self.controllore_prenotazione.get_servizio_alloggio().nome)
         #self.create_label("Numero di persone: ", self.controllore_prenotazione.get_servizio_alloggio().numero_persone_max)
 
-
         # label servizi aggiuntivi
         self.label_servizi_aggiuntivi = QLabel("Servizi aggiuntivi:")
         self.label_servizi_aggiuntivi.setStyleSheet("color: rgb(0, 0, 0);\n""font: 300 18pt \"Times New Roman\";\n"

@@ -1,7 +1,7 @@
 from PyQt5.QtCore import QDate
-from PyQt5.QtGui import QFont, QStandardItemModel, QStandardItem, QTextCharFormat, QColor
+from PyQt5.QtGui import QFont, QStandardItemModel, QStandardItem, QTextCharFormat, QColor, QKeySequence
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QCalendarWidget, QComboBox, QCheckBox, QMessageBox, \
-    QPushButton
+    QPushButton, QShortcut
 from datetime import datetime
 
 from ListaPrenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
@@ -108,6 +108,8 @@ class VistaNuovaPrenotazione(QWidget):
         self.bottone_conferma.setFont(QFont("Arial", 15, 15, True))
         self.bottone_conferma.setStyleSheet("background-color: rgb(0,255,0);")
         self.bottone_conferma.clicked.connect(self.aggiungi_prenotazione)
+        self.shortcut_open = QShortcut(QKeySequence('Return'), self)
+        self.shortcut_open.activated.connect(self.aggiungi_prenotazione)
         self.layout.addWidget(self.bottone_conferma, 9, 1)
 
         self.setLayout(self.layout)

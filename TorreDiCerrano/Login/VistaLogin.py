@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QPushButton, QMessageBox, QVBoxLayout, QLabel, QLineEdit, QShortcut
 from PyQt5.QtGui import QKeySequence, QFont
+from qtwidgets import PasswordEdit
 import os
 import json
 
@@ -41,7 +42,7 @@ class VistaLogin(QWidget):
         self.label_password.setFont(self.font)
         self.v_layout.addWidget(self.label_password)
 
-        self.campo_password = QLineEdit()
+        self.campo_password = PasswordEdit()
         self.campo_password.setEchoMode(QLineEdit.Password)
         self.v_layout.addWidget(self.campo_password)
 
