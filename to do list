@@ -1,10 +1,7 @@
 CODICE:
-- Resconti per l'admin
 - aggiunstare il fatto che se l'admin sbaglia password, gli arriva il mex "email errata"
 - Aggiunngere il controllo della disponibilità
-- in VistaListaPrenotazioniAdmin, una volta premuto "vai" sulla data selezionata, e cliccando
-  su "dettagli prenotazione", compare sempre la stessa prenotazione in posizione 0 dell'array
-  self.controllore_lista_prenotazioni.get_lista_prenotazioni()
+
 
 
 

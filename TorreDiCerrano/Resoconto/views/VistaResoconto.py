@@ -51,20 +51,27 @@ class VistaResoconto(QWidget):
         self.bottone_resoconto = QPushButton("Calcola Resoconto")
         self.bottone_resoconto.setStyleSheet("background-color: rgb(170, 255, 0);""font: 15pt \"Arial\";")
         self.bottone_resoconto.clicked.connect(self.mostra_resoconto)
-        self.layout.addWidget(self.bottone_resoconto, 3, 1)
+        self.layout.addWidget(self.bottone_resoconto, 4, 1)
+
+        # label altre spese
+        self.label_altre_spese = QLabel("Inserisci le spese aggiuntive: ")
+        self.label_altre_spese.setStyleSheet("font: 200 14pt \"Papyrus\";\n""color: rgb(0, 0, 0);\n"
+                                        "background-color: rgb(178, 225, 255);\n""selection-color: rgb(170, 255, 0);")
+        self.layout.addWidget(self.label_altre_spese, 2, 0)
 
         # aggiungi altre spese
         self.altre_spese = QLineEdit()
         self.altre_spese.setFont(QFont("Arial", 10))
-        self.layout.addWidget(self.altre_spese, 2, 0)
+        self.layout.addWidget(self.altre_spese, 3, 0)
 
         self.bottone_aggiungi_spesa = QPushButton("Aggiungi spesa")
         self.bottone_aggiungi_spesa.clicked.connect(self.aggiungi_spesa)
-        self.bottone_aggiungi_spesa.setFont(QFont("Arial", 10))
-        self.layout.addWidget(self.bottone_aggiungi_spesa, 2, 1)
+        self.bottone_aggiungi_spesa.setFont(QFont("Arial", 12))
+        self.layout.addWidget(self.bottone_aggiungi_spesa, 3, 1)
 
         self.setLayout(self.layout)
         self.setWindowTitle("Resoconto")
+        self.resize(800, 800)
 
     def mostra_resoconto(self):
         data_inizio_q = self.calendario_inizio.selectedDate()
