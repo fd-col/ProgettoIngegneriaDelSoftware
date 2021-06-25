@@ -2,7 +2,7 @@ from PyQt5.QtCore import QDate
 from PyQt5.QtGui import QFont, QStandardItemModel, QStandardItem, QTextCharFormat, QColor, QKeySequence
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QCalendarWidget, QComboBox, QCheckBox, QMessageBox, \
     QPushButton, QShortcut
-from datetime import datetime
+from datetime import datetime,timedelta
 
 from ListaPrenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
 from ListaServizi.model.ListeServizi import ListeServizi
@@ -181,6 +181,10 @@ class VistaNuovaPrenotazione(QWidget):
         if self.checkbox_spa.isChecked():
             servizi_aggiuntivi.append(self.liste_servizi.get_servizi_aggiuntivi()[2])
 
+        if not self.controlla_disponibilità():
+            QMessageBox.Critical(self, "Ci Dispiace", "Nelle date per le quali vuoi prenotare non sono disponibili posti per il tipo di alloggio scelto", QMessageBox.Ok)
+            return
+
         prenotazione = Prenotazione(self.email_cliente, data_inizio, data_fine, numero_persone, servizio_ristorazione, servizio_alloggio, servizi_aggiuntivi)
 
         risposta = QMessageBox.question(self, "Conferma", "Il costo della prenotazione è "
@@ -196,6 +200,21 @@ class VistaNuovaPrenotazione(QWidget):
             controllore_lista_prenotazioni.save_data()
             self.aggiorna_dati_prenotazioni()
             self.close()
+
+    def controlla_disponibilità(self, data_inizio, data_fine, servizio_alloggio):
+        controllore_lista_prenotazioni = ControlloreListaPrenotazioni()
+        one_day = timedelta(days=1)
+        data_controllo = data_inizio
+
+        disponibilita_giornaliera_alloggio = servizio_alloggio.disponibilita_giornaliera
+        while data_controllo <= data_fine:
+            disponibilita_giornaliera_rimanente = disponibilita_giornaliera_alloggio
+            for prenotazione in controllore_lista_prenotazioni.get_lista_prenotazioni():
+                if data_controllo >= prenotazione.data_inizio and data_controllo <= prenotazione.data_fine and prenotazione.servizio_alloggio == servizio_alloggio:
+                    disponibilita_giornaliera_rimanente = disponibilita_giornaliera_rimanente-1
+            if disponibilita_giornaliera_rimanente < 1:
+                return False
+        return True
 
 
 

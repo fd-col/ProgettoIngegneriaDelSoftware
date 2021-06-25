@@ -3,7 +3,7 @@ from PyQt5.QtGui import QFont, QStandardItemModel, QStandardItem
 from datetime import datetime
 
 from ListaPrenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
-from Cliente.views.VistaNuovaPrenotazione import VistaNuovaPrenotazione
+from Prenotazione.views.VistaNuovaPrenotazione import VistaNuovaPrenotazione
 from Prenotazione.controller.ControllorePrenotazione import ControllorePrenotazione
 from Prenotazione.views.VistaPrenotazione import VistaPrenotazione
 
