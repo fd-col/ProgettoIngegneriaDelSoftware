@@ -51,19 +51,16 @@
       "nome" : "Noleggio mezzi elettrici",
       "campo" : "Servizi aggiuntivi",
       "prezzo" : 30,
-      "disponibilita_giornaliera" : 20
     },
     {
       "nome" : "Escursione turistica",
       "campo" : "Servizi aggiuntivi",
       "prezzo" : 50,
-      "disponibilita_giornaliera" : 20
     },
     {
       "nome" : "Centro benessere",
       "campo" : "Servizi aggiuntivi",
-      "prezzo" : 50,
-      "disponibilita_giornaliera" : 20
+      "prezzo" : 50
     }
   ]
 ]
