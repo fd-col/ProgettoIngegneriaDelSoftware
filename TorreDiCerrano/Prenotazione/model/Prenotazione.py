@@ -10,6 +10,9 @@ class Prenotazione:
         self.servizio_alloggio = servizio_alloggio
         self.servizi_aggiuntivi = servizi_aggiuntivi
 
+    def __lt__(self, other):
+        return self.data_inizio < other.data_inizio
+
     def get_prezzo_totale(self):
         numero_notti = self.data_fine.timetuple().tm_yday - self.data_inizio.timetuple().tm_yday
         prezzo_pernottamento = numero_notti*self.servizio_alloggio.prezzo

@@ -182,7 +182,7 @@ class VistaNuovaPrenotazione(QWidget):
             servizi_aggiuntivi.append(self.liste_servizi.get_servizi_aggiuntivi()[2])
 
         if not self.controlla_disponibilità(data_inizio, data_fine, servizio_alloggio):
-            QMessageBox.Critical(self, "Ci Dispiace", "Nelle date per le quali vuoi prenotare non sono disponibili posti per il tipo di alloggio scelto", QMessageBox.Ok)
+            QMessageBox.critical(self, "Ci Dispiace", "Nelle date per le quali vuoi prenotare non sono disponibili posti per il tipo di alloggio scelto", QMessageBox.Ok, QMessageBox.Ok)
             return
 
         prenotazione = Prenotazione(self.email_cliente, data_inizio, data_fine, numero_persone, servizio_ristorazione, servizio_alloggio, servizi_aggiuntivi)
@@ -214,7 +214,7 @@ class VistaNuovaPrenotazione(QWidget):
                     disponibilita_giornaliera_rimanente = disponibilita_giornaliera_rimanente-1
             if disponibilita_giornaliera_rimanente < 1:
                 return False
-            data_controllo = data_controllo+one_day
+            data_controllo = data_controllo + one_day
         return True
 
 

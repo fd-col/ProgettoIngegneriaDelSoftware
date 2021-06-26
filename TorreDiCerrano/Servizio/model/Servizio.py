@@ -14,3 +14,6 @@ class Servizio:
 
     def prenota(self):
         self.disponibile = False
+
+    def __eq__(self, other):
+        return self.nome == other.nome
