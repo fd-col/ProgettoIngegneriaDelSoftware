@@ -114,7 +114,7 @@ class VistaNuovaPrenotazione(QWidget):
 
         self.setLayout(self.layout)
         self.resize(1000, 600)
-        self.setWindowTitle("Aggiungi Prenotazione")
+        self.setWindowTitle("Nuova Prenotazione")
 
     def get_servizi(self):
         self.liste_servizi = ListeServizi()
@@ -181,7 +181,7 @@ class VistaNuovaPrenotazione(QWidget):
         if self.checkbox_spa.isChecked():
             servizi_aggiuntivi.append(self.liste_servizi.get_servizi_aggiuntivi()[2])
 
-        prenotazione = Prenotazione(self.email_cliente, data_inizio, data_fine, numero_persone, servizio_ristorazione, servizio_alloggio, servizi_aggiuntivi)
+        prenotazione = Prenotazione(self.email_cliente, data_inizio, data_fine, numero_persone.numero_persone_max, servizio_ristorazione, servizio_alloggio, servizi_aggiuntivi)
 
         risposta = QMessageBox.question(self, "Conferma", "Il costo della prenotazione è "
                                         + str(prenotazione.get_prezzo_totale()) + " € totali. \nDovrai versare una caparra di "
