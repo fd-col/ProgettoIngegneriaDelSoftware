@@ -15,6 +15,9 @@ class ControllorePrenotazione:
     def get_servizio_ristorazione(self):
         return self.model.servizio_ristorazione
 
+    def get_numero_persone(self):
+        return self.model.numero_persone
+
     def get_servizio_alloggio(self):
         return self.model.servizio_alloggio
 

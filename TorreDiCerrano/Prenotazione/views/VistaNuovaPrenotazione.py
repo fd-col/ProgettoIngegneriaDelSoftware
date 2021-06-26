@@ -2,7 +2,7 @@ from PyQt5.QtCore import QDate
 from PyQt5.QtGui import QFont, QStandardItemModel, QStandardItem, QTextCharFormat, QColor, QKeySequence
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QCalendarWidget, QComboBox, QCheckBox, QMessageBox, \
     QPushButton, QShortcut
-from datetime import datetime,timedelta
+from datetime import datetime, timedelta
 
 from ListaPrenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
 from ListaServizi.model.ListeServizi import ListeServizi
@@ -185,7 +185,7 @@ class VistaNuovaPrenotazione(QWidget):
             QMessageBox.critical(self, "Ci Dispiace", "Nelle date per le quali vuoi prenotare non sono disponibili posti per il tipo di alloggio scelto", QMessageBox.Ok, QMessageBox.Ok)
             return
 
-        prenotazione = Prenotazione(self.email_cliente, data_inizio, data_fine, numero_persone, servizio_ristorazione, servizio_alloggio, servizi_aggiuntivi)
+        prenotazione = Prenotazione(self.email_cliente, data_inizio, data_fine, numero_persone.numero_persone_max, servizio_ristorazione, servizio_alloggio, servizi_aggiuntivi)
 
         risposta = QMessageBox.question(self, "Conferma", "Il costo della prenotazione è "
                                         + str(prenotazione.get_prezzo_totale()) + " € totali. \nDovrai versare una caparra di "

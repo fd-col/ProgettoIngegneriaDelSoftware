@@ -59,7 +59,7 @@ class VistaAmministratore(QWidget):
 
         self.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.setLayout(self.v_layout)
-        self.setWindowTitle(nome)
+        self.setWindowTitle("Profilo Amministratore")
         self.resize(350, 650)
         self.move(850, 130)
 

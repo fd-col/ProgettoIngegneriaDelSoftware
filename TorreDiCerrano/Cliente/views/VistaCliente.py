@@ -67,7 +67,7 @@ class VistaCliente(QWidget):
 
         self.setStyleSheet("background-color: rgb(178, 225, 255);")
         self.setLayout(self.v_layout)
-        self.setWindowTitle(self.controllore_cliente.get_nome_cliente() + " " + self.controllore_cliente.get_cognome_cliente())
+        self.setWindowTitle("Profilo Cliente")
         self.resize(650, 450)
         self.move(650, 20)
 
