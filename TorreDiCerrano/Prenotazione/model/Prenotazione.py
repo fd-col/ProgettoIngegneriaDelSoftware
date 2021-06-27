@@ -22,3 +22,4 @@ class Prenotazione:
             prezzo_servizi_aggiuntivi = prezzo_servizi_aggiuntivi + servizio_aggiuntivo.prezzo
 
         return prezzo_ristorazione+prezzo_pernottamento+prezzo_servizi_aggiuntivi
+

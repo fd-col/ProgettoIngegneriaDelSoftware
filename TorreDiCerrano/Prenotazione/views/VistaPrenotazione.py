@@ -17,7 +17,7 @@ class VistaPrenotazione(QWidget):
                                 + " - " + self.controllore_prenotazione.get_data_fine_prenotazione().strftime('%d/%m/%Y'))
         self.create_label("Servizio ristorazione: ", self.controllore_prenotazione.get_servizio_ristorazione().nome)
         self.create_label("Servizio alloggio: ", self.controllore_prenotazione.get_servizio_alloggio().nome)
-        self.create_label("Numero di persone: ", self.controllore_prenotazione.get_numero_persone())
+        self.create_label("Numero di persone: ", str(self.controllore_prenotazione.get_numero_persone()))
 
         # label servizi aggiuntivi
         self.label_servizi_aggiuntivi = QLabel("Servizi aggiuntivi:")

@@ -168,7 +168,7 @@ class VistaNuovaPrenotazione(QWidget):
             return
 
         servizio_alloggio = self.liste_servizi.get_servizi_alloggio()[self.menu_alloggio.currentIndex()]
-        numero_persone = self.liste_servizi.get_servizi_alloggio()[self.menu_numero_persone.currentIndex()]
+        numero_persone = self.liste_servizi.get_servizi_alloggio()[self.menu_numero_persone.currentIndex()].numero_persone_max
         servizio_ristorazione = self.liste_servizi.get_servizi_ristorazione()[self.menu_ristorazione.currentIndex()]
         servizi_aggiuntivi = []
 
@@ -185,7 +185,7 @@ class VistaNuovaPrenotazione(QWidget):
             QMessageBox.critical(self, "Ci Dispiace", "Nelle date per le quali vuoi prenotare non sono disponibili posti per il tipo di alloggio scelto", QMessageBox.Ok, QMessageBox.Ok)
             return
 
-        prenotazione = Prenotazione(self.email_cliente, data_inizio, data_fine, numero_persone.numero_persone_max, servizio_ristorazione, servizio_alloggio, servizi_aggiuntivi)
+        prenotazione = Prenotazione(self.email_cliente, data_inizio, data_fine, numero_persone, servizio_ristorazione, servizio_alloggio, servizi_aggiuntivi)
 
         risposta = QMessageBox.question(self, "Conferma", "Il costo della prenotazione è "
                                         + str(prenotazione.get_prezzo_totale()) + " € totali. \nDovrai versare una caparra di "
