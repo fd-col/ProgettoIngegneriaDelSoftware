@@ -67,11 +67,14 @@ class VistaListaPrenotazioniAdmin(QWidget):
     def dettagli_prenotazione(self):
         try:
             indice = self.lista_prenotazioni.selectedIndexes()[0].row()
-            lista_prenotazioni_filtrata = []
-            for prenotazione in self.controllore_lista_prenotazioni.get_lista_prenotazioni():
-                if prenotazione.data_inizio == self.data_inizio:
-                    lista_prenotazioni_filtrata.append(prenotazione)
-            da_visualizzare = lista_prenotazioni_filtrata[indice]
+            if self.data_inizio is not None:
+                lista_prenotazioni_filtrata = []
+                for prenotazione in self.controllore_lista_prenotazioni.get_lista_prenotazioni():
+                    if prenotazione.data_inizio == self.data_inizio:
+                        lista_prenotazioni_filtrata.append(prenotazione)
+                da_visualizzare = lista_prenotazioni_filtrata[indice]
+            else:
+                da_visualizzare = self.controllore_lista_prenotazioni.get_lista_prenotazioni()[indice]
         except:
             QMessageBox.critical(self, "Errore", "Seleziona la prenotazione da visualizzare", QMessageBox.Ok, QMessageBox.Ok)
             return

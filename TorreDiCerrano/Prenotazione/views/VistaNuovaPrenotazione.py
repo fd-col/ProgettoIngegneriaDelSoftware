@@ -1,3 +1,4 @@
+
 from PyQt5.QtCore import QDate
 from PyQt5.QtGui import QFont, QStandardItemModel, QStandardItem, QTextCharFormat, QColor, QKeySequence
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QCalendarWidget, QComboBox, QCheckBox, QMessageBox, \
@@ -125,15 +126,18 @@ class VistaNuovaPrenotazione(QWidget):
         self.model_menu_numero_persone = QStandardItemModel(self.menu_numero_persone)
         for servizio_alloggio in self.liste_servizi.get_servizi_alloggio():
             item1 = QStandardItem()
-            item1.setText(servizio_alloggio.nome)
+            item1.setText(servizio_alloggio.nome + "(max " + str(servizio_alloggio.numero_persone_max) + " persone)")
             item1.setEditable(False)
-            item2 = QStandardItem()
-            item2.setText(str(servizio_alloggio.numero_persone_max))
-            item2.setEditable(False)
             self.model_menu_alloggio.appendRow(item1)
-            self.model_menu_numero_persone.appendRow(item2)
         self.menu_alloggio.setModel(self.model_menu_alloggio)
+
+        for numero in [1, 2, 3, 4, 5, 6, 7, 8]:
+            item = QStandardItem()
+            item.setText(str(numero))
+            item.setEditable(False)
+            self.model_menu_numero_persone.appendRow(item)
         self.menu_numero_persone.setModel(self.model_menu_numero_persone)
+
         self.layout.addWidget(self.menu_alloggio, 6, 0)
         self.layout.addWidget(self.menu_numero_persone, 4, 0)
 
@@ -168,7 +172,7 @@ class VistaNuovaPrenotazione(QWidget):
             return
 
         servizio_alloggio = self.liste_servizi.get_servizi_alloggio()[self.menu_alloggio.currentIndex()]
-        numero_persone = self.liste_servizi.get_servizi_alloggio()[self.menu_numero_persone.currentIndex()].numero_persone_max
+        numero_persone = self.menu_numero_persone.currentIndex()+1
         servizio_ristorazione = self.liste_servizi.get_servizi_ristorazione()[self.menu_ristorazione.currentIndex()]
         servizi_aggiuntivi = []
 
@@ -183,6 +187,10 @@ class VistaNuovaPrenotazione(QWidget):
 
         if not self.controlla_disponibilità(data_inizio, data_fine, servizio_alloggio):
             QMessageBox.critical(self, "Ci Dispiace", "Nelle date per le quali vuoi prenotare non sono disponibili posti per il tipo di alloggio scelto", QMessageBox.Ok, QMessageBox.Ok)
+            return
+
+        if numero_persone > servizio_alloggio.numero_persone_max:
+            QMessageBox.critical(self, "Errore", "Il numero di persone selezionato è troppo alto per il tipo di alloggio scelto", QMessageBox.Ok, QMessageBox.Ok)
             return
 
         prenotazione = Prenotazione(self.email_cliente, data_inizio, data_fine, numero_persone, servizio_ristorazione, servizio_alloggio, servizi_aggiuntivi)
