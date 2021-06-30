@@ -43,6 +43,7 @@ class VistaListaPrenotazioniAdmin(QWidget):
 
         if data_inizio is not None:
             self.label_stato_resort = QLabel("Sommario prenotazioni:")
+            self.label_stato_resort.setAlignment(Qt.AlignCenter)
             self.label_stato_resort.setStyleSheet("font:  18pt \"Papyrus\";""color: rgb(0,0,255);")
             self.v_layout.addWidget(self.label_stato_resort)
             self.lista_stato_resort = QListView()
