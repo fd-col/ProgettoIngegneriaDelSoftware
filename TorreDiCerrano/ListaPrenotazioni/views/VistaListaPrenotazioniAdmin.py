@@ -117,34 +117,34 @@ class VistaListaPrenotazioniAdmin(QWidget):
 
                 for servizio_aggiuntivo in prenotazione.servizi_aggiuntivi:
                     if servizio_aggiuntivo == Servizio("Noleggio mezzi elettrici", "Servizi aggiuntivi", 30):
-                        numero_mezzi_elettrici_occupati = numero_mezzi_elettrici_occupati + 1
+                        numero_mezzi_elettrici_occupati = numero_mezzi_elettrici_occupati + prenotazione.numero_persone
                     if servizio_aggiuntivo == Servizio("Centro benessere", "Servizi aggiuntivi", 50):
-                        numero_prenotazioni_centro_benessere = numero_prenotazioni_centro_benessere + 1
+                        numero_prenotazioni_centro_benessere = numero_prenotazioni_centro_benessere + prenotazione.numero_persone
                     if servizio_aggiuntivo == Servizio("Escursione turistica", "Servizi aggiuntivi", 50):
-                        numero_prenotazioni_escursione_turistica = numero_prenotazioni_escursione_turistica + 1
+                        numero_prenotazioni_escursione_turistica = numero_prenotazioni_escursione_turistica + prenotazione.numero_persone
 
         item_suite = QStandardItem()
         item_suite.setFont(self.font)
         item_suite.setEditable(False)
-        item_suite.setText("Numero Suite occupate: " + str(numero_suite_occupate))
+        item_suite.setText("Suite occupate: " + str(numero_suite_occupate))
         self.modello_stato_resort.appendRow(item_suite)
 
         item_camere_doppie = QStandardItem()
         item_camere_doppie.setFont(self.font)
         item_camere_doppie.setEditable(False)
-        item_camere_doppie.setText("Numero Camere doppie occupate: " + str(numero_stanze_doppie_occupate))
+        item_camere_doppie.setText("Camere doppie occupate: " + str(numero_stanze_doppie_occupate))
         self.modello_stato_resort.appendRow(item_camere_doppie)
 
         item_camere_famigliari = QStandardItem()
         item_camere_famigliari.setFont(self.font)
         item_camere_famigliari.setEditable(False)
-        item_camere_famigliari.setText("Numero Camere famigliari occupate: " + str(numero_stanze_doppie_occupate))
+        item_camere_famigliari.setText("Camere famigliari occupate: " + str(numero_stanze_doppie_occupate))
         self.modello_stato_resort.appendRow(item_camere_famigliari)
 
         item_bungalow = QStandardItem()
         item_bungalow.setFont(self.font)
         item_bungalow.setEditable(False)
-        item_bungalow.setText("Numero Bungalow occupati: " + str(numero_bungalow_occupati))
+        item_bungalow.setText("Bungalow occupati: " + str(numero_bungalow_occupati))
         self.modello_stato_resort.appendRow(item_bungalow)
 
         item_vuoto = QStandardItem()
