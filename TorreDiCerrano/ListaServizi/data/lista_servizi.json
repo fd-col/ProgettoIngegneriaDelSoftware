@@ -34,16 +34,16 @@
     {
       "nome" : "Camera famigliare",
       "campo" : "Alloggio",
-      "prezzo" : 125,
-      "numero_persone_max" : 6,
+      "prezzo" : 180,
+      "numero_persone_max" : 5,
       "disponibilita_giornaliera" : 35
     },
     {
       "nome" : "Bungalow",
       "campo" : "Alloggio",
-      "prezzo" : 150,
+      "prezzo" : 320,
       "numero_persone_max" : 8,
-      "disponibilita_giornaliera" : 1
+      "disponibilita_giornaliera" : 10
     }
   ],
   [
