@@ -72,7 +72,7 @@ class VistaListaDipendenti(QWidget):
         except:
             QMessageBox.critical(self, "Errore", "Seleziona il dipendente da eliminare", QMessageBox.Ok, QMessageBox.Ok)
             return
-        risposta = QMessageBox.question(self, "Conferma", "Sei sicuro di volere eliminare il dipendente?", QMessageBox.Yes, QMessageBox.No)
+        risposta = QMessageBox.warning(self, "Conferma", "Sei sicuro di volere eliminare il dipendente?", QMessageBox.Yes, QMessageBox.No)
         if risposta == QMessageBox.Yes:
             self.controller.elimina_dipendente_by_id(da_eliminare.id)
             QMessageBox.about(self, "Eliminato", "Il dipendente è stato eliminato")

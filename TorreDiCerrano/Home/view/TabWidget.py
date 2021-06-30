@@ -18,7 +18,7 @@ class TabWidget(QWidget):
         self.h_button_layout = QHBoxLayout()
 
         self.bottone_info = self.create_button("", "", "", "Info", self.visualizza_info)
-        self.bottone_info.setStyleSheet("border-radius: 10px;")
+        self.bottone_info.setStyleSheet("color: 'black';" "border-radius: 10px;")
         self.bottone_info.setIcon(QIcon("images/icon_info.png"))
         self.bottone_info.setIconSize(QSize(150, 70))
 
@@ -43,15 +43,17 @@ class TabWidget(QWidget):
         self.tab3.setStyleSheet("background-color: #FFFFF0;")
         self.tab4 = QWidget()
         self.tab4.setStyleSheet("background-color: #FFFFF0;")
+        self.tab5 = QWidget()
+        self.tab5.setStyleSheet("background-color: #FFFFF0;")
 
         # Add tabs
         self.tabs.addTab(self.tab1, QIcon("images/icona_home.jpg"), "Home")
-        self.tabs.setIconSize(QSize(30, 30))
         self.tabs.addTab(self.tab2, QIcon("images/icons8-pila-di-foto.gif"), "Immagini")
-        self.tabs.setIconSize(QSize(30, 30))
         self.tabs.addTab(self.tab3, QIcon("images/icons8-lista-64.png"), "Servizi")
-        self.tabs.setIconSize(QSize(30, 30))
         self.tabs.addTab(self.tab4, QIcon("images/icons8-euro-80.png"), "Prezzi")
+        self.tabs.addTab(self.tab5, QIcon("images/icons8-contatti-64.png"), "Contatti")
+        self.tabs.setIconSize(QSize(40, 40))
+
         self.tabs.setFont((QFont("Arial", 15)))
         self.tabs.setStyleSheet("QTabBar::tab { height: 50px; width: 200px; }")
 
@@ -187,6 +189,16 @@ class TabWidget(QWidget):
 
         self.tab4.layout.addLayout(self.h_table_layout)
         self.tab4.setLayout(self.tab4.layout)
+
+
+        # Create fifth tab
+        self.tab5.layout = QVBoxLayout(self)
+
+        self.v3_layout = QVBoxLayout()
+
+        self.tab5.setLayout(self.tab5.layout)
+
+
 
         # Final layout
         self.layout.addLayout(self.h_button_layout)

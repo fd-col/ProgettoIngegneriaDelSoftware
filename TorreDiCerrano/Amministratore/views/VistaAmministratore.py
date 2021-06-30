@@ -11,6 +11,7 @@ class VistaAmministratore(QWidget):
 
     def __init__(self, nome, parent=None):
         super(VistaAmministratore, self).__init__(parent)
+        self.font_bottone = QFont("Arial", 15, 1, True)
 
         self.v_layout = QVBoxLayout()
 
@@ -19,8 +20,7 @@ class VistaAmministratore(QWidget):
         self.v_layout.addWidget(self.label_icona)
 
         self.label_nome = QLabel(nome)
-        self.font_nome = QFont("Arial", 20)
-        self.label_nome.setFont(self.font_nome)
+        self.label_nome.setFont(QFont("Arial", 20))
         self.v_layout.addWidget(self.label_nome)
         self.v_layout.addSpacing(20)
 
@@ -28,8 +28,7 @@ class VistaAmministratore(QWidget):
         self.h_admin_layout = QHBoxLayout()
 
         self.label_admin = QLabel("Account Amministratore")
-        self.font_admin = QFont("Arial", 16)
-        self.label_admin.setFont(self.font_admin)
+        self.label_admin.setFont(QFont("Arial", 16))
 
         self.bottone_info_shortcut = self.create_button("", self.visualizza_info_shortcut, "border-radius: 10px;",
                                                         "Alt+I", "images/icon_info.png", QSize(150, 150))
@@ -60,12 +59,12 @@ class VistaAmministratore(QWidget):
         self.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.setLayout(self.v_layout)
         self.setWindowTitle("Profilo Amministratore")
-        self.resize(350, 650)
-        self.move(850, 130)
+        self.rect = self.frameGeometry()
+        self.setGeometry(self.rect)
 
     def create_button(self, testo, comando, background_color, shortcut, icona, icon_size=QSize(30, 30)):
         bottone = QPushButton(testo)
-        bottone.setFont(QFont("Arial", 15, 1, True))
+        bottone.setFont(self.font_bottone)
         bottone.setStyleSheet(background_color)
         bottone.setIcon(QIcon(icona))
         bottone.setIconSize(icon_size)

@@ -21,7 +21,7 @@ class VistaRegistrazione(QWidget):
         self.font_label3 = QFont("Arial", 17, 15, True)     # font per il titolo del form
 
         # titolo
-        self.label_alto = QLabel("Compila il form di registrazione")
+        self.label_alto = QLabel("Compila il form di registrazione: ")
         self.label_alto.setFont(self.font_label3)
         self.label_alto.setStyleSheet("color: rgb(0, 0, 255)")
         self.v_layout.addWidget(self.label_alto)
@@ -49,8 +49,8 @@ class VistaRegistrazione(QWidget):
         self.v_layout.addWidget(self.bottone_conferma)
 
         self.setLayout(self.v_layout)
-        self.resize(200, 600)
-        self.move(1100, 165)
+        self.rect = self.frameGeometry()
+        self.setGeometry(self.rect)
         self.setWindowTitle("Registrazione")
 
     def create_format_campo(self, testo):
@@ -59,6 +59,7 @@ class VistaRegistrazione(QWidget):
         self.v_layout.addWidget(label)
 
         campo = QLineEdit()
+        campo.setFont(self.font_label1)
         self.v_layout.addWidget(campo)
         return campo
 
@@ -68,6 +69,7 @@ class VistaRegistrazione(QWidget):
         self.v_layout.addWidget(label)
 
         campo = PasswordEdit()
+        campo.setFont(self.font_label1)
         campo.setEchoMode(QLineEdit.Password)
         self.v_layout.addWidget(campo)
         return campo
