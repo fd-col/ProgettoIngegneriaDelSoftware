@@ -5,6 +5,7 @@ from PyQt5.QtCore import Qt
 from ListaPrenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
 from Prenotazione.controller.ControllorePrenotazione import ControllorePrenotazione
 from Prenotazione.views.VistaPrenotazione import VistaPrenotazione
+from Servizio.model.Servizio import Servizio
 
 
 class VistaListaPrenotazioniAdmin(QWidget):
@@ -29,6 +30,12 @@ class VistaListaPrenotazioniAdmin(QWidget):
         self.lista_prenotazioni = QListView()
         self.aggiorna_dati_prenotazioni()
         self.v_layout.addWidget(self.lista_prenotazioni)
+
+        if data_inizio is not None:
+            self.lista_stato_resort = QListView()
+            self.get_stato_resort(data_inizio)
+            self.v_layout.addWidget(self.lista_stato_resort)
+
 
         self.bottone_dettagli_prenotaizone = QPushButton("Dettagli prenotazione")
         self.bottone_dettagli_prenotaizone.setFont(self.font)
@@ -81,3 +88,74 @@ class VistaListaPrenotazioniAdmin(QWidget):
 
         self.vista_prenotazione = VistaPrenotazione(ControllorePrenotazione(da_visualizzare))
         self.vista_prenotazione.show()
+
+    def get_stato_resort(self, data_controllo_stato):
+        self.modello_stato_resort = QStandardItemModel()
+
+        numero_suite_occupate = 0
+        numero_stanze_doppie_occupate = 0
+        numero_stanze_familiari_occupate = 0
+        numero_bungalow_occupati = 0
+
+        numero_mezzi_elettrici_occupati = 0
+        numero_prenotazioni_centro_benessere = 0
+        numero_prenotazioni_escursione_turistica = 0
+
+        for prenotazione in self.controllore_lista_prenotazioni.get_lista_prenotazioni():
+            if data_controllo_stato >= prenotazione.data_inizio and data_controllo_stato <= prenotazione.data_fine:
+                if prenotazione.servizio_alloggio == Servizio("Suite", "Alloggio", 235):
+                    numero_suite_occupate = numero_suite_occupate + 1
+                if prenotazione.servizio_alloggio == Servizio("Camera doppia", "Alloggio", 80):
+                    numero_stanze_doppie_occupate = numero_stanze_doppie_occupate + 1
+                if prenotazione.servizio_alloggio == Servizio("Camera famigliare", "Alloggio", 125):
+                    numero_stanze_familiari_occupate = numero_stanze_familiari_occupate + 1
+                if prenotazione.servizio_alloggio == Servizio("Bungalow", "Alloggio", 150):
+                    numero_bungalow_occupati = numero_bungalow_occupati + 1
+
+                for servizio_aggiuntivo in prenotazione.servizi_aggiuntivi:
+                    if servizio_aggiuntivo == Servizio("Noleggio mezzi elettrici", "Servizi aggiuntivi", 30):
+                        numero_mezzi_elettrici_occupati = numero_mezzi_elettrici_occupati + 1
+                    if servizio_aggiuntivo == Servizio("Centro benessere", "Servizi aggiuntivi", 50):
+                        numero_prenotazioni_centro_benessere = numero_prenotazioni_centro_benessere + 1
+                    if servizio_aggiuntivo == Servizio("Escursione turistica", "Servizi aggiuntivi", 50):
+                        numero_prenotazioni_escursione_turistica = numero_prenotazioni_escursione_turistica + 1
+
+        item_suite = QStandardItem()
+        item_suite.setFont(self.font)
+        item_suite.setText("Numero Suite occupate: " + str(numero_suite_occupate))
+        self.modello_stato_resort.appendRow(item_suite)
+
+        item_camere_doppie = QStandardItem()
+        item_camere_doppie.setFont(self.font)
+        item_camere_doppie.setText("Numero Camere doppie occupate: " + str(numero_stanze_doppie_occupate))
+        self.modello_stato_resort.appendRow(item_camere_doppie)
+
+        item_camere_famigliari = QStandardItem()
+        item_camere_famigliari.setFont(self.font)
+        item_camere_famigliari.setText("Numero camere famigliai occupate: " + str(numero_stanze_doppie_occupate))
+        self.modello_stato_resort.appendRow(item_camere_famigliari)
+
+        item_bungalow = QStandardItem()
+        item_bungalow.setFont(self.font)
+        item_bungalow.setText("Numero Bungalow occupati: " + str(numero_bungalow_occupati))
+        self.modello_stato_resort.appendRow(item_bungalow)
+
+        item_vuoto = QStandardItem()
+        self.modello_stato_resort.appendRow(item_vuoto)
+
+        item_mezzi_elettrici = QStandardItem()
+        item_mezzi_elettrici.setFont(self.font)
+        item_mezzi_elettrici.setText("Numero mezzi elettrici noleggiati: " + str(numero_mezzi_elettrici_occupati))
+        self.modello_stato_resort.appendRow(item_mezzi_elettrici)
+
+        item_centro_benessere = QStandardItem()
+        item_centro_benessere.setFont(self.font)
+        item_centro_benessere.setText("Numero prenotazioni centro benessere: " + str(numero_prenotazioni_centro_benessere))
+        self.modello_stato_resort.appendRow(item_centro_benessere)
+
+        item_escursioni = QStandardItem()
+        item_escursioni.setFont(self.font)
+        item_escursioni.setText("Numero escursioni prenotate: " + str(numero_prenotazioni_escursione_turistica))
+        self.modello_stato_resort.appendRow(item_escursioni)
+
+        self.lista_stato_resort.setModel(self.modello_stato_resort)
