@@ -35,6 +35,7 @@ class VistaLogin(QWidget):
         self.v_layout.addWidget(self.label_email)
 
         self.campo_email = QLineEdit()
+        self.campo_email.setFont(self.font)
         self.v_layout.addWidget(self.campo_email)
 
         # campo password
@@ -43,6 +44,7 @@ class VistaLogin(QWidget):
         self.v_layout.addWidget(self.label_password)
 
         self.campo_password = PasswordEdit()
+        self.campo_password.setFont(self.font)
         self.campo_password.setEchoMode(QLineEdit.Password)
         self.v_layout.addWidget(self.campo_password)
 

@@ -99,7 +99,6 @@ class TabWidget(QWidget):
 
         self.tab1.setLayout(self.tab1.layout)
 
-
         # Create second tab
         self.tab2.layout = QGridLayout(self)
 
@@ -126,7 +125,6 @@ class TabWidget(QWidget):
 
         self.tab2.setLayout(self.tab2.layout)
 
-
         # Create third tab
         self.tab3.layout = QVBoxLayout(self)
 
@@ -148,7 +146,6 @@ class TabWidget(QWidget):
         self.tab3.layout.addWidget(lista1)
         self.tab3.setLayout(self.tab3.layout)
 
-
         # Create fourth tab
         self.tab4.layout = QVBoxLayout(self)
 
@@ -164,7 +161,7 @@ class TabWidget(QWidget):
         self.label_servizi_compresi.setFont(QFont("Times new roman", 20))
         self.label_servizi_compresi.setWordWrap(True)
 
-        #elenco dei servizi compresi
+        # elenco dei servizi compresi
         self.check1 = self.create_check_box("Ingresso in piscina con lettini")
         self.check2 = self.create_check_box("Ombrellone, sdraio, lettino in spiaggia")
         self.check3 = self.create_check_box("Animazione grandi e piccoli")
