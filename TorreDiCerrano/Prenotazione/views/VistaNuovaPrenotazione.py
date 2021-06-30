@@ -171,6 +171,10 @@ class VistaNuovaPrenotazione(QWidget):
             QMessageBox.critical(self, "Errore", "La data di fine non può essere precedente la data di inizio della vacanza", QMessageBox.Ok, QMessageBox.Ok)
             return
 
+        if data_inizio == datetime(datetime.now().year, datetime.now().month, datetime.now().day):
+            QMessageBox.critical(self, "Errore", "La prenotazione non può partire da oggi", QMessageBox.Ok, QMessageBox.Ok)
+            return
+
         servizio_alloggio = self.liste_servizi.get_servizi_alloggio()[self.menu_alloggio.currentIndex()]
         numero_persone = self.menu_numero_persone.currentIndex()+1
         servizio_ristorazione = self.liste_servizi.get_servizi_ristorazione()[self.menu_ristorazione.currentIndex()]

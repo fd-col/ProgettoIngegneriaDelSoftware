@@ -1,3 +1,4 @@
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMainWindow
 
 from Home.view.TabWidget import TabWidget
@@ -9,7 +10,7 @@ class Home(QMainWindow):
         super(Home, self).__init__(parent)
         self.setObjectName("HOME")
         self.setWindowTitle("RESORT TORRE DI CERRANO")
-        self.resize(1650, 1000)
+        self.setWindowState(Qt.WindowMaximized)
         self.move(50, 0)
         self.setStyleSheet("background-color: #F0DC83;")
 
