@@ -74,7 +74,7 @@ class VistaModificaDipendente(QWidget):
             return
 
         if id > 99999 or id < 10000:
-            QMessageBox.critical(self, "Errore", "L'ID deve essere composto da 5 cifre", QMessageBox.Ok, QMessageBox.Ok)
+            QMessageBox.critical(self, "Errore", "L'ID deve essere composto da 5 cifre e non può cominciare con 0", QMessageBox.Ok, QMessageBox.Ok)
             return
 
         if self.controller.get_id_dipendente() == id:

@@ -71,7 +71,7 @@ class VistaResoconto(QWidget):
 
         self.setLayout(self.layout)
         self.setWindowTitle("Resoconto")
-        self.resize(800, 800)
+        self.resize(800, 500)
 
     def mostra_resoconto(self):
         data_inizio_q = self.calendario_inizio.selectedDate()

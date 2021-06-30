@@ -6,9 +6,9 @@ from Dipendente.model.Dipendente import Dipendente
 
 class VistaInserisciDipendente(QWidget):
 
-    def __init__(self, controller, aggiorna_lista, parent=None):
+    def __init__(self, controller_lista_dipendenti, aggiorna_lista, parent=None):
         super(VistaInserisciDipendente, self).__init__(parent)
-        self.controller = controller
+        self.controller = controller_lista_dipendenti
         self.aggiorna_lista = aggiorna_lista
 
         self.v_layout = QVBoxLayout()
@@ -60,8 +60,8 @@ class VistaInserisciDipendente(QWidget):
             QMessageBox.critical(self, "Errore", "Inserisci solo numeri per il codice ID", QMessageBox.Ok, QMessageBox.Ok)
             return False
 
-        if id > 99999 or id < 00000:
-            QMessageBox.critical(self, "Errore", "L'ID deve essere composto da 5 cifre", QMessageBox.Ok, QMessageBox.Ok)
+        if id > 99999 or id < 10000:
+            QMessageBox.critical(self, "Errore", "L'ID deve essere composto da 5 cifre e non può cominciare con 0", QMessageBox.Ok, QMessageBox.Ok)
             return False
 
         if not self.controlla_id_libero(id):
