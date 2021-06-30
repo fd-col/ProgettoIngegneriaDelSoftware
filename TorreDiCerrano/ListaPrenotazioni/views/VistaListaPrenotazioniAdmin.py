@@ -26,13 +26,16 @@ class VistaListaPrenotazioniAdmin(QWidget):
         self.label_prenotazioni_by_data.setStyleSheet("font:  20pt \"Papyrus\";""color: rgb(0,0,255);")
         self.label_prenotazioni_by_data.setAlignment(Qt.AlignCenter)
         self.v_layout.addWidget(self.label_prenotazioni_by_data)
-        self.v_layout.addSpacing(30)
+        self.v_layout.addSpacing(15)
 
         self.lista_prenotazioni = QListView()
         self.aggiorna_dati_prenotazioni()
         self.v_layout.addWidget(self.lista_prenotazioni)
 
         if data_inizio is not None:
+            self.label_stato_resort = QLabel("Sommario prenotazioni:")
+            self.label_stato_resort.setFont(self.font)
+            self.v_layout.addWidget(self.label_stato_resort)
             self.lista_stato_resort = QListView()
             self.get_stato_resort(data_inizio)
             self.lista_stato_resort.setAlternatingRowColors(True)
@@ -49,7 +52,7 @@ class VistaListaPrenotazioniAdmin(QWidget):
         self.v_layout.addWidget(self.bottone_dettagli_prenotaizone)
 
         self.setLayout(self.v_layout)
-        self.resize(900, 600)
+        self.resize(900, 800)
         self.setWindowTitle("Lista Prenotazioni")
 
     def aggiorna_dati_prenotazioni(self):
