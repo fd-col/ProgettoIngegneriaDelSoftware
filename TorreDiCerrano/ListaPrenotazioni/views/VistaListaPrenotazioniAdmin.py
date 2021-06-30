@@ -32,17 +32,6 @@ class VistaListaPrenotazioniAdmin(QWidget):
         self.aggiorna_dati_prenotazioni()
         self.v_layout.addWidget(self.lista_prenotazioni)
 
-        if data_inizio is not None:
-            self.label_stato_resort = QLabel("Sommario prenotazioni:")
-            self.label_stato_resort.setFont(self.font)
-            self.v_layout.addWidget(self.label_stato_resort)
-            self.lista_stato_resort = QListView()
-            self.get_stato_resort(data_inizio)
-            self.lista_stato_resort.setAlternatingRowColors(True)
-            self.lista_stato_resort.setEditTriggers(QAbstractItemView.NoEditTriggers)
-            self.v_layout.addWidget(self.lista_stato_resort)
-
-
         self.bottone_dettagli_prenotaizone = QPushButton("Dettagli prenotazione")
         self.bottone_dettagli_prenotaizone.setFont(self.font)
         self.bottone_dettagli_prenotaizone.setStyleSheet("background-color: rgb(170,180,255);")
@@ -50,6 +39,17 @@ class VistaListaPrenotazioniAdmin(QWidget):
         self.shortcut_open = QShortcut(QKeySequence('Return'), self)
         self.shortcut_open.activated.connect(self.dettagli_prenotazione)
         self.v_layout.addWidget(self.bottone_dettagli_prenotaizone)
+        self.v_layout.addSpacing(15)
+
+        if data_inizio is not None:
+            self.label_stato_resort = QLabel("Sommario prenotazioni:")
+            self.label_stato_resort.setStyleSheet("font:  18pt \"Papyrus\";""color: rgb(0,0,255);")
+            self.v_layout.addWidget(self.label_stato_resort)
+            self.lista_stato_resort = QListView()
+            self.get_stato_resort(data_inizio)
+            self.lista_stato_resort.setAlternatingRowColors(True)
+            self.lista_stato_resort.setEditTriggers(QAbstractItemView.NoEditTriggers)
+            self.v_layout.addWidget(self.lista_stato_resort)
 
         self.setLayout(self.v_layout)
         self.resize(900, 800)

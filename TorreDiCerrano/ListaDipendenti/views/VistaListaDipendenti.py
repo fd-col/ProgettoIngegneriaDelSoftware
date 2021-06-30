@@ -4,7 +4,7 @@ from PyQt5.QtGui import QFont, QStandardItem, QStandardItemModel
 from Dipendente.controller.ControlloreDipendente import ControlloreDipendente
 from Dipendente.views.VistaModificaDipendente import VistaModificaDipendente
 from ListaDipendenti.controller.ControlloreListaDipendenti import ControlloreListaDipendenti
-from ListaDipendenti.views.VistaInserisciDipendente import VistaInserisciDipendente
+from Dipendente.views.VistaInserisciDipendente import VistaInserisciDipendente
 
 
 class VistaListaDipendenti(QWidget):
