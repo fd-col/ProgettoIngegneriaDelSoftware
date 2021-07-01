@@ -189,7 +189,7 @@ class VistaNuovaPrenotazione(QWidget):
         if self.checkbox_spa.isChecked():
             servizi_aggiuntivi.append(self.liste_servizi.get_servizi_aggiuntivi()[2])
 
-        if not self.controlla_disponibilità(data_inizio, data_fine, servizio_alloggio):
+        if not self.controlla_disponibilita(data_inizio, data_fine, servizio_alloggio):
             QMessageBox.critical(self, "Ci Dispiace", "Nelle date per le quali vuoi prenotare non sono disponibili posti per il tipo di alloggio scelto", QMessageBox.Ok, QMessageBox.Ok)
             return
 
@@ -213,7 +213,7 @@ class VistaNuovaPrenotazione(QWidget):
             self.aggiorna_dati_prenotazioni()
             self.close()
 
-    def controlla_disponibilità(self, data_inizio, data_fine, servizio_alloggio):
+    def controlla_disponibilita(self, data_inizio, data_fine, servizio_alloggio):
         controllore_lista_prenotazioni = ControlloreListaPrenotazioni()
         one_day = timedelta(days=1)
         data_controllo = data_inizio
@@ -228,8 +228,3 @@ class VistaNuovaPrenotazione(QWidget):
                 return False
             data_controllo = data_controllo + one_day
         return True
-
-
-
-
-
