@@ -217,9 +217,9 @@ class TabWidget(QWidget):
         list3.setAlternatingRowColors(True)
         list3.setStyleSheet("background-color: #C0C0C0;")
         self.aggiungi_item(list1, "Federico C.")
-        self.aggiungi_item(list1, "email ")
+        self.aggiungi_item(list1, "email - s1093242@studenti.univpm.it")
         self.aggiungi_item(list2, "Francesco C.")
-        self.aggiungi_item(list2, "email ")
+        self.aggiungi_item(list2, "email - s1094929@studenti.univpm.it")
         self.aggiungi_item(list3, "Andrea C.")
         self.aggiungi_item(list3, "email - s1092302@studenti.univpm.it")
 
