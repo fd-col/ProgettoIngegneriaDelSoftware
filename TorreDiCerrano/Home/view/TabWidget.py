@@ -1,5 +1,5 @@
 from PyQt5.QtCore import QSize, Qt
-from PyQt5.QtGui import QIcon, QFont, QPixmap
+from PyQt5.QtGui import QIcon, QFont, QPixmap, QPalette
 from PyQt5.QtWidgets import QWidget, QTabWidget, QVBoxLayout, QLabel, QHBoxLayout, QPushButton, QGridLayout, \
     QListWidget, QListWidgetItem, QDialog, QTableWidget, QTableWidgetItem, QHeaderView, QCheckBox, QAbstractItemView
 
@@ -131,6 +131,7 @@ class TabWidget(QWidget):
         self.tab3.layout = QVBoxLayout(self)
 
         lista1 = QListWidget()
+        lista1.setAlternatingRowColors(True)
         lista1.setSpacing(20)
         lista1.setStyleSheet("font: 12pt \"Papyrus\";\n""color: rgb(0, 0, 0);\n""selection-color: rgb(170, 255, 0);")
         lista1.setObjectName("listWidget")
@@ -190,15 +191,46 @@ class TabWidget(QWidget):
         self.tab4.layout.addLayout(self.h_table_layout)
         self.tab4.setLayout(self.tab4.layout)
 
-
         # Create fifth tab
         self.tab5.layout = QVBoxLayout(self)
 
         self.v3_layout = QVBoxLayout()
+        self.v3_layout.addSpacing(70)
 
+        self.label_contact = QLabel()
+        self.label_contact.setPixmap(QPixmap("images/contatti.jpg"))
+        self.label_contact.setAlignment(Qt.AlignCenter)
+
+        self.v3_layout.addWidget(self.label_contact)
+        self.v3_layout.addSpacing(120)
+
+        # horizontal layout che contiene le schede dei contatti
+        self.h_contact_layout = QHBoxLayout()
+
+        list1 = QListWidget()
+        list1.setAlternatingRowColors(True)
+        list1.setStyleSheet("background-color: #C0C0C0;")
+        list2 = QListWidget()
+        list2.setAlternatingRowColors(True)
+        list2.setStyleSheet("background-color: #C0C0C0;")
+        list3 = QListWidget()
+        list3.setAlternatingRowColors(True)
+        list3.setStyleSheet("background-color: #C0C0C0;")
+        self.aggiungi_item(list1, "Federico C.")
+        self.aggiungi_item(list1, "email ")
+        self.aggiungi_item(list2, "Francesco C.")
+        self.aggiungi_item(list2, "email ")
+        self.aggiungi_item(list3, "Andrea C.")
+        self.aggiungi_item(list3, "email ")
+
+        self.h_contact_layout.addWidget(list1)
+        self.h_contact_layout.addWidget(list2)
+        self.h_contact_layout.addWidget(list3)
+
+        self.v3_layout.addLayout(self.h_contact_layout)
+
+        self.tab5.layout.addLayout(self.v3_layout)
         self.tab5.setLayout(self.tab5.layout)
-
-
 
         # Final layout
         self.layout.addLayout(self.h_button_layout)
@@ -245,7 +277,7 @@ class TabWidget(QWidget):
 
     def aggiungi_item(self, lista, nome):
         item = QListWidgetItem(nome)
-        item.setCheckState(Qt.Checked)
+        item.setTextAlignment(Qt.AlignCenter)
         font = QFont("Arial", 16)
         font.setWeight(50)
         item.setFont(font)
