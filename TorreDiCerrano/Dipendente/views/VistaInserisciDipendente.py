@@ -14,7 +14,7 @@ class VistaInserisciDipendente(QWidget):
         self.v_layout = QVBoxLayout()
         self.font_label = QFont("Arial", 17)
 
-        self.label_alto = QLabel("Compila il form di inserimento del dipendente")
+        self.label_alto = QLabel("Compila il form con i dati del dipendente: ")
         self.label_alto.setFont(QFont("Arial", 17, 15, True))
         self.label_alto.setStyleSheet("color: rgb(0, 0, 255)")
         self.v_layout.addWidget(self.label_alto)
@@ -45,6 +45,7 @@ class VistaInserisciDipendente(QWidget):
         self.v_layout.addWidget(label)
 
         campo = QLineEdit()
+        campo.setFont(self.font_label)
         self.v_layout.addWidget(campo)
         self.v_layout.addSpacing(10)
         return campo

@@ -22,12 +22,12 @@ class VistaLogin(QWidget):
         self.v_layout = QVBoxLayout()
 
         # titolo
-        self.label_alto = QLabel("Inserisci i dati per il login")
+        self.label_alto = QLabel("Inserisci i dati per il login: ")
         self.label_alto.setFont(self.font)
         self.label_alto.setStyleSheet("color: rgb(0, 0, 255)")
         self.v_layout.addWidget(self.label_alto)
 
-        self.v_layout.addSpacing(10)
+        self.v_layout.addSpacing(20)
 
         # campo email
         self.label_email = QLabel("E-mail")
@@ -36,9 +36,10 @@ class VistaLogin(QWidget):
 
         self.campo_email = QLineEdit()
         self.campo_email.setFont(self.font)
-        self.v_layout.addSpacing(10)
+        self.v_layout.addSpacing(5)
         self.v_layout.addWidget(self.campo_email)
 
+        self.v_layout.addSpacing(10)
 
         # campo password
         self.label_password = QLabel("Password")
@@ -48,9 +49,8 @@ class VistaLogin(QWidget):
         self.campo_password = PasswordEdit()
         self.campo_password.setFont(self.font)
         self.campo_password.setEchoMode(QLineEdit.Password)
-        self.v_layout.addSpacing(10)
+        self.v_layout.addSpacing(5)
         self.v_layout.addWidget(self.campo_password)
-
 
         self.v_layout.addSpacing(20)
 

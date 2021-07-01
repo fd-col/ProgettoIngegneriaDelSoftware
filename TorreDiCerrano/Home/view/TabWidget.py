@@ -1,5 +1,5 @@
 from PyQt5.QtCore import QSize, Qt
-from PyQt5.QtGui import QIcon, QFont, QPixmap
+from PyQt5.QtGui import QIcon, QFont, QPixmap, QPalette
 from PyQt5.QtWidgets import QWidget, QTabWidget, QVBoxLayout, QLabel, QHBoxLayout, QPushButton, QGridLayout, \
     QListWidget, QListWidgetItem, QDialog, QTableWidget, QTableWidgetItem, QHeaderView, QCheckBox, QAbstractItemView
 
@@ -18,7 +18,7 @@ class TabWidget(QWidget):
         self.h_button_layout = QHBoxLayout()
 
         self.bottone_info = self.create_button("", "", "", "Info", self.visualizza_info)
-        self.bottone_info.setStyleSheet("border-radius: 10px;")
+        self.bottone_info.setStyleSheet("color: 'black';" "border-radius: 10px;")
         self.bottone_info.setIcon(QIcon("images/icon_info.png"))
         self.bottone_info.setIconSize(QSize(150, 70))
 
@@ -43,15 +43,17 @@ class TabWidget(QWidget):
         self.tab3.setStyleSheet("background-color: #FFFFF0;")
         self.tab4 = QWidget()
         self.tab4.setStyleSheet("background-color: #FFFFF0;")
+        self.tab5 = QWidget()
+        self.tab5.setStyleSheet("background-color: #FFFFF0;")
 
         # Add tabs
         self.tabs.addTab(self.tab1, QIcon("images/icona_home.jpg"), "Home")
-        self.tabs.setIconSize(QSize(30, 30))
         self.tabs.addTab(self.tab2, QIcon("images/icons8-pila-di-foto.gif"), "Immagini")
-        self.tabs.setIconSize(QSize(30, 30))
         self.tabs.addTab(self.tab3, QIcon("images/icons8-lista-64.png"), "Servizi")
-        self.tabs.setIconSize(QSize(30, 30))
         self.tabs.addTab(self.tab4, QIcon("images/icons8-euro-80.png"), "Prezzi")
+        self.tabs.addTab(self.tab5, QIcon("images/icons8-contatti-64.png"), "Contatti")
+        self.tabs.setIconSize(QSize(40, 40))
+
         self.tabs.setFont((QFont("Arial", 15)))
         self.tabs.setStyleSheet("QTabBar::tab { height: 50px; width: 200px; }")
 
@@ -129,6 +131,7 @@ class TabWidget(QWidget):
         self.tab3.layout = QVBoxLayout(self)
 
         lista1 = QListWidget()
+        lista1.setAlternatingRowColors(True)
         lista1.setSpacing(20)
         lista1.setStyleSheet("font: 12pt \"Papyrus\";\n""color: rgb(0, 0, 0);\n""selection-color: rgb(170, 255, 0);")
         lista1.setObjectName("listWidget")
@@ -188,6 +191,47 @@ class TabWidget(QWidget):
         self.tab4.layout.addLayout(self.h_table_layout)
         self.tab4.setLayout(self.tab4.layout)
 
+        # Create fifth tab
+        self.tab5.layout = QVBoxLayout(self)
+
+        self.v3_layout = QVBoxLayout()
+        self.v3_layout.addSpacing(70)
+
+        self.label_contact = QLabel()
+        self.label_contact.setPixmap(QPixmap("images/contatti.jpg"))
+        self.label_contact.setAlignment(Qt.AlignCenter)
+
+        self.v3_layout.addWidget(self.label_contact)
+        self.v3_layout.addSpacing(120)
+
+        # horizontal layout che contiene le schede dei contatti
+        self.h_contact_layout = QHBoxLayout()
+
+        list1 = QListWidget()
+        list1.setAlternatingRowColors(True)
+        list1.setStyleSheet("background-color: #C0C0C0;")
+        list2 = QListWidget()
+        list2.setAlternatingRowColors(True)
+        list2.setStyleSheet("background-color: #C0C0C0;")
+        list3 = QListWidget()
+        list3.setAlternatingRowColors(True)
+        list3.setStyleSheet("background-color: #C0C0C0;")
+        self.aggiungi_item(list1, "Federico C.")
+        self.aggiungi_item(list1, "email ")
+        self.aggiungi_item(list2, "Francesco C.")
+        self.aggiungi_item(list2, "email ")
+        self.aggiungi_item(list3, "Andrea C.")
+        self.aggiungi_item(list3, "email ")
+
+        self.h_contact_layout.addWidget(list1)
+        self.h_contact_layout.addWidget(list2)
+        self.h_contact_layout.addWidget(list3)
+
+        self.v3_layout.addLayout(self.h_contact_layout)
+
+        self.tab5.layout.addLayout(self.v3_layout)
+        self.tab5.setLayout(self.tab5.layout)
+
         # Final layout
         self.layout.addLayout(self.h_button_layout)
         self.layout.addWidget(self.tabs)
@@ -233,7 +277,7 @@ class TabWidget(QWidget):
 
     def aggiungi_item(self, lista, nome):
         item = QListWidgetItem(nome)
-        item.setCheckState(Qt.Checked)
+        item.setTextAlignment(Qt.AlignCenter)
         font = QFont("Arial", 16)
         font.setWeight(50)
         item.setFont(font)

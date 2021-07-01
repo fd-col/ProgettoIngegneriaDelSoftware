@@ -16,19 +16,21 @@ class VistaCliente(QWidget):
 
         self.v_layout = QVBoxLayout()
 
+        # icona profilo cliente
         self.label_icona = QLabel("Cliente")
         self.pixmap = QPixmap('images/profilo_utente.png').scaled(QSize(250,250), Qt.KeepAspectRatio, Qt.SmoothTransformation)
         self.label_icona.setPixmap(self.pixmap)
 
         self.v_layout.addWidget(self.label_icona)
 
-
+        # label nome cliente
         self.label_nome = QLabel(self.controllore_cliente.get_nome_cliente() + " " + self.controllore_cliente.get_cognome_cliente())
-        self.font_nome = QFont("Times New Roman", 30, 150)
-        self.label_nome.setFont(self.font_nome)
+        self.label_nome.setFont(QFont("Times New Roman", 30, 150))
+
         self.v_layout.addWidget(self.label_nome)
         self.v_layout.addSpacing(40)
 
+        # labels contenenti dati del cliente
         self.create_label("Data di nascita:  ", self.controllore_cliente.get_data_nascita_cliente().strftime('%m/%d/%Y'))
         self.create_label("Indirizzo:        ", self.controllore_cliente.get_indirizzo_cliente())
         self.create_label("Telefono:         ", self.controllore_cliente.get_telefono_cliente())
@@ -45,6 +47,7 @@ class VistaCliente(QWidget):
             self.path = self.controllore_cliente.get_documento_identita().split("/")
             self.nome_documento = self.path[-1]
 
+        # label documento
         self.label_documento = QLabel("Documento:        " )
         self.label_documento.setStyleSheet("color: rgb(255, 0, 0);\n""font: 100 18pt \"Times New Roman\";\n"
                             "background-color: rgba(178, 225, 255, 20);")
@@ -59,6 +62,7 @@ class VistaCliente(QWidget):
 
         self.h_layout = QHBoxLayout()
 
+        # bottoni profilo cliente collegati alle relative funzioni
         self.create_button("Prenotazioni", self.go_lista_prenotazioni)
         self.create_button("Scannerizza documento", self.go_vista_scannerizza_documento)
         self.create_button("Elimina profilo", self.conferma_elimina_profilo)
@@ -68,8 +72,8 @@ class VistaCliente(QWidget):
         self.setStyleSheet("background-color: rgb(178, 225, 255);")
         self.setLayout(self.v_layout)
         self.setWindowTitle("Profilo Cliente")
-        self.resize(650, 450)
-        self.move(650, 20)
+        self.rect = self.frameGeometry()
+        self.setGeometry(self.rect)
 
     def create_label(self, testo, text_label):
         h_layout = QHBoxLayout()

@@ -17,6 +17,7 @@ class VistaNuovaPrenotazione(QWidget):
         self.font = QFont("Arial", 16)
         self.email_cliente = email_cliente
         self.aggiorna_dati_prenotazioni = aggiorna_dati_prenotazioni
+
         self.layout = QGridLayout()
 
         # prenotazione data inizio vacanza
@@ -74,10 +75,6 @@ class VistaNuovaPrenotazione(QWidget):
                                           "selection-color: rgb(170, 255, 0);")
         self.layout.addWidget(self.label_numero_persone, 3, 0)
 
-
-
-
-
         # selezione tipologia di alloggio
         self.label_alloggio = QLabel("Seleziona il tipo di alloggio:")
         self.label_alloggio.setStyleSheet("font: 200 14pt \"Papyrus\";\n"
@@ -120,15 +117,23 @@ class VistaNuovaPrenotazione(QWidget):
     def get_servizi(self):
         self.liste_servizi = ListeServizi()
 
+        self.font_combo_box = QFont("Arial", 12)
+
+        # menu a tendina per stabilire il servizio di aloggio
         self.menu_alloggio = QComboBox()
+        self.menu_alloggio.setFont(self.font_combo_box)
         self.model_menu_alloggio = QStandardItemModel(self.menu_alloggio)
+
+        # menu a tendina per stabilire il numero di persone
         self.menu_numero_persone = QComboBox()
+        self.menu_numero_persone.setFont(self.font_combo_box)
         self.model_menu_numero_persone = QStandardItemModel(self.menu_numero_persone)
+
         for servizio_alloggio in self.liste_servizi.get_servizi_alloggio():
-            item1 = QStandardItem()
-            item1.setText(servizio_alloggio.nome + "(max " + str(servizio_alloggio.numero_persone_max) + " persone)")
-            item1.setEditable(False)
-            self.model_menu_alloggio.appendRow(item1)
+            item = QStandardItem()
+            item.setText(servizio_alloggio.nome + "(max " + str(servizio_alloggio.numero_persone_max) + " persone)")
+            item.setEditable(False)
+            self.model_menu_alloggio.appendRow(item)
         self.menu_alloggio.setModel(self.model_menu_alloggio)
 
         for numero in [1, 2, 3, 4, 5, 6, 7, 8]:
@@ -141,8 +146,11 @@ class VistaNuovaPrenotazione(QWidget):
         self.layout.addWidget(self.menu_alloggio, 6, 0)
         self.layout.addWidget(self.menu_numero_persone, 4, 0)
 
+        # menu a tendina per stabilire il servizio ristorazione
         self.menu_ristorazione = QComboBox()
+        self.menu_ristorazione.setFont(self.font_combo_box)
         self.model_menu_ristorazione = QStandardItemModel(self.menu_ristorazione)
+
         for servizio_ristorazione in self.liste_servizi.get_servizi_ristorazione():
             item = QStandardItem()
             item.setText(servizio_ristorazione.nome)
@@ -152,12 +160,15 @@ class VistaNuovaPrenotazione(QWidget):
         self.layout.addWidget(self.menu_ristorazione, 9, 0)
 
         self.checkbox_noleggio = QCheckBox("Noleggio Mezzi Elettrici")
+        self.checkbox_noleggio.setFont(self.font_combo_box)
         self.layout.addWidget(self.checkbox_noleggio, 4, 1)
 
         self.checkbox_spa = QCheckBox("Centro Benessere")
+        self.checkbox_spa.setFont(self.font_combo_box)
         self.layout.addWidget(self.checkbox_spa, 5, 1)
 
         self.checkbox_escursione = QCheckBox("Escursione Turistica")
+        self.checkbox_escursione.setFont(self.font_combo_box)
         self.layout.addWidget(self.checkbox_escursione, 6, 1)
 
     def aggiungi_prenotazione(self):
