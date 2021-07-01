@@ -1,5 +1,5 @@
 from PyQt5.QtCore import QSize, Qt
-from PyQt5.QtGui import QIcon, QFont, QPixmap, QPalette
+from PyQt5.QtGui import QIcon, QFont, QPixmap
 from PyQt5.QtWidgets import QWidget, QTabWidget, QVBoxLayout, QLabel, QHBoxLayout, QPushButton, QGridLayout, \
     QListWidget, QListWidgetItem, QDialog, QTableWidget, QTableWidgetItem, QHeaderView, QCheckBox, QAbstractItemView
 
@@ -18,7 +18,7 @@ class TabWidget(QWidget):
         self.h_button_layout = QHBoxLayout()
 
         self.bottone_info = self.create_button("", "", "", "Info", self.visualizza_info)
-        self.bottone_info.setStyleSheet("color: 'black';" "border-radius: 10px;")
+        self.bottone_info.setStyleSheet("color: 'black';" "border-radius: 10;")
         self.bottone_info.setIcon(QIcon("images/icon_info.png"))
         self.bottone_info.setIconSize(QSize(150, 70))
 
