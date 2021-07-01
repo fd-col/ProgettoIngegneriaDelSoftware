@@ -195,14 +195,14 @@ class TabWidget(QWidget):
         self.tab5.layout = QVBoxLayout(self)
 
         self.v3_layout = QVBoxLayout()
-        self.v3_layout.addSpacing(70)
+        self.v3_layout.addSpacing(30)
 
         self.label_contact = QLabel()
         self.label_contact.setPixmap(QPixmap("images/contatti.jpg"))
         self.label_contact.setAlignment(Qt.AlignCenter)
 
         self.v3_layout.addWidget(self.label_contact)
-        self.v3_layout.addSpacing(120)
+        self.v3_layout.addSpacing(40)
 
         # horizontal layout che contiene le schede dei contatti
         self.h_contact_layout = QHBoxLayout()
@@ -221,7 +221,7 @@ class TabWidget(QWidget):
         self.aggiungi_item(list2, "Francesco C.")
         self.aggiungi_item(list2, "email ")
         self.aggiungi_item(list3, "Andrea C.")
-        self.aggiungi_item(list3, "email ")
+        self.aggiungi_item(list3, "email - s1092302@studenti.univpm.it")
 
         self.h_contact_layout.addWidget(list1)
         self.h_contact_layout.addWidget(list2)
