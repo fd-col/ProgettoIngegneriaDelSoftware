@@ -28,6 +28,7 @@ class VistaListaDipendenti(QWidget):
         self.v_layout.addLayout(self.h_layout)
         self.setLayout(self.v_layout)
         self.resize(300, 500)
+        self.move(250, 150)
         self.setWindowTitle("Lista Dipendenti")
         self.show()
 

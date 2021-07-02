@@ -181,7 +181,7 @@ class TabWidget(QWidget):
         self.create_table(3, 2, "Pacchetto del soggiorno", "  Sola colazione;  Mezza pensione;  Pensione completa; ",
                           "   30 €;   60 €;   90 €; ", True)
         self.create_table(4, 2, "Tipologia di alloggio", "  Suite;  Camera familiare;  Camera doppia;  Bungalow ",
-                          "  235 €;  125 €;  80 €;  150 €", True)
+                          "  235 €;  125 €;    80 €;  150 €", True)
         self.create_table(3, 2, "Servizi aggiuntivi", "  Noleggio mezzi elettrici;  Escursione turistica;  Centro benessere; ",
                           "  30 €;  50 €;  50 €; ", False)
 
