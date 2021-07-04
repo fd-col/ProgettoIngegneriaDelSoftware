@@ -13,6 +13,10 @@ class Resoconto:
 
         return  costo_dipendenti
 
+    #Calcola i ricavi dalle prenotazioni e ritorna un array dai 3 float:
+    #0) Ricavi dal servizio di alloggio
+    #1) Ricavi dal servizio di ristorazione
+    #2) Ricavi dai servizi aggiuntivi
     def calcola_ricavi_prenotazioni(self, data_inizio, data_fine, lista_prenotazioni):
         array_ricavi = []
         lista_prenotazioni_filtrata = []

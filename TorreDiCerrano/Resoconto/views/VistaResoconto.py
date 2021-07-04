@@ -73,6 +73,7 @@ class VistaResoconto(QWidget):
         self.setWindowTitle("Resoconto")
         self.resize(800, 500)
 
+    #Mostra la tabella del resoconto calcolato tra le date selezionate
     def mostra_resoconto(self):
         data_inizio_q = self.calendario_inizio.selectedDate()
         data_inizio = datetime(data_inizio_q.year(), data_inizio_q.month(), data_inizio_q.day())
@@ -80,6 +81,7 @@ class VistaResoconto(QWidget):
         data_fine_q = self.calendario_fine.selectedDate()
         data_fine = datetime(data_fine_q.year(), data_fine_q.month(), data_fine_q.day())
 
+        #Controlla che la data di fine del periodo del resoconto non sia precedente a quella di inizio
         if data_fine < data_inizio:
             QMessageBox.critical(self, "Errore",
                                  "Il periodo finale non può essere precedente al periodo iniziale da resocontare",
@@ -89,6 +91,7 @@ class VistaResoconto(QWidget):
         self.tabella_resoconto = VistaTabellaResoconto(data_inizio, data_fine, self.spese_aggiuntive)
         self.tabella_resoconto.show()
 
+    #Aggiunge una spesa alla lista delle spese aggiuntive che verranno poi considerate nel resoconto
     def aggiungi_spesa(self):
         try:
             spesa = float(self.altre_spese.text())

@@ -14,5 +14,6 @@ class Home(QMainWindow):
         self.move(50, 0)
         self.setStyleSheet("background-color: #F0DC83;")
 
+        #Crea il widget centrale della finestra e glielo assegna
         self.table_widget = TabWidget()
         self.setCentralWidget(self.table_widget)

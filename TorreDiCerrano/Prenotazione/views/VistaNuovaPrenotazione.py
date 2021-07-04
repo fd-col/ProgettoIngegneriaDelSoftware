@@ -159,6 +159,7 @@ class VistaNuovaPrenotazione(QWidget):
         self.menu_ristorazione.setModel(self.model_menu_ristorazione)
         self.layout.addWidget(self.menu_ristorazione, 9, 0)
 
+        #Checkbox servizi agginitivi
         self.checkbox_noleggio = QCheckBox("Noleggio Mezzi Elettrici")
         self.checkbox_noleggio.setFont(self.font_combo_box)
         self.layout.addWidget(self.checkbox_noleggio, 4, 1)
@@ -171,21 +172,26 @@ class VistaNuovaPrenotazione(QWidget):
         self.checkbox_escursione.setFont(self.font_combo_box)
         self.layout.addWidget(self.checkbox_escursione, 6, 1)
 
+    #Controlla i dati inseriti nella prenotazione e se sono corretti registra la prenotazione
     def aggiungi_prenotazione(self):
+        #Trasforma le date prese dal calendario da QDate a datetime
         data_inizio_q = self.calendario_inizio.selectedDate()
         data_inizio = datetime(data_inizio_q.year(), data_inizio_q.month(), data_inizio_q.day())
 
         data_fine_q = self.calendario_fine.selectedDate()
         data_fine = datetime(data_fine_q.year(), data_fine_q.month(), data_fine_q.day())
 
+        #Controlla che la data di fine non sai precedente a quella di inizio
         if data_fine <= data_inizio:
             QMessageBox.critical(self, "Errore", "La data di fine non può essere precedente la data di inizio della vacanza", QMessageBox.Ok, QMessageBox.Ok)
             return
 
+        #Controlla che la data di inizio della prenotazione sia almeno domani
         if data_inizio == datetime(datetime.now().year, datetime.now().month, datetime.now().day):
             QMessageBox.critical(self, "Errore", "La prenotazione non può partire da oggi", QMessageBox.Ok, QMessageBox.Ok)
             return
 
+        #indici dei servizi selezionati
         servizio_alloggio = self.liste_servizi.get_servizi_alloggio()[self.menu_alloggio.currentIndex()]
         numero_persone = self.menu_numero_persone.currentIndex()+1
         servizio_ristorazione = self.liste_servizi.get_servizi_ristorazione()[self.menu_ristorazione.currentIndex()]
@@ -200,16 +206,19 @@ class VistaNuovaPrenotazione(QWidget):
         if self.checkbox_spa.isChecked():
             servizi_aggiuntivi.append(self.liste_servizi.get_servizi_aggiuntivi()[2])
 
+        #Controlla la disponibilità dell'alloggio pe rle date selezionate
         if not self.controlla_disponibilita(data_inizio, data_fine, servizio_alloggio):
             QMessageBox.critical(self, "Ci Dispiace", "Nelle date per le quali vuoi prenotare non sono disponibili posti per il tipo di alloggio scelto", QMessageBox.Ok, QMessageBox.Ok)
             return
 
+        #Controlla che il numero di persone inserite sia inferiore al numero di persone massimo per il tipo di alloggio scelto
         if numero_persone > servizio_alloggio.numero_persone_max:
             QMessageBox.critical(self, "Errore", "Il numero di persone selezionato è troppo alto per il tipo di alloggio scelto", QMessageBox.Ok, QMessageBox.Ok)
             return
 
         prenotazione = Prenotazione(self.email_cliente, data_inizio, data_fine, numero_persone, servizio_ristorazione, servizio_alloggio, servizi_aggiuntivi)
 
+        #Chiede la conferma per la prenotazione
         risposta = QMessageBox.question(self, "Conferma", "Il costo della prenotazione è "
                                         + str(prenotazione.get_prezzo_totale()) + " € totali. \nDovrai versare una caparra di "
                                         + str(prenotazione.get_prezzo_totale()*20/100.0) + " €. \n\nConfermare?",
@@ -224,6 +233,7 @@ class VistaNuovaPrenotazione(QWidget):
             self.aggiorna_dati_prenotazioni()
             self.close()
 
+    #Controlla la disponibilità dell'alloggio scelto nel periodo selezionato
     def controlla_disponibilita(self, data_inizio, data_fine, servizio_alloggio):
         controllore_lista_prenotazioni = ControlloreListaPrenotazioni()
         one_day = timedelta(days=1)

@@ -9,6 +9,7 @@ class ControlloreCliente:
     def get_cognome_cliente(self):
         return self.model.cognome
 
+    #Ritorna la data di nascita del cliente in formato datetime
     def get_data_nascita_cliente(self):
         return self.model.dt_nascita
 
@@ -24,6 +25,7 @@ class ControlloreCliente:
     def get_password_cliente(self):
         return self.model.password
 
+    #ritorna la path del documento scelto dal cliente sotto forma di stringa
     def get_documento_identita(self):
         return self.model.documento
 

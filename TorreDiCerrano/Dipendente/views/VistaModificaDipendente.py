@@ -33,6 +33,8 @@ class VistaModificaDipendente(QWidget):
         self.setWindowTitle("Dipendente")
         self.resize(450, 400)
 
+    #Cre una label con la prima stringa passata la aggiunge al layout verticale della finestra, al di sotto aggiunge un
+    #campo editabile con al suo interno la stringa passata come secondo argomento
     def create_format_campo(self, testo, get_campo):
         label = QLabel(testo)
         label.setFont(self.font_label)
@@ -45,6 +47,7 @@ class VistaModificaDipendente(QWidget):
         self.v_layout.addSpacing(10)
         return campo
 
+    #Crea un bottone con il testo, la funzione e il colore di abckground passati e lo aggiunge al layout dei bottoni
     def create_button(self, testo, comando, background_color):
         bottone = QPushButton(testo)
         bottone.setFont(QFont("Arial", 15, 1, True))
@@ -61,6 +64,8 @@ class VistaModificaDipendente(QWidget):
                 return False
         return True
 
+    #Controlla se i campi modificati del dipendente siano stati compilati correttamente, applica gli stessi controlli
+    #della funzione conferma_inserimento() in VistaInserisciDipendente.py
     def modifica_dipendente(self):
         nome = self.campo_nome.text()
         cognome = self.campo_cognome.text()

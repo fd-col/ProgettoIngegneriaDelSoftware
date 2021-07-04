@@ -3,7 +3,7 @@ from PyQt5.QtGui import QFont, QStandardItemModel, QStandardItem
 from datetime import datetime
 
 from ListaPrenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
-from Cliente.views.VistaNuovaPrenotazione import VistaNuovaPrenotazione
+from Prenotazione.views.VistaNuovaPrenotazione import VistaNuovaPrenotazione
 from Prenotazione.controller.ControllorePrenotazione import ControllorePrenotazione
 from Prenotazione.views.VistaPrenotazione import VistaPrenotazione
 
@@ -36,6 +36,7 @@ class VistaPrenotazioniCliente(QWidget):
         self.resize(250, 500)
         self.setWindowTitle("Prenotazioni")
 
+    #Crea un bottone con i parametri passati e lo aggiunge al layout dei bottoni
     def create_button(self, testo, comando, background_color):
         bottone = QPushButton(testo)
         bottone.setFont(QFont("Arial", 14))
@@ -43,6 +44,7 @@ class VistaPrenotazioniCliente(QWidget):
         bottone.clicked.connect(comando)
         self.h_layout.addWidget(bottone)
 
+    #Funzione di callback che aggiorna i dati delle prenotazioni visualizzate
     def aggiorna_dati_prenotazioni(self):
         self.modello_lista_prenotazioni = QStandardItemModel()
         self.controllore_lista_prenotazioni = ControlloreListaPrenotazioni()
@@ -54,10 +56,13 @@ class VistaPrenotazioniCliente(QWidget):
             self.modello_lista_prenotazioni.appendRow(item)
         self.lista_prenotazioni.setModel(self.modello_lista_prenotazioni)
 
+    #Visualizza la finestra per creare una nuova prenotazione
     def go_nuova_prenotazione(self):
         self.vista_nuova_prenotazione = VistaNuovaPrenotazione(self.email_cliente, self.aggiorna_dati_prenotazioni)
         self.vista_nuova_prenotazione.show()
 
+    #Viuslizza i dettagli della prenotazione selezionata, se non è stata selezionata alcuna prenotazione mostra un
+    #messaggio di errore
     def apri_prenotazione(self):
         try:
             indice = self.lista_prenotazioni.selectedIndexes()[0].row()
@@ -69,6 +74,7 @@ class VistaPrenotazioniCliente(QWidget):
         self.vista_prenotazione = VistaPrenotazione(ControllorePrenotazione(da_visualizzare))
         self.vista_prenotazione.show()
 
+    #Chiede conferma dell'eliminazione di una prenotazione, in caso affermativo la cancella
     def conferma_elimina_prenotazione(self):
         try:
             indice = self.lista_prenotazioni.selectedIndexes()[0].row()

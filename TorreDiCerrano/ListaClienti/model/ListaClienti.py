@@ -6,6 +6,7 @@ class ListaClienti():
 
     def __init__(self):
         super(ListaClienti, self).__init__()
+        #Carica la lista clienti dal file lista_clienti_salvata.pickle, se questo non esiste inizializza una lista vuota
         self.lista_clienti = []
         if os.path.isfile("ListaClienti/data/lista_clienti_salvata.pickle"):
             with open("ListaClienti/data/lista_clienti_salvata.pickle", "rb") as file:

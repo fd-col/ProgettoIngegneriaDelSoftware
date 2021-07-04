@@ -7,6 +7,7 @@ class ListeServizi:
     def __init__(self):
         super(ListeServizi, self).__init__()
 
+        #Sono presenti 3 liste, una per i servizi di alloggio, una per i servizi di ristorazione e una per i servizi aggiuntivi
         self.lista_servizi_ristorazione = []
         self.lista_servizi_alloggio = []
         self.lista_servizi_aggiuntivi = []
