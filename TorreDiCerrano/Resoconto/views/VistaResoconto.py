@@ -71,7 +71,8 @@ class VistaResoconto(QWidget):
 
         self.setLayout(self.layout)
         self.setWindowTitle("Resoconto")
-        self.resize(800, 500)
+        self.rect = self.frameGeometry()
+        self.setGeometry(self.rect)
 
     #Mostra la tabella del resoconto calcolato tra le date selezionate
     def mostra_resoconto(self):

@@ -22,8 +22,8 @@ class VistaTabellaResoconto(QWidget):
         self.v_layout.addWidget(self.table)
 
         self.setLayout(self.v_layout)
-        self.move(70,50)
-        self.resize(1000, 900)
+        self.rect = self.frameGeometry()
+        self.setGeometry(self.rect)
         self.setWindowTitle("RESOCONTO dal " + str(data_inizio) + " al " + str(data_fine))
 
     def create_table(self, row, column, ricavi_prenotazioni, costo_dipendenti, spese_aggiuntive_totali):

@@ -211,7 +211,7 @@ class VistaNuovaPrenotazione(QWidget):
         if self.checkbox_spa.isChecked():
             servizi_aggiuntivi.append(self.liste_servizi.get_servizi_aggiuntivi()[2])
 
-        #Controlla la disponibilità dell'alloggio pe rle date selezionate
+        #Controlla la disponibilità dell'alloggio per le date selezionate
         if not self.controlla_disponibilita(data_inizio, data_fine, servizio_alloggio):
             QMessageBox.critical(self, "Ci Dispiace", "Nelle date per le quali vuoi prenotare non sono disponibili posti per il tipo di alloggio scelto", QMessageBox.Ok, QMessageBox.Ok)
             return
