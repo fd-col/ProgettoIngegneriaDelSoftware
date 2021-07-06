@@ -16,9 +16,17 @@ class Prenotazione:
 
     #Calcola il costo della prenotazione
     def get_prezzo_totale(self):
+
+        #Numero di notti della prenotazione
         numero_notti = self.data_fine.timetuple().tm_yday - self.data_inizio.timetuple().tm_yday
+
+        #Prezzo del servizio di pernottamento
         prezzo_pernottamento = numero_notti * self.servizio_alloggio.prezzo * self.numero_persone
+
+        #Prezzo del servizio di ristorazione
         prezzo_ristorazione = numero_notti * self.servizio_ristorazione.prezzo * self.numero_persone
+
+        #Prezzo dei servizi aggiuntivi
         prezzo_servizi_aggiuntivi = 0
         for servizio_aggiuntivo in self.servizi_aggiuntivi:
             if servizio_aggiuntivo.nome == "Escursione turistica":
