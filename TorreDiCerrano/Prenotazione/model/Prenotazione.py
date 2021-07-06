@@ -21,7 +21,10 @@ class Prenotazione:
         prezzo_ristorazione = numero_notti * self.servizio_ristorazione.prezzo * self.numero_persone
         prezzo_servizi_aggiuntivi = 0
         for servizio_aggiuntivo in self.servizi_aggiuntivi:
-            prezzo_servizi_aggiuntivi = prezzo_servizi_aggiuntivi + (servizio_aggiuntivo.prezzo * self.numero_persone)
+            if servizio_aggiuntivo.nome == "Escursione turistica":
+                prezzo_servizi_aggiuntivi = prezzo_servizi_aggiuntivi + (servizio_aggiuntivo.prezzo * self.numero_persone)
+            else:
+                prezzo_servizi_aggiuntivi = prezzo_servizi_aggiuntivi + (servizio_aggiuntivo.prezzo * self.numero_persone * numero_notti)
 
         return prezzo_ristorazione+prezzo_pernottamento+prezzo_servizi_aggiuntivi
 
