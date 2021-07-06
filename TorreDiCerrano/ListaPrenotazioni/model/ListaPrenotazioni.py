@@ -18,6 +18,7 @@ class ListaPrenotazioni:
     def get_lista_prenotazioni(self):
         return self.lista_prenotazioni
 
+    #Ritorna una lista di prenotazioni con le sole prenotazioni effettuate dal cliente al quale è associata l'email passata
     def get_lista_prenotazioni_cliente(self, email):
         lista_ritorno = []
         for prenotazione in self.lista_prenotazioni:
@@ -25,11 +26,13 @@ class ListaPrenotazioni:
                 lista_ritorno.append(prenotazione)
         return lista_ritorno
 
+    #Elimina tutte le prenotazioni del cliente al quale è associata l'email passata come argomento
     def elimina_prenotazioni_cliente(self, email_cliente):
         for prenotazione in self.lista_prenotazioni:
             if prenotazione.email_cliente == email_cliente:
                 self.lista_prenotazioni.remove(prenotazione)
 
+    #Elimina la prenotazione del cliente al quale è associata l'email che inizia nella data passata come argomento in formato datetime
     def elimina_prenotazione_singola(self, email, data_inizio):
         for prenotazione in self.lista_prenotazioni:
             if prenotazione.email_cliente == email and prenotazione.data_inizio == data_inizio:

@@ -39,6 +39,7 @@ class VistaListaDipendenti(QWidget):
         bottone.clicked.connect(comando)
         self.h_layout.addWidget(bottone)
 
+    #Funzione di callback che aggiorna i dati della lista dipendenti visualizzata
     def aggiorna_dati(self):
         self.list_view_model = QStandardItemModel(self.list_view)
 
@@ -54,6 +55,8 @@ class VistaListaDipendenti(QWidget):
         self.vista_inserisci_dipendente = VistaInserisciDipendente(self.controller, self.aggiorna_dati)
         self.vista_inserisci_dipendente.show()
 
+    #Mostra la finestra di modifica del dipendente selezionato, se non si è selezionato alcun dipendente mostra
+    #un messaggio di errore
     def go_modifica_dipendente(self):
         try:
             indice = self.list_view.selectedIndexes()[0].row()
@@ -66,6 +69,7 @@ class VistaListaDipendenti(QWidget):
                                                                  self.controller.get_lista_dipendenti())
         self.vista_modifica_dipendente.show()
 
+    #Chiede conferma di eliminare il dipendente selezionato, in caso affermativo lo cancella
     def elimina_dipendente(self):
         try:
             indice = self.list_view.selectedIndexes()[0].row()
@@ -81,6 +85,7 @@ class VistaListaDipendenti(QWidget):
         else:
             return
 
+    #Alla chiusura della finestra salva le modifiche apportate alla lista dei dipendenti
     def closeEvent(self, event):
         self.controller.save_data()
 

@@ -38,6 +38,7 @@ class VistaListaPrenotazioni(QWidget):
         self.resize(700, 600)
         self.setWindowTitle("Lista Prenotazioni")
 
+    #Crea un bottone con i parametri passati e lo aggiunge al layout orizzontale dei bottoni
     def create_button(self, testo, comando, background_color):
         bottone = QPushButton(testo)
         bottone.setFont(QFont("Arial", 15, 1, True))
@@ -45,12 +46,14 @@ class VistaListaPrenotazioni(QWidget):
         bottone.clicked.connect(comando)
         self.h_layout.addWidget(bottone)
 
+    #Visualizza la lista delle prenotazioni che iniziano nella data selezionata nel calendario
     def go_lista_prenotazioni_by_data(self):
         data_inizio_q = self.calendario.selectedDate()
         self.data_inizio = datetime(data_inizio_q.year(), data_inizio_q.month(), data_inizio_q.day())
         self.lista_prenotazioni_by_data = VistaListaPrenotazioniAdmin(self.data_inizio)
         self.lista_prenotazioni_by_data.show()
 
+    #Visualizza la lista completa delle prenotazioni
     def go_lista_prenotazioni(self):
         self.lista_prenotazioni = VistaListaPrenotazioniAdmin()
         self.lista_prenotazioni.show()

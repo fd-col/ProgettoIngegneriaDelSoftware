@@ -4,7 +4,7 @@ from PyQt5.QtCore import QSize, Qt
 
 from Cliente.views.VistaScannerizzaDocumento import VistaScannerizzaDocumento
 from ListaClienti.controller.ControlloreListaClienti import ControlloreListaClienti
-from Cliente.views.VistaPrenotazioniCliente import VistaPrenotazioniCliente
+from ListaPrenotazioni.views.VistaPrenotazioniCliente import VistaPrenotazioniCliente
 
 
 class VistaCliente(QWidget):
@@ -75,6 +75,9 @@ class VistaCliente(QWidget):
         self.rect = self.frameGeometry()
         self.setGeometry(self.rect)
 
+    #Crea due label in un horizontal layout che poi viene aggiunto al layout verticale della finestra
+    #La label più a sinistra viene creata con il testo passato nel primo parametro, la label più a destra viene creata
+    #con il la stringa passata come secondo parametro
     def create_label(self, testo, text_label):
         h_layout = QHBoxLayout()
 
@@ -89,6 +92,8 @@ class VistaCliente(QWidget):
 
         self.v_layout.addLayout(h_layout)
 
+    #Crea un bottone e lo aggiunge al layout orizzontale dei bottoni
+    #Riceve come argomenti il testo da mettere nei bottoni e la funzione da collegare
     def create_button(self, testo, comando):
         bottone = QPushButton(testo)
         bottone.setFont(QFont("Arial", 15, 1, True))
@@ -97,6 +102,8 @@ class VistaCliente(QWidget):
         self.h_layout.addWidget(bottone)
 
     # Nelle prossime funzioni ci starà anche il controllore lista clienti che serve per salvare o aggiornare i dati
+
+    #Visualizza la lista delle prenotazioni
     def go_lista_prenotazioni(self):
         if self.controllore_cliente.get_documento_identita() is None or self.controllore_cliente.get_documento_identita() == '':
             QMessageBox.critical(self, "Errore", "Seleziona un documento prima di prenotare la tua vacanza", QMessageBox.Ok, QMessageBox.Ok)
@@ -104,13 +111,16 @@ class VistaCliente(QWidget):
         self.vista_prenotazioni_cliente = VistaPrenotazioniCliente(self.controllore_cliente.get_email_cliente())
         self.vista_prenotazioni_cliente.show()
 
+    #Visualizza la finestra per la scannerizzazione del documento
     def go_vista_scannerizza_documento(self):
         self.vista_scannerizza_documento = VistaScannerizzaDocumento(self.controllore_cliente)
         self.aggiorna_documento()
 
+
+    #Chiede conferma per l'eliminazione del profilo e in caso affermativo lo cancella
     def conferma_elimina_profilo(self):
         self.controllore_lista_clienti = ControlloreListaClienti()
-        risposta = QMessageBox.warning(self, "Elimina Profilo", "Sei sicuro di voler elimare il tuo profilo ?\nCancellerai tutti i tuoi dati.", QMessageBox.Yes, QMessageBox.No)
+        risposta = QMessageBox.warning(self, "Elimina Profilo", "Sei sicuro di voler elimare il tuo profilo ?\nLe prenotazioni effettuate non verranno eliminate.", QMessageBox.Yes, QMessageBox.No)
         if risposta == QMessageBox.Yes:
             self.close()
             self.controllore_lista_clienti.elimina_cliente_by_email(self.controllore_cliente.get_email_cliente())
@@ -118,6 +128,7 @@ class VistaCliente(QWidget):
         else:
             pass
 
+    #Funzione di callback per aggiornare la label del documento di identità nella finestra
     def aggiorna_documento(self):
         if self.controllore_cliente.get_documento_identita() is None or self.controllore_cliente.get_documento_identita() == '':
             return

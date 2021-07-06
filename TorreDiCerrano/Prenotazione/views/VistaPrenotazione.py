@@ -18,6 +18,8 @@ class VistaPrenotazione(QWidget):
         self.create_label("Servizio ristorazione: ", self.controllore_prenotazione.get_servizio_ristorazione().nome)
         self.create_label("Servizio alloggio: ", self.controllore_prenotazione.get_servizio_alloggio().nome)
         self.create_label("Numero di persone: ", str(self.controllore_prenotazione.get_numero_persone()))
+        self.create_label("Codice ombrellone: ", self.controllore_prenotazione.get_codice_ombrellone())
+        self.create_label("Prezzo totale: ", str(self.controllore_prenotazione.get_prezzo_totale()) + ' €')
 
         # label servizi aggiuntivi
         self.label_servizi_aggiuntivi = QLabel("Servizi aggiuntivi:")
@@ -36,6 +38,7 @@ class VistaPrenotazione(QWidget):
         self.setWindowTitle("Prenotazione")
         self.resize(800, 500)
 
+    #Crea una coppia di label con le stringhe passate e le aggiunge al layout della finestra
     def create_label(self, testo, text_label):
         h_layout = QHBoxLayout()
 
@@ -51,6 +54,7 @@ class VistaPrenotazione(QWidget):
         self.v_layout.addLayout(h_layout)
         self.v_layout.addSpacing(20)
 
+    #Aggiunge alla finestra la lista dei servizi aggiuntivi della prenotazione
     def get_dati_lista_servizi(self):
         self.list_view_model = QStandardItemModel()
         for servizio in self.controllore_prenotazione.get_servizi_aggiuntivi():

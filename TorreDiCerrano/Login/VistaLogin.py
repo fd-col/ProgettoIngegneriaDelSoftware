@@ -67,19 +67,25 @@ class VistaLogin(QWidget):
         self.resize(200, 200)
         self.setWindowTitle("Login")
 
+    #Controlla le credenziali inserite dall'utente
     def login(self):
         email = self.campo_email.text()
         password = self.campo_password.text()
 
+        #Controlla se le credenziali inserite sono quelle di un amministratore
         if self.controlla_admin(email, password):
             return
 
+        #Controlla che le credenziali inserite corrispondano a quelle di un cliente
         if self.controllore.get_cliente_by_email(email) is not None:
             da_mostrare = self.controllore.get_cliente_by_email(email)
+
+            #In caso affermativo visualizza il profilo del cliente
             if da_mostrare.password == password:
                 self.vista_cliente = VistaCliente(ControlloreCliente(da_mostrare))
                 self.vista_cliente.show()
                 self.close()
+            #Altrimenti mostra un messaggio di errore
             else:
                 QMessageBox.critical(self, "Errore", "La password è errata", QMessageBox.Ok,
                                      QMessageBox.Ok)
@@ -87,6 +93,8 @@ class VistaLogin(QWidget):
             QMessageBox.critical(self, "Errore", "L'email inserita non è associata ad alcun cliente", QMessageBox.Ok,
                                  QMessageBox.Ok)
 
+    #Controlla che l'email e la password inseriti coincidano con le credenziali di una admin, in caso affermativo
+    #ritorna True e visualizza il profilo dell'amministratore, altrimenti ritorna False
     def controlla_admin(self, email, password):
 
         if os.path.isfile("Amministratore/data/lista_amministratori.json"):

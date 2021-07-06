@@ -62,6 +62,8 @@ class VistaAmministratore(QWidget):
         self.rect = self.frameGeometry()
         self.setGeometry(self.rect)
 
+    #Crea bottoni ricevendo come parametri il testo, il comando da collegare, il colore di background, la shortcut
+    #associata e opzionalmente la dimensione dell'icona
     def create_button(self, testo, comando, background_color, shortcut, icona, icon_size=QSize(30, 30)):
         bottone = QPushButton(testo)
         bottone.setFont(self.font_bottone)
@@ -73,18 +75,22 @@ class VistaAmministratore(QWidget):
         shortcut_open.activated.connect(comando)
         return bottone
 
+    #Mostra la lista dei dipendenti
     def go_lista_dipendenti(self):
         self.vista_lista_dipendenti = VistaListaDipendenti()
         self.vista_lista_dipendenti.show()
 
+    #Mostra la lista delle prenotazioni
     def go_lista_prenotazioni(self):
         self.vista_lista_prenotazioni = VistaListaPrenotazioni()
         self.vista_lista_prenotazioni.show()
 
+    #Mostra la vista dei resoconti
     def go_resoconto(self):
         self.vista_resoconto = VistaResoconto()
         self.vista_resoconto.show()
 
+    #Mostra le informazioni riguardo le shortcut
     def visualizza_info_shortcut(self):
         info = QMessageBox.information(self, "Info shortcut", "Alt+P --> bottone lista prenotazioni\n"
                                                               "Alt+D --> bottone lista dipendenti\n"

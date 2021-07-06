@@ -31,7 +31,7 @@ class VistaRegistrazione(QWidget):
         # campi registrazione
         self.campo_nome = self.create_format_campo("Nome")
         self.campo_cognome = self.create_format_campo("Cognome")
-        self.campo_nascita = self.create_format_campo("Data di nascita")
+        self.campo_nascita = self.create_format_campo("Data di nascita (gg/mm/aaaa)")
         self.campo_indirizzo = self.create_format_campo("Indirizzo")
         self.campo_telefono = self.create_format_campo("Telefono")
 
@@ -53,6 +53,7 @@ class VistaRegistrazione(QWidget):
         self.setGeometry(self.rect)
         self.setWindowTitle("Registrazione")
 
+    #Crea una label con la stringa passata come argomento al di sotto un campo editabile a li aggiunge al layout della finestra
     def create_format_campo(self, testo):
         label = QLabel(testo)
         label.setFont(self.font_label1)
@@ -63,6 +64,7 @@ class VistaRegistrazione(QWidget):
         self.v_layout.addWidget(campo)
         return campo
 
+    #Crea una label e al di sotto un campo con la possibilità di oscurare l'inserimento e li aggiunge al layout
     def create_format_password(self, testo):
         label = QLabel(testo)
         label.setFont(self.font_label2)
@@ -74,11 +76,18 @@ class VistaRegistrazione(QWidget):
         self.v_layout.addWidget(campo)
         return campo
 
+    #Controlla i dati inseriti e registra il cliente
     def registra_cliente(self):
+
+        #Controlla che il cliente abbai compilato tutti i campi
         if self.campo_nome.text() == "" or self.campo_cognome.text() == "" or self.campo_nascita.text() == "" or self.campo_indirizzo.text() == "" or self.campo_telefono.text() == "" or self.campo_email.text() == "" or self.campo_password.text() == "" or self.campo_conferma_password.text() == "":
             QMessageBox.critical(self, "Errore", "Compila tutti i campi richiesti", QMessageBox.Ok, QMessageBox.Ok)
+
+        #Controlla che l'email inserita non sia già stata utilizzata da una lto cliente
         elif self.controller.get_cliente_by_email(self.campo_email.text()) is not None:
             QMessageBox.critical(self, "Errore", "L'email che hai inserito è già stata utilizzata", QMessageBox.Ok, QMessageBox.Ok)
+
+        #Controlla che le password inserite corrispondano
         elif self.campo_password.text() != self.campo_conferma_password.text():
             QMessageBox.critical(self, "Errore", "La password inserita non corrisponde, si prega di riprovare",
                                  QMessageBox.Ok, QMessageBox.Ok)
@@ -90,6 +99,8 @@ class VistaRegistrazione(QWidget):
             telefono = self.campo_telefono.text()
             email = self.campo_email.text()
             password = self.campo_password.text()
+
+            #Controlla che la data di nascita sia inserita nel formato richiesto
             try:
                 data_nascita = datetime.strptime(dt_nascita, "%d/%m/%Y")
                 da_aggiungere = Cliente(nome, cognome, data_nascita, indirizzo, telefono, email, password)

@@ -17,11 +17,13 @@ class TabWidget(QWidget):
         # Horizontal layout for buttons and labels
         self.h_button_layout = QHBoxLayout()
 
+        #Crea il bottone info
         self.bottone_info = self.create_button("", "", "", "Info", self.visualizza_info)
         self.bottone_info.setStyleSheet("color: 'black';" "border-radius: 10;")
         self.bottone_info.setIcon(QIcon("images/icon_info.png"))
         self.bottone_info.setIconSize(QSize(150, 70))
 
+        #Crea i bottoni login e registrati
         self.bottone_login = self.create_button("        Login        ", "rgb(255,255,255)", "rgb(0, 0, 0)",
                                                 "login", self.go_vista_login)
         self.bottone_registrati = self.create_button("     Registrati     ", "rgb(0,0,0)", "rgb(255, 170, 0)",
@@ -179,11 +181,11 @@ class TabWidget(QWidget):
         self.v2_layout.addSpacing(118)
 
         self.create_table(3, 2, "Pacchetto del soggiorno", "  Sola colazione;  Mezza pensione;  Pensione completa; ",
-                          "   30 €;   60 €;   90 €; ", True)
+                          "   20 €;   40 €;   60 €; ", True)
         self.create_table(4, 2, "Tipologia di alloggio", "  Suite;  Camera familiare;  Camera doppia;  Bungalow ",
-                          "  235 €;  125 €;    80 €;  150 €", True)
+                          "  100 €;  60 €;  60 €;  40 €", True)
         self.create_table(3, 2, "Servizi aggiuntivi", "  Noleggio mezzi elettrici;  Escursione turistica;  Centro benessere; ",
-                          "  30 €;  50 €;  50 €; ", False)
+                          "  50 €;  50 €;  50 €; ", False)
 
         self.h_table_layout.addLayout(self.v1_layout)
         self.h_table_layout.addLayout(self.v2_layout)
@@ -237,6 +239,7 @@ class TabWidget(QWidget):
         self.layout.addWidget(self.tabs)
         self.setLayout(self.layout)
 
+    #Crea un bottone con i parametri passati
     def create_button(self, testo, text_color, background_color, nome, comando):
         bottone = QPushButton(testo)
         bottone.setStyleSheet("background-color: " + background_color + ";\n""font: 100 19pt \"Arial\";\n"
@@ -246,6 +249,8 @@ class TabWidget(QWidget):
         bottone.clicked.connect(comando)
         return bottone
 
+    #Crea delle label con immagini da inserire nei layout, come argomento deve essere passata la path dell'immagine
+    #come stringa
     def create_label_image(self, immagine):
         label = QLabel()
         label.setText("")
@@ -254,14 +259,17 @@ class TabWidget(QWidget):
         label.setObjectName("label")
         return label
 
+    #Visualizza form registrazione
     def go_vista_registrazione(self):
         self.vista_registrazione = VistaRegistrazione()
         self.vista_registrazione.show()
 
+    #Visualizza finestra login
     def go_vista_login(self):
         self.vista_login = VistaLogin()
         self.vista_login.show()
 
+    #Visualizza la mappadei dintorni della torre di cerrano
     def visualizza_info(self):
         dialog = QDialog()
         dialog.setWindowTitle("Dove puoi trovarci :")
@@ -275,6 +283,7 @@ class TabWidget(QWidget):
         dialog.setLayout(v_layout)
         dialog.exec()
 
+    #Aggiunge alla lista in item con il nome passato
     def aggiungi_item(self, lista, nome):
         item = QListWidgetItem(nome)
         item.setTextAlignment(Qt.AlignCenter)
@@ -283,6 +292,7 @@ class TabWidget(QWidget):
         item.setFont(font)
         lista.addItem(item)
 
+    #Crea una tabella con i parametri passati
     def create_table(self, row, column, header, nomi, prezzi, side):
         table_widget = QTableWidget(row, column)
 
@@ -308,7 +318,7 @@ class TabWidget(QWidget):
             self.v1_layout.addWidget(table_widget)
         else:
             self.v2_layout.addWidget(table_widget)
-
+    #Crea una checkbox da aggiungere ai layout
     def create_check_box(self, text):
         check_box = QCheckBox(text)
         check_box.setFont(QFont("Arial", 16))
