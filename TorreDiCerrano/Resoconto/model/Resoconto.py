@@ -31,14 +31,14 @@ class Resoconto:
         for prenotazione in lista_prenotazioni_filtrata:
             ricavi_servizi_aggiuntivi = 0.0
             for servizio_aggiuntivo in prenotazione.servizi_aggiuntivi:
-                ricavi_servizi_aggiuntivi = ricavi_servizi_aggiuntivi + servizio_aggiuntivo.prezzo
+                ricavi_servizi_aggiuntivi = ricavi_servizi_aggiuntivi + servizio_aggiuntivo.prezzo*prenotazione.numero_persone
 
             ricavi_alloggio = 0.0
             ricavi_ristorazione = 0.0
             num_giorni_prenotazione = (prenotazione.data_fine - prenotazione.data_inizio).days
 
-            ricavi_alloggio = num_giorni_prenotazione*prenotazione.servizio_alloggio.prezzo
-            ricavi_ristorazione = num_giorni_prenotazione*prenotazione.servizio_ristorazione.prezzo
+            ricavi_alloggio = num_giorni_prenotazione*prenotazione.servizio_alloggio.prezzo*prenotazione.numero_persone
+            ricavi_ristorazione = num_giorni_prenotazione*prenotazione.servizio_ristorazione.prezzo*prenotazione.numero_persone
 
             ricavi_totali_alloggio = ricavi_totali_alloggio + ricavi_alloggio
             ricavi_totali_ristorazione = ricavi_totali_ristorazione + ricavi_ristorazione

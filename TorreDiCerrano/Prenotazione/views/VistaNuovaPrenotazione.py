@@ -191,6 +191,11 @@ class VistaNuovaPrenotazione(QWidget):
             QMessageBox.critical(self, "Errore", "La prenotazione non può partire da oggi", QMessageBox.Ok, QMessageBox.Ok)
             return
 
+        #COntrolla che la prenotazione duri almeno 3 giorni
+        if data_fine-data_inizio < timedelta(days=3):
+            QMessageBox.critical(self, "Errore", "La prenotazione deve essere di almeno 3 giorni", QMessageBox.Ok, QMessageBox.Ok)
+            return
+
         #indici dei servizi selezionati
         servizio_alloggio = self.liste_servizi.get_servizi_alloggio()[self.menu_alloggio.currentIndex()]
         numero_persone = self.menu_numero_persone.currentIndex()+1
@@ -211,12 +216,18 @@ class VistaNuovaPrenotazione(QWidget):
             QMessageBox.critical(self, "Ci Dispiace", "Nelle date per le quali vuoi prenotare non sono disponibili posti per il tipo di alloggio scelto", QMessageBox.Ok, QMessageBox.Ok)
             return
 
+        #In base al valore ritornato dalla funzione controlla_disponibilità, assegna un codice all'ombrellone del cliente
+        if servizio_alloggio.nome == "Suite" or servizio_alloggio.nome == "Bungalow":
+            codice_ombrellone = str(self.controlla_disponibilita(data_inizio, data_fine, servizio_alloggio)) + servizio_alloggio.nome[0]
+        else:
+            codice_ombrellone = str(self.controlla_disponibilita(data_inizio, data_fine, servizio_alloggio)) + servizio_alloggio.nome[0] + servizio_alloggio.nome[7]
+
         #Controlla che il numero di persone inserite sia inferiore al numero di persone massimo per il tipo di alloggio scelto
         if numero_persone > servizio_alloggio.numero_persone_max:
             QMessageBox.critical(self, "Errore", "Il numero di persone selezionato è troppo alto per il tipo di alloggio scelto", QMessageBox.Ok, QMessageBox.Ok)
             return
 
-        prenotazione = Prenotazione(self.email_cliente, data_inizio, data_fine, numero_persone, servizio_ristorazione, servizio_alloggio, servizi_aggiuntivi)
+        prenotazione = Prenotazione(self.email_cliente, data_inizio, data_fine, numero_persone, servizio_ristorazione, servizio_alloggio, servizi_aggiuntivi, codice_ombrellone)
 
         #Chiede la conferma per la prenotazione
         risposta = QMessageBox.question(self, "Conferma", "Il costo della prenotazione è "
@@ -233,11 +244,15 @@ class VistaNuovaPrenotazione(QWidget):
             self.aggiorna_dati_prenotazioni()
             self.close()
 
-    #Controlla la disponibilità dell'alloggio scelto nel periodo selezionato
+    #Controlla la disponibilità dell'alloggio scelto nel periodo selezionato e in caso di disponibilità ritorna il numero
+    #degli alloggi dello stesso tipo occupati nel primo giorno della prenotazione
+    #Questo ritorno verrà utilizzato per assegnare il codice dell'ombrellone
     def controlla_disponibilita(self, data_inizio, data_fine, servizio_alloggio):
         controllore_lista_prenotazioni = ControlloreListaPrenotazioni()
         one_day = timedelta(days=1)
         data_controllo = data_inizio
+
+        numero_ombrellone = 0
 
         disponibilita_giornaliera_alloggio = servizio_alloggio.disponibilita_giornaliera
         while data_controllo <= data_fine:
@@ -247,5 +262,7 @@ class VistaNuovaPrenotazione(QWidget):
                     disponibilita_giornaliera_rimanente = disponibilita_giornaliera_rimanente-1
             if disponibilita_giornaliera_rimanente < 1:
                 return False
+            if data_controllo == data_inizio:
+                numero_ombrellone = disponibilita_giornaliera_rimanente
             data_controllo = data_controllo + one_day
-        return True
+        return disponibilita_giornaliera_rimanente

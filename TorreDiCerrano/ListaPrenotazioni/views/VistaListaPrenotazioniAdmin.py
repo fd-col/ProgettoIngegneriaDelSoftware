@@ -114,7 +114,7 @@ class VistaListaPrenotazioniAdmin(QWidget):
 
         numero_mezzi_elettrici_occupati = 0
         numero_prenotazioni_centro_benessere = 0
-        numero_prenotazioni_escursione_turistica = 0
+        #numero_prenotazioni_escursione_turistica = 0
 
         for prenotazione in self.controllore_lista_prenotazioni.get_lista_prenotazioni():
 
@@ -138,8 +138,8 @@ class VistaListaPrenotazioniAdmin(QWidget):
                         numero_mezzi_elettrici_occupati = numero_mezzi_elettrici_occupati + prenotazione.numero_persone
                     if servizio_aggiuntivo == Servizio("Centro benessere", "Servizi aggiuntivi", 50):
                         numero_prenotazioni_centro_benessere = numero_prenotazioni_centro_benessere + prenotazione.numero_persone
-                    if servizio_aggiuntivo == Servizio("Escursione turistica", "Servizi aggiuntivi", 50):
-                        numero_prenotazioni_escursione_turistica = numero_prenotazioni_escursione_turistica + prenotazione.numero_persone
+                    #if servizio_aggiuntivo == Servizio("Escursione turistica", "Servizi aggiuntivi", 50):
+                        #numero_prenotazioni_escursione_turistica = numero_prenotazioni_escursione_turistica + prenotazione.numero_persone
 
         #I dati vengono aggiunti alla lista del sommario tramite degli item
         item_suite = QStandardItem()
@@ -182,10 +182,10 @@ class VistaListaPrenotazioniAdmin(QWidget):
         item_centro_benessere.setText("Numero prenotazioni centro benessere: " + str(numero_prenotazioni_centro_benessere))
         self.modello_stato_resort.appendRow(item_centro_benessere)
 
-        item_escursioni = QStandardItem()
-        item_escursioni.setFont(self.font)
-        item_escursioni.setEditable(False)
-        item_escursioni.setText("Numero escursioni prenotate: " + str(numero_prenotazioni_escursione_turistica))
-        self.modello_stato_resort.appendRow(item_escursioni)
+        #item_escursioni = QStandardItem()
+        #item_escursioni.setFont(self.font)
+        #item_escursioni.setEditable(False)
+        #item_escursioni.setText("Numero escursioni prenotate: " + str(numero_prenotazioni_escursione_turistica))
+        #self.modello_stato_resort.appendRow(item_escursioni)
 
         self.lista_stato_resort.setModel(self.modello_stato_resort)
