@@ -11,7 +11,7 @@ class TabWidget(QWidget):
 
     def __init__(self):
         super(QWidget, self).__init__()
-
+        self.font = QFont("Arial", 17)
         self.layout = QVBoxLayout()
 
         # Horizontal layout for buttons and labels
@@ -59,7 +59,7 @@ class TabWidget(QWidget):
         self.tabs.setFont((QFont("Arial", 15)))
         self.tabs.setStyleSheet("QTabBar::tab { height: 50px; width: 200px; }")
 
-        # Create first tab
+        # Create first tab HOME
         self.tab1.layout = QHBoxLayout(self)
 
         self.v_layout = QVBoxLayout()
@@ -103,7 +103,7 @@ class TabWidget(QWidget):
 
         self.tab1.setLayout(self.tab1.layout)
 
-        # Create second tab
+        # Create second tab IMMAGINI
         self.tab2.layout = QGridLayout(self)
 
         # images to insert into tab2
@@ -129,7 +129,7 @@ class TabWidget(QWidget):
 
         self.tab2.setLayout(self.tab2.layout)
 
-        # Create third tab
+        # Create third tab SERVIZI
         self.tab3.layout = QVBoxLayout(self)
 
         lista1 = QListWidget()
@@ -151,7 +151,7 @@ class TabWidget(QWidget):
         self.tab3.layout.addWidget(lista1)
         self.tab3.setLayout(self.tab3.layout)
 
-        # Create fourth tab
+        # Create fourth tab PREZZI
         self.tab4.layout = QVBoxLayout(self)
 
         self.h_table_layout = QHBoxLayout()
@@ -184,8 +184,16 @@ class TabWidget(QWidget):
                           "   20 €;   40 €;   60 €; ", True)
         self.create_table(4, 2, "Tipologia di alloggio", "  Suite;  Camera familiare;  Camera doppia;  Bungalow ",
                           "  100 €;  60 €;  60 €;  40 €", True)
-        self.create_table(3, 2, "Servizi aggiuntivi", "  Noleggio mezzi elettrici;  Escursione turistica;  Centro benessere; ",
-                          "  50 €;  50 €;  50 €; ", False)
+        self.create_table(3, 2, "Servizi aggiuntivi", "  Centro benessere;  Noleggio mezzi elettrici;  Escursione turistica; ",
+                          "  30 €;  20 €;  50 €; ", False)
+        self.label_nota = QLabel("Nota: i prezzi indicati sono intesi a persona per notte.")
+        self.label_nota.setFont(self.font)
+        self.v1_layout.addWidget(self.label_nota)
+
+        self.label_nota2 = QLabel("Nota:    il prezzo dell'escursione turistica si intende per persona\n "
+                                  "         e valida per una sola uscita.")
+        self.label_nota2.setFont(self.font)
+        self.v2_layout.addWidget(self.label_nota2)
 
         self.h_table_layout.addLayout(self.v1_layout)
         self.h_table_layout.addLayout(self.v2_layout)
@@ -193,7 +201,7 @@ class TabWidget(QWidget):
         self.tab4.layout.addLayout(self.h_table_layout)
         self.tab4.setLayout(self.tab4.layout)
 
-        # Create fifth tab
+        # Create fifth tab CONTATTI
         self.tab5.layout = QVBoxLayout(self)
 
         self.v3_layout = QVBoxLayout()
@@ -321,6 +329,6 @@ class TabWidget(QWidget):
     #Crea una checkbox da aggiungere ai layout
     def create_check_box(self, text):
         check_box = QCheckBox(text)
-        check_box.setFont(QFont("Arial", 16))
-        check_box.setChecked(True)
+        check_box.setFont(self.font)
+        check_box.setCheckable(False)
         return check_box
