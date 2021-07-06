@@ -265,4 +265,4 @@ class VistaNuovaPrenotazione(QWidget):
             if data_controllo == data_inizio:
                 numero_ombrellone = disponibilita_giornaliera_rimanente
             data_controllo = data_controllo + one_day
-        return disponibilita_giornaliera_rimanente
+        return numero_ombrellone
