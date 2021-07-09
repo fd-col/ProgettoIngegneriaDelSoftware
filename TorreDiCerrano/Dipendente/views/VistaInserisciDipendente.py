@@ -25,12 +25,12 @@ class VistaInserisciDipendente(QWidget):
         self.campo_cognome = self.create_format_campo("Cognome")
         self.campo_ruolo = self.create_format_campo("Ruolo")
         self.campo_id = self.create_format_campo("ID")
-        self.campo_stipendio = self.create_format_campo("Stipendio")
+        self.campo_stipendio = self.create_format_campo("Stipendio (€)")
 
         self.v_layout.addSpacing(25)
 
         self.bottone_conferma = QPushButton("Conferma")
-        self.bottone_conferma.setFont(QFont("Candara", 15, 1, True))
+        self.bottone_conferma.setFont(QFont("Arial", 15, 1, True))
         self.bottone_conferma.setStyleSheet("background-color: rgb(0,255,0);")
         self.bottone_conferma.clicked.connect(self.conferma_inserimento)
         self.v_layout.addWidget(self.bottone_conferma)
