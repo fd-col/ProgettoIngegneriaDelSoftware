@@ -1,0 +1,69 @@
+[
+  [
+    {
+      "nome" : "Mezza Pensione",
+      "campo" : "Ristorazione",
+      "prezzo" : 40
+    },
+    {
+      "nome" : "Pensione completa",
+      "campo" : "Ristorazione",
+      "prezzo" : 60
+    },
+    {
+      "nome" : "Solo colazione",
+      "campo" : "Ristorazione",
+      "prezzo" : 20
+    }
+  ],
+  [
+    {
+      "nome" : "Suite",
+      "campo" : "Alloggio",
+      "prezzo" : 100,
+      "numero_persone_max" : 2,
+      "disponibilita_giornaliera" : 5
+    },
+    {
+      "nome" : "Camera doppia",
+      "campo" : "Alloggio",
+      "prezzo" : 60,
+      "numero_persone_max" : 2,
+      "disponibilita_giornaliera" : 20
+    },
+    {
+      "nome" : "Camera famigliare",
+      "campo" : "Alloggio",
+      "prezzo" : 60,
+      "numero_persone_max" : 5,
+      "disponibilita_giornaliera" : 35
+    },
+    {
+      "nome" : "Bungalow",
+      "campo" : "Alloggio",
+      "prezzo" : 40,
+      "numero_persone_max" : 8,
+      "disponibilita_giornaliera" : 10
+    }
+  ],
+  [
+    {
+      "nome" : "Noleggio mezzi elettrici",
+      "campo" : "Servizi aggiuntivi",
+      "prezzo" : 20,
+      "disponibilita_giornaliera" : 100
+    },
+    {
+      "nome" : "Escursione turistica",
+      "campo" : "Servizi aggiuntivi",
+      "prezzo" : 50,
+      "disponibilita_giornaliera" : 100
+    },
+    {
+      "nome" : "Centro benessere",
+      "campo" : "Servizi aggiuntivi",
+      "prezzo" : 30,
+      "disponibilita_giornaliera" : 100
+    }
+  ]
+]
